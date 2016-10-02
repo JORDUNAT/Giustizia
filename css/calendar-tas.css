@@ -1,0 +1,366 @@
+/* simple css-based tooltip */
+.tooltip {
+    background-color:#000;
+    border:1px solid #fff;
+    padding:10px 15px;
+    width:200px;
+    display:none;
+    color:#fff;
+    text-align:left;
+    font-size:12px;
+ 
+    /* outline radius for mozilla/firefox only */
+    -moz-box-shadow:0 0 10px #000;
+    -webkit-box-shadow:0 0 10px #000;
+}
+
+.Encabezado {
+	font-size: 9px;
+	color: #000099;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-decoration: underline;
+}
+.contenido {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	color: #333333;
+	text-align: left;
+	
+}
+.contenidoUno {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #123D05;
+}
+
+.contenidoVerde {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	color: #360;
+	background-color: #D8E3B7;
+}
+.contenidoVerdeGrande {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 36px;
+	color: #360;
+	background-color: #FFF;
+	font-weight: bold;
+}
+
+.contenidoRojo {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	color: #F00;
+	background-color: #FFF;
+}
+.contenidoRojoGrande {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #F00;
+	background-color: #FFF;
+}
+
+
+
+
+
+.bgon {
+	background-color: #7B1B1D;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7pt;
+}
+a {  text-decoration: none; color: #FFFFFF}
+a:hover {
+	text-decoration: underline;
+	color: #FF0000
+}
+.botton {
+	background-color: #C52A2E;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7pt;
+}
+/*
+.titulo {
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-style: normal;
+	color: #FFFFFF;
+}
+*/
+
+.cabezote {
+	font-size: 14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #0B458F;
+	background-position: center center;
+	background-color: #FFFFFF;
+}
+
+.DC {font-size: 9px; font-family: Verdana, Arial, Helvetica, sans-serif; }
+.cabezoteprincipal {
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: #D8E3B7;
+	color: #357320;
+	background-position: center center;
+	font-weight: bold;
+}
+.cabezoteprincipalRojo {
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: #FFC;
+	color: #F00;
+	background-position: center center;
+}
+.cabezoteprincipalRojoGrande {
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: #357320;
+	color: #FFF;
+	background-position: center center;
+	font-weight: bold;
+	text-align:center;
+}
+.cabezoteprincipalRojoGrandeUno {
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: #FFC;
+	color: #F00;
+	background-position: center center;
+}
+
+
+
+.bgon {
+	background-color: #7B1B1D;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7pt;
+}
+a {
+	text-decoration: none;
+	color: #333333
+}
+a:hover {
+	text-decoration: underline;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+.botton {
+	background-color: #C52A2E;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7pt;
+}
+.bottonCopy {
+	background-color: #C52A2E;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7pt;
+}
+
+.titulo {
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-style: normal;
+	color: #333;
+	background-color: #FFC;
+}
+.campos {
+
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: #FFC;
+	color: #000000;
+	background-position: center center;
+}
+.modulos {
+	font-size: 8px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: #666666;
+	color: #FFF;
+	background-position: center center;
+}
+.cabezoteTituloNegro {
+
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: #333333;
+	color: #FFFFFF;
+	background-position: center center;
+}
+
+.Estilo13 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #000066;
+	font-size: 10px;
+}
+.contenidoPeque {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8px;
+	color: #333333;
+}
+ Adiciones de Jose luis 
+.informativo {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	color: #000;
+	background-color: #FF0;
+	background-position:bottom;
+}
+
+.fondo{
+	background-image:url(../Presentacion%202.jpg);
+	position:static;
+}
+	
+.formulario_titulo {
+	background-image: url(../images/form/top.png);
+	background-repeat: repeat-x;
+	color: #FFF;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	height: 32px;
+	font-size: 18px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	;
+	text-align: center;
+	
+}
+
+.formulario_titulo_1 {
+	background-image: url(../images/form/top.png);
+	background-repeat: repeat-x;
+	color: #FFF;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	height: 32px;
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	;
+	text-align: center;
+	font-weight:bold;
+	
+}
+
+.formulario_borde {
+	background-image: url(../images/form/top.png);
+	background-repeat: repeat-x;
+	color: #FFF;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	font-size: 14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	;
+	text-align: center;
+	
+}
+.formulario_cuerpo {
+	background-repeat: repeat;
+	background-color: #D8E3B7;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	
+}
+.formulario_pie {
+	background-image: url(../images/form/bottom.png);
+	background-repeat: repeat-x;
+	height: 32px;
+}
+
+.formulario_campos_centro {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: center;
+	font-size: 12px;
+	color: #364837;
+}
+.formulario_campos_izq {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: left;
+	font-size: 12px;
+	color: #364837;
+}
+.formulario_campos_der {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-align:right;
+	color: #364837;
+	border:0px;
+}
+.boton {
+	padding:0 20px;
+		height:32px;
+		border:0px solid #70ad2e;
+		color:#fff;
+		cursor:pointer;		
+		text-align:center;
+	background-image: url(../images/form/boton_1.png);
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.boton:hover {
+	padding:0 20px;
+		height:32px;
+		line-height:32px;		
+		border:0px solid #70ad2e;
+		color:#fff;
+		cursor:pointer;		
+		text-align:center;
+	background-image: url(../images/form/boton_2.png);
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+#current {
+	padding: 10px;
+	width: 500px;
+	border: 1px dashed #C2C2C2;
+	margin-bottom: 10px;
+}
+#current img {
+	float: left;
+	margin-right: 10px;
+	margin-top: 4px;
+}
+#forecast {
+	padding: auto;
+	width: 520px;
+	border: 1px dashed #C2C2C2;
+	height: 100px;
+}
+#forecast #item {
+	float: left;
+	width: 70px;
+	text-align: center;
+}
+.mini {
+	font-size: 10px;
+}
+.container-foot {
+	width: 100%;
+	background: #FFF;
+	position: absolute;
+	bottom: -1px !important;
+	bottom: -1px; /* For Certain IE widths */
+	height: 40px;
+	left: 1px;
+}
+
+.foot {
+  padding: 0 1em;
+  line-height: 40px;
+}
+
+.division_subtitulos {
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: #E3E9F1;
+	color: #060;
+	background-position: center center;
+	font-weight: bold;
+	text-align:center;
+	
+}

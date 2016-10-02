@@ -1,0 +1,37 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* Estilos
+Ejemplo Inventarios*/
+
+body
+{
+	background-color:#C60;
+}
+
+.cajas, .combos
+{
+	width:95%;
+	font-family:Verdana, Geneva, sans-serif;
+	font-style:italic;
+	background-color:#C60;
+	color:yellow;	
+}
+
+.tablatitulos
+{
+	color: red;
+	text-align:center;
+}
+
+.tablacontenido
+{
+	color: yellow;
+}
+
+.boton
+{
+	border-color: #C60;
+	color: green;
+	background-color: #C60;
+}

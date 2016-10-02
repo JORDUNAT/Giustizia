@@ -1,0 +1,19 @@
+fieldset{
+
+	width: 500px;
+    
+
+}
+
+body{
+	color:green;
+ 	background-image: url(imagen.jpg);
+    background-repeat:no-repeat,repeat;
+    
+ }
+ img{
+ 
+ background-position:left;
+   
+
+}
