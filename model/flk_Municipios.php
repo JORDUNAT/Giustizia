@@ -1,4 +1,8 @@
 <?php	
+// PHP
+//Fecha creado: 27/06/2016
+//Propósito: Modificación Municipios
+
 	session_start();
 
 	header("Content-Type: text/html;charset=utf-8");
@@ -19,28 +23,26 @@
 	
 
 
-	$Id 			=($_POST['txt_id'])*1;
-	$Codigo			=$_POST['txt_id'];
-	$departamento 	=$conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
-	$capital 	=$conexion->real_escape_string(strtoupper($_POST['txt_capital']));
+	$Id 			=($_POST['txt_id']);
+	$municipio 	=$conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
 
 
 if($tipousuario==1){
-	$query="UPDATE tbl_departamentos SET depa_Departamento='$departamento', depa_Capital='$capital' WHERE (depa_Id='$Id')";
+	$query="UPDATE tbl_municipios SET muni_Municipio='$municipio' WHERE (muni_Codigo='$Id')";
 	$resultado=$conexion->query($query);
 
 	if($resultado>0){
-		echo '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-floppy-saved"></span> Se ha guardado los cambios realizados al Departamento con código '.$Id;
-		echo "<META HTTP-EQUIV='refresh' CONTENT='3; URL=../vistas/frm_ListaDepartamentos.php'>";		
+		echo '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-floppy-saved"></span> Se ha guardado los cambios realizados al Municipio con el código '.$Id;
+		echo "<META HTTP-EQUIV='refresh' CONTENT='3; URL=../vistas/frm_ListaMunicipios.php'>";		
 	} else {
-		echo '<div class="alert alert-danger" role="alert"><span class="glyphicon  glyphicon-floppy-remove"></span> Error al guardar un Departamento, por favor contacta con el Administrador  </div>';
-		echo "<META HTTP-EQUIV='refresh' CONTENT='3; URL=../vistas/frm_ListaDepartamentos.php'>";
+		echo '<div class="alert alert-danger" role="alert"><span class="glyphicon  glyphicon-floppy-remove"></span> Error al guardar un Municipio, por favor contacta con el Administrador  </div>';
+		echo "<META HTTP-EQUIV='refresh' CONTENT='3; URL=../vistas/frm_ListaMunicipios.php'>";
 
 	}
 }
 	else
-	{	echo '<div class="alert alert-danger" role="alert"><span class="glyphicon  glyphicon-floppy-remove"></span>Solo se puede modificar un Departamento cuando se es Administrador</div>';		
-	echo "<META HTTP-EQUIV='refresh' CONTENT='3; URL=../vistas/frm_ListaDepartamentos.php'>";
+	{	echo '<div class="alert alert-danger" role="alert"><span class="glyphicon  glyphicon-floppy-remove"></span>Solo se puede modificar un Municipio cuando se es Administrador</div>';		
+	echo "<META HTTP-EQUIV='refresh' CONTENT='3; URL=../vistas/frm_ListaMunicipios.php'>";
 
 	}
 ?>

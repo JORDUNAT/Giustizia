@@ -1,4 +1,10 @@
+
 <?php	
+
+// Html5 y PHP
+//Fecha creado: 27/06/2016
+//Propósito: Modificación Municipios
+
 
 	session_start();
 
@@ -19,16 +25,16 @@
 	include_once('../model/usuariosModel.php');	
 
 	$obj_model = new usuariosModel();
-	$data = $obj_model -> getQryDepartamentos($conexion);
+	$data = $obj_model -> getQryMunicipios($conexion);
 
 ?>
 	<article class="col-xs-12  col-sm-8 col-md-9 col-lg-9">
 		<div class="ibody1 col-xs-12  col-sm-12 col-md-12 col-lg-12">
-			<div align='center>' class="jumbotron">
-			<h8 align='center>'><b>MODIFICANDO DEPARTAMENTO DE CODIGO  <?php echo $data['depa_Codigo']?> </b></h8>
+			<div align='center' class="jumbotron">
+			<h8 align='center'><b>MODIFICANDO EL MUNICIPIO CON CODIGO  <?php echo $data['muni_Codigo']?> </b></h8>
 			</div>
 			<div >
-				<form name="flk_Departamentof" id="flk_Departamentof" method="POST" action="">
+				<form name="flk_Municipiof" id="flk_Municipiof" method="POST" action="">
 
 					<div id="mensaje" style="display: none;">
 					</div>
@@ -36,12 +42,12 @@
 					<div class="row" align="center">	
 
 							<div align="center" class="col-xs-12  col-sm-3 col-md-3 col-lg-3 ">
-							<input type="number" min="1" name="item" id="item" style = "visibility:hidden"  class="form-control" aria-describedby="sizing-addon3" value="<?php echo $data['depa_Codigo']?>"  required/> 
+							<input type="number" min="1" name="item" id="item" style = "visibility:hidden"  class="form-control" aria-describedby="sizing-addon3" value="<?php echo $data['muni_Codigo']?>"  required/> 
 							</div>
 
 							<div class="col-xs-12  col-sm-6 col-md-6 col-lg-6 ">
 							<label>Departamento: </label>
-							<input type="text" name="descripcion" id="descripcion"  class="form-control" placeholder="Departamento" value="<?php echo $data['depa_Departamento']?>" required/>
+							<input type="text" name="descripcion" id="descripcion"  class="form-control" placeholder="Departamento" value="<?php echo $data['depa_Departamento']?>" disabled/>
 							</div>
 
 							<div align="center" class="col-xs-12  col-sm-12 col-md-12 col-lg-12 ">
@@ -52,8 +58,8 @@
 							</div>
 
 							<div align="center" class="col-xs-12  col-sm-6 col-md-6 col-lg-6 ">
-							<label>Capital: </label>
-							<input type="text" name="capital" id="capital"  class="form-control" placeholder="Capital" value="<?php echo $data['depa_Capital']?>" required/>
+							<label>Municipio: </label>
+							<input type="text" name="municipio" id="municipio"  class="form-control" placeholder="Municipio" value="<?php echo $data['muni_Municipio']?>" required/>
 							</div>
 
 						<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
@@ -61,8 +67,8 @@
 						</div>
 
 						<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12" align="center">
-							<input type="submit" name="btn_ModDeparta" id="btn_ModDeparta" class="btn btn-primary" value="Guardar" >
-							<input type="button" class="btn btn-primary" onclick="location.href='frm_ListaDepartamentos.php'" value="Cancelar" >
+							<input type="submit" name="btn_ModMunici" id="btn_ModMunici" class="btn btn-primary" value="Guardar" >
+							<input type="button" class="btn btn-primary" onclick="location.href='frm_ListaMunicipios.php'" value="Cancelar" >
 						</div>
 
 						</div>

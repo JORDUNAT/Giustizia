@@ -245,6 +245,7 @@
 			return $html_combo;
 		}
 
+
 		function getTipoDocumentoRelacion($conexion)
 		{
 			$html = array();
@@ -280,6 +281,25 @@
 			return $html;
 
 		}	
+
+		function getTipoJuzgadoRelacion($conexion)
+		{
+			$html = array();
+			$qryproceso="SELECT  * FROM tbl_tipojuzgado"; // Sleccion de Tipo de Usuario
+			$qry = $conexion->query($qryproceso);
+			
+			if (!$qry)
+			{
+				return 'Error->'.mysql_error().',qry:'.$sql;
+			}
+			while ($cursor = $qry->fetch_assoc())
+			{
+				array_push($html,$cursor);
+			}
+			return $html;
+
+		}	
+
 
 		function getQryTipDocu($conexion)
 		{
@@ -588,11 +608,11 @@
 
 		function getQryMunicipios($conexion)
 		{
-			$id= $_POST['municipio'];
+			$id= $_POST['municip'];
 
 			$html = array();
 			$sql = "
-				SELECT * FROM tbl_municipios WHERE muni_Codigo = '$id'
+				SELECT A.muni_Codigo, A.muni_Departamento, A.muni_Municipio, B.depa_Id, B.depa_Departamento FROM tbl_municipios A, tbl_departamentos B WHERE (muni_Codigo='$id') AND (A.muni_Departamento= B.depa_Id)
 			";
 
 			$qry = $conexion->query($sql);
@@ -601,6 +621,7 @@
 
 			return $cursor;
 		}	
+
 
 	
 		function getConsutlasCliente($conexion) //Consulta de los usuarios no clientes de acuero a cada oficina

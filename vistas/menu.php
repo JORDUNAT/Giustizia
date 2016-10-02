@@ -21,6 +21,7 @@
                         echo '<li><a href="#" class="sub" tabindex="1"><span class="glyphicon glyphicon-filter"></span> <b> </b> PARAMETRICA</a>';
                         echo '<ul>';
                         echo '<li><a href="frm_ListaTipoProcesos.php"> Tipo Procesos</a></li>';
+                        echo '<li><a href="frm_ListaTipoJuzgado.php"> Tipo Juzgado</a></li>';
                         echo '<li><a href="frm_ListaTipoaccion.php">Tipo Acción</a></li>';
                         echo '<li><a href="frm_ListaTipoDocumento.php">Tipo Documento</a></li>';  
                         echo '<li><a href="frm_ListaTipoUsuario.php">Tipo Usuario</a></li>'; 

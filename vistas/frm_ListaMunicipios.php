@@ -33,7 +33,7 @@ $(document).ready(function(){
 			<h8 align='center'><b>MUNICIPIOS</b></h8>
 			</div>
 			<div >
-				<form name="flk_Municipiosf" id="flk_Municipiosf" method="POST" action="frm_Municipios.php">
+				<form name="flk_Municipiosf" id="flk_Municipiosf" method="POST" action="flk_Municipios.php">
 					<div class="row">	
 						<div class="table-responsive">
 						<div class="panel panel-default">
