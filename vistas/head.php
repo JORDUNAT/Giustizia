@@ -72,7 +72,8 @@
         <script language="javascript" src="../js/frm_CrearDepartamento.js"></script>
         <script language="javascript" src="../js/flk_Departamentos.js"></script>    
         <script language="javascript" src="../js/frm_CrearMunicipios.js"></script>
-        <script language="javascript" src="../js/flk_Municipios.js"></script>  
+        <script language="javascript" src="../js/flk_Municipios.js"></script>
+        <script language="javascript" src="../js/frm_CrearTipoJuzgado.js"></script>  
         
 
         
