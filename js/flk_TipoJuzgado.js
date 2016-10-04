@@ -9,7 +9,7 @@ $(document).ready(function()
   $('#btn_ModTipJuzg').click(function()
   {
     //Validación del formulario
-    $('#flk_TipoUsuariof').validate(
+    $('#flk_TipoJuzgadof').validate(
     {
       rules:
       {

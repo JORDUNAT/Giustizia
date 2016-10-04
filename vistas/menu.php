@@ -27,6 +27,7 @@
                         echo '<li><a href="frm_ListaTipoUsuario.php">Tipo Usuario</a></li>'; 
                         echo '<li><a href="frm_ListaDepartamentos.php">Departamentos</a></li>'; 
                         echo '<li><a href="frm_ListaMunicipios.php">Municipios</a></li>'; 
+                        echo '<li><a href="frm_ListaJuzgados.php">Juzgados</a></li>'; 
                         echo '</ul>';
                         echo '</li>';
 

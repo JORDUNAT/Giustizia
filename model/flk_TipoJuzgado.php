@@ -19,26 +19,26 @@
 	
 
 
-	$Id 				=$_POST['txt_id'];
-	$tipu_TipoUsuario 	=$conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
+	$Id 					=$_POST['txt_id'];
+	$tipjuz_TipoJuzgado 	=$conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
 
 
 if($tipousuario==1){
-	$query="UPDATE tbl_tipousuario SET tipu_TipoUsuario='$tipu_TipoUsuario' WHERE (tipu_Id='$Id')";
+	$query="UPDATE tbl_tipojuzgado SET tipjuz_TipoJuzgado='$tipjuz_TipoJuzgado' WHERE (tipjuz_Id='$Id')";
 	$resultado=$conexion->query($query);
 
 	if($resultado>0){
-		echo '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-floppy-saved"></span> Se ha guardado los cambios realizados a la Tipo de Usuario No. '.$Id;
-		echo "<META HTTP-EQUIV='refresh' CONTENT='3; URL=../vistas/frm_ListaTipoUsuario.php'>";		
+		echo '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-floppy-saved"></span> Se ha guardado los cambios realizados a la Tipo de Juzgado No. '.$Id;
+		echo "<META HTTP-EQUIV='refresh' CONTENT='3; URL=../vistas/frm_ListaTipoJuzgado.php'>";		
 	} else {
-		echo '<div class="alert alert-danger" role="alert"><span class="glyphicon  glyphicon-floppy-remove"></span> Error al guardar un Tipo de Usuario, por favor contacta con el Administrador  </div>';
-		echo "<META HTTP-EQUIV='refresh' CONTENT='3; URL=../vistas/frm_ListaTipoUsuario.php'>";
+		echo '<div class="alert alert-danger" role="alert"><span class="glyphicon  glyphicon-floppy-remove"></span> Error al guardar un Tipo de Juzgado, por favor contacta con el Administrador  </div>';
+		echo "<META HTTP-EQUIV='refresh' CONTENT='3; URL=../vistas/frm_ListaTipoJuzgado.php'>";
 
 	}
 }
 	else
-	{	echo '<div class="alert alert-danger" role="alert"><span class="glyphicon  glyphicon-floppy-remove"></span>Solo se puede modificar un Tipo de Usuario cuando se es Administrador</div>';		
-	echo "<META HTTP-EQUIV='refresh' CONTENT='3; URL=../vistas/frm_ListaTipoUsuario.php'>";
+	{	echo '<div class="alert alert-danger" role="alert"><span class="glyphicon  glyphicon-floppy-remove"></span>Solo se puede modificar un Tipo de Juzgado cuando se es Administrador</div>';		
+	echo "<META HTTP-EQUIV='refresh' CONTENT='3; URL=../vistas/frm_ListaTipoJuzgado.php'>";
 
 	}
 ?>

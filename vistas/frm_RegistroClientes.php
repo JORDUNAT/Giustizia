@@ -8,6 +8,7 @@
 	include_once('../model/usuariosModel.php');	
 
 	$obj_model = new usuariosModel(); //UsuarioModel es un archivo que contiene consultas a la base de datos
+	
 
 ?>
 

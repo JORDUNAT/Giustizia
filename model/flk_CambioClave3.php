@@ -28,15 +28,17 @@
 	$confclave 			=$_POST['confclave'];
 	$confclaveE 		=md5($_POST['confclave']);
 
+	$clavecontar		=strlen($nueclave);
 	$to				= $email;
 
 
 
 if($clavecontar<5 AND $clavecontar>9)
 {
-	echo '<div class="alert alert-danger" role="alert"><span class="glyphicon  glyphicon-floppy-remove"></span>  Error al Cambiar Clave, la clave debe tener minimo 4 caracteres y máximo 9, por favor verifique que cumpla con estas condiciones.  </div>';
+	echo '<div class="alert alert-danger" role="alert"><span class="glyphicon  glyphicon-floppy-remove"></span>  Error al Cambiar Clave, la clave debe tener minimo 5 caracteres y máximo 8, por favor verifique que cumpla con estas condiciones.  </div>';
 }else{
 	if($nueclave==$confclave){
+
 
 		$query="UPDATE tbl_usuarios SET usu_Clave='$confclaveE', usu_Estado='1'  WHERE (usu_Documento='$ususession')";
 		$resultado=$conexion->query($query);
