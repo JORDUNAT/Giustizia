@@ -353,6 +353,22 @@
 			return $cursor;
 		}	
 
+		function getQryTipJuzg($conexion)
+		{
+			$tipojuzgado= $_POST['tipjuzg'];
+
+			$html = array();
+			$sql = "
+				SELECT * FROM tbl_tipojuzgado WHERE tipjuz_Id = '$tipojuzgado'
+			";
+
+			$qry = $conexion->query($sql);
+			$cursor = $qry->fetch_assoc();
+			//echo '<br>';
+			//echo $cursor['Cons_Cliente'];			
+
+			return $cursor;
+		}	
 
 		function getEstadoUsuario($conexion)
 		{
