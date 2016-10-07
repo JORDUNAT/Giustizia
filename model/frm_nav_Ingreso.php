@@ -16,7 +16,7 @@
 
 
   //$qry = "SELECT * FROM tblusuarios WHERE idUsuario ='$usuario' AND claveUsuario='$clave'";
-	$qry = "SELECT * FROM tbl_usuarios WHERE usu_Documento ='$usuario' AND usu_Clave ='$clave' AND usu_Estado='1' OR usu_Estado='3' AND usu_Documento=$usuario";
+	$qry = "SELECT * FROM tbl_usuarios WHERE (usu_Documento ='$usuario') AND (usu_Clave ='$clave') AND (usu_Estado='1' OR usu_Estado='3')";
 	$proceso = $conexion->query($qry);
 
 	if (!$proceso)	

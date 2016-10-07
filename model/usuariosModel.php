@@ -156,8 +156,9 @@
 
 			while ($oficina = $qry->fetch_assoc())
 			{
-				$html_combo .= "<option   value='".$oficina['usu_Documento']."'>".$oficina['usu_Nombres']." | ".$oficina['usu_Direccion']." ".$oficina['muni_Municipio']."</option>";
+				$html_combo .= "<option id='oficina', name='oficina',  value='".$oficina['usu_Documento']."'>".$oficina['usu_Nombres']." | ".$oficina['usu_Direccion']." ".$oficina['muni_Municipio']."</option>";
 			}
+			
 
 			return $html_combo;
 		}
@@ -596,6 +597,31 @@
 			}
 			return $html;
 		}	
+
+		function getListaJuzgado($conexion) //Listado de departamentos
+
+		{
+
+			$oficina = $_SESSION['s_oficina'];
+			$usuario_sesionado = $_SESSION['s_usuario'];
+						
+			$html = array();
+			$sql = "
+			SELECT * FROM tbl_juzgados
+			";
+
+			$qry = $conexion->query($sql);
+			if (!$qry)
+			{
+				return 'Error->'.mysql_error().',qry:'.$sql;
+			}
+			while ($cursor = $qry->fetch_assoc())
+			{
+				array_push($html,$cursor);
+			}
+			return $html;
+		}	
+
 
 		function getListaMunicipios($conexion) //Listado de municipios
 

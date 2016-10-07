@@ -6,7 +6,7 @@ $(document).ready(function()
 {
   //Evento sobre el botón modifica un cliente en vista fll_Clientes.php
 
-  $('#btn_ModyClientes').click(function()
+  $('#btn_ModyClientesU').click(function()
   {
     //Validación del formulario
     $('#fModyClientes').validate(

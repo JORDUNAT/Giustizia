@@ -18,7 +18,7 @@
 	$primernumero		=substr($_POST['txt_documento'], 1);
 	$a 					=$documento[0];
 
-
+	
 	if($a==1){
 		$clave = 'ncAB'.$primernumero.'$';
 	}elseif ($a==2) {
@@ -39,7 +39,6 @@
 		$clave = 'ncQR'.$primernumero.'#';
 	}
 
-
 	$nombre 			=$conexion->real_escape_string(strtoupper($_POST['txt_nombre']));
 	$apellido 			=$conexion->real_escape_string(strtoupper($_POST['txt_apellidos']));
 	$direccion			=$conexion->real_escape_string(strtoupper($_POST['txt_direccion']));
@@ -55,16 +54,16 @@
 	$consulta 			=$conexion->real_escape_string(strtoupper($_POST['txt_consulta']));		
 	$pass 				=md5($clave);
 	$fecha_actual 		= date("Y-m-d");
-	$anno				= date("Y");
-	
+	$anno				= date("Y");	
 
 	$to 				= $email;
 
-		$sql = "SELECT usu_Documento, usu_Nombres, usu_Direccion, usu_Email FROM tbl_usuarios WHERE (usu_tipusu='1' AND usu_Documento = '$oficina')";
+		$sql = "SELECT usu_Documento, usu_Nombres, usu_Direccion, usu_Email, usu_Logo FROM tbl_usuarios WHERE (usu_tipusu='1' AND usu_Documento = '$oficina')";
 		$qry = $conexion->query($sql);
 		$resofis = mysqli_fetch_array($qry);
 
 		$to2				= $resofis['usu_Email'];
+		$logo 				= $resofis['usu_Logo'];
 
 
 		$cons_id ="SELECT * FROM tbl_consultas ORDER BY Cons_Id DESC LIMIT 1";
@@ -77,7 +76,7 @@
 
 	if($proceso){
 		$consutarId=$proceso->fetch_assoc();
-		$rec_conid 	= 	$consutarId['Cons_Id'];
+		$rec_conid 	= 	$consutarId['cons_Id'];
 		$nuevacon	= 	$rec_conid+1;
 
 	}else{
@@ -85,13 +84,13 @@
 	}
 
 
-		$query="INSERT INTO tbl_usuarios(usu_TipoDoc, usu_Documento, usu_Nombres, usu_Apellidos, usu_Email, usu_FechaNacimiento, usu_tipusu, usu_Consultorio, usu_Clave, usu_Celular, usu_Genero, usu_Direccion, usu_Municipio, usu_Telefono, usu_Estrato, usu_Estado) VALUES ('$TipDoc', '$documento', '$nombre', '$apellido', '$email', '$fecha', '3',	'$oficina', '$pass', '$celular', '$genero', '$direccion',  '$municipio', '$telefono', '$estrato', '3')";
+		$query="INSERT INTO tbl_usuarios(usu_TipoDoc, usu_Documento, usu_Nombres, usu_Apellidos, usu_Email, usu_FechaNacimiento, usu_tipusu, usu_Consultorio, usu_Clave, usu_Celular, usu_Genero, usu_Direccion, usu_Logo, usu_Municipio, usu_Telefono, usu_Estrato, usu_Estado) VALUES ('$TipDoc', '$documento', '$nombre', '$apellido', '$email', '$fecha', '3',	'$oficina', '$pass', '$celular', '$genero', '$direccion', '$logo', '$municipio', '$telefono', '$estrato', '3')";
 		$resultado=$conexion->query($query);
 
 
 		if($resultado>0){
 
-			$query="INSERT INTO tbl_consultas(Cons_Id, Cons_NoConsulta, Cons_Fecha, Cons_Atendido, Cons_Cliente, Cons_DetalleConsulta) VALUES ('$nuevacon', concat('$oficina','-','$nuevacon','-','$anno'), '$fecha_actual', 'Consutla Web' '$documento ', '$consulta')";
+			$query="INSERT INTO tbl_consultas(cons_Id, cons_NoConsulta, cons_Fecha, cons_Atendido, cons_Cliente, cons_DetalleConsulta) VALUES ('$nuevacon', concat('$oficina','-','$nuevacon','-','$anno'), '$fecha_actual', 'Consutla Web' '$documento ', '$consulta')";
 			$resultado=$conexion->query($query);
 
 			$mail -> From = 'desoftco@desoftco.co';

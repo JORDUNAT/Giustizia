@@ -107,7 +107,7 @@
 						</div>
 
 						<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
-							<input type="submit" name="btn_ModyClientes" id="btn_ModyClientes" class="btn btn-primary" value="Guardar" >
+							<input type="submit" name="btn_ModyClientesU" id="btn_ModyClientesU" class="btn btn-primary" value="Guardar" >
 							<input type="button" class="btn btn-primary" onclick="location.href='frm_ListaClientes.php'" value="Volver" >
 						</div>
 
