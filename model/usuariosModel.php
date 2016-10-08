@@ -180,6 +180,23 @@
 
 		}
 
+		function getTipoJuzgado($conexion)
+		{
+
+			$html_combo = "";
+			$qrytd="SELECT * FROM tbl_tipojuzgado"; // Sleccion de Tipo de Usuario
+			$qry = $conexion->query($qrytd);
+			
+
+			while ($tipodocumento = $qry->fetch_assoc())
+			{
+				$html_combo .= "<option   value='".$tipodocumento['tipjuz_Id']."'>".$tipodocumento['tipjuz_TipoJuzgado']."</option>";
+			}
+
+			return $html_combo;
+
+		}
+
 		function getTipoUsuario($conexion)
 		{
 			$html_combo = "";
@@ -465,6 +482,24 @@
 			$html = array();
 			$sql = "
 				SELECT * FROM tbl_tipoaccion WHERE 	tipAcc_Id = '$tipoaccion'
+			";
+
+			$qry = $conexion->query($sql);
+			$cursor = $qry->fetch_assoc();
+			//echo '<br>';
+			//echo $cursor['Cons_Cliente'];			
+
+			return $cursor;
+		}
+
+
+		function getQryJuzgado($conexion)
+		{
+			$juzgado= $_POST['juzg'];
+
+			$html = array();
+			$sql = "
+				SELECT * FROM tbl_juzgados WHERE juz_Id = '$juzgado'
 			";
 
 			$qry = $conexion->query($sql);

@@ -43,7 +43,7 @@ $(document).ready(function(){
 									<?php
 										
 										if ($tipousuario=='1'){
-											echo '<input type="button" class="btn btn-default" value="Crear Usuario" id="btn_crearusaurio" >';
+											echo '<input type="button" class="btn btn-primary" value="Crear Usuario" id="btn_crearusaurio" >';
 										     }
 										else{ 
 										     echo '<input type="button" class="btn btn-default" value="Crear Usuario" disabled="disabled" >';

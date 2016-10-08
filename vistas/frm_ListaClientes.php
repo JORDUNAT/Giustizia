@@ -47,7 +47,7 @@ $(document).ready(function () {
 									<?php
 										
 										if ($tipousuario=='1' || $tipousuario=='5'){
-											echo '<input type="button" class="btn btn-default" value="Crear Cliente" id="btn_crearcliente" >';
+											echo '<input type="button" class="btn btn-primary" value="Crear Cliente" id="btn_crearcliente" >';
 										     }
 										else{ 
 										     echo '<input type="button" class="btn btn-default" value="Crear Cliente" disabled="disabled" >';

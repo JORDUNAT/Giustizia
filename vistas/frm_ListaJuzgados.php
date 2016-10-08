@@ -81,7 +81,7 @@ $(document).ready(function(){
 												print "<th>".$juzgados['juz_Telefono']."</th>";
 												print "<th>".$juzgados['juz_HorarioAtencion']."</th>";
 												echo '<td align="center">';
-												echo '<input type="radio" name="depart" id="depart" value="'.$juzgados['juz_Id'].'" required>';
+												echo '<input type="radio" name="juzg" id="juzg" value="'.$juzgados['juz_Id'].'" required>';
 										        echo "</td>";												
 												print "</tr>";					
 											}
@@ -91,6 +91,35 @@ $(document).ready(function(){
 							</table>
 							</div>	
 					</div>
+					<div class="col-xs-12  col-sm-12 col-md-11 col-lg-11">
+						<br>
+					</div>
+					<br>
+				<div class="ibody1 col-xs-12  col-sm-12 col-md-11 col-lg-11">
+					
+					<h5>Acronimos: </h5>
+					<div align="right" class="col-xs-6 col-sm-2 col-md-1 col-lg-1">
+					<H6>CE:</H6>
+					<h6>CSJ:</h6>
+					<h6>DSRJ:</h6>
+					<h6>TS:</h6>
+					<H6>JC:</H6>
+					<H6>TA:</H6>
+					<H6>JA:</H6>
+					<H6>JM:</H6>						
+					</div>
+					<div align="left" class="col-xs-6 col-sm-8 col-md-6 col-lg-6">
+					<H6>CONSEJO DE ESTADO </H6>
+					<h6>CONSEJO SECCIONAL DE LA JUDICATURA</h6>
+					<h6>DIRECCION SECCIONAL DE LA RAMA JUDICIAL </h6>
+					<h6>TRIBUNAL SUPERIOR</h6>
+					<H6>JUZGADO DE CIRCUITO</H6>
+					<H6>TRIBUNAL ADMINISTRATIVO</H6>
+					<H6>JUZGADO ADMINISTRATIVO </H6>
+					<H6>JUZGADO MUNICIPAL </H6>
+					</div>
+				</div>
+
 				</form>
 			</div>
 		</div>
@@ -111,24 +140,50 @@ $(document).ready(function(){
 				<form name="frm_crear" id="frm_crear" method="POST" action="" align="center">
 					<div class="row" align="center">	
 
-							<div class="col-xs-12  col-sm-6 col-md-10 col-lg-10" align="center">
+							<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12" align="center">
 							
-								<div class="col-xs-12  col-sm-12 col-md-6 col-lg-6 ">
-								<label>Nombre del Juzgado </label>
+								<div class="col-xs-12  col-sm-12 col-md-6 col-lg-6">
+								<label>Nombre del Juzgado: </label>
 								<input type="text" name="juzgado" id="juzgado"  class="form-control" placeholder="Juzgado" required/>
 								</div>
-								<br>
 
-								<div align="center" class="col-xs-12  col-sm-12 col-md-6 col-lg-6 " >
+								<div align="center" class="col-xs-12  col-sm-12 col-md-5 col-lg-5">
 								<label>Circuito: </label>
-								<input type="text" name="codigo" id="codigo"  class="form-control" placeholder="Código"/>
-								</div><br>
+								<input type="text" name="circuito" id="circuito"  class="form-control" placeholder="Circuitto"/>
+								</div>								
 								
-								
-								<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 ">
-								<label>Su Capital </label>
-								<input type="text" name="capital" id="capital"  class="form-control" placeholder="Capital" required/>
+								<div class="col-xs-12  col-sm-12 col-md-6 col-lg-6">
+								<label>Distrito: </label>
+								<input type="text" name="distrito" id="distrito"  class="form-control" placeholder="Distrito" required/>
 								</div>
+
+								<div align="center" class="col-xs-12  col-sm-12 col-md-5 col-lg-5">
+								<label>Dirección: </label>
+								<input type="text" name="direccion" id="direccion"  class="form-control" placeholder="Dirección"/>
+								</div>
+
+								<div class="col-xs-12  col-sm-12 col-md-6 col-lg-6">
+								<label>Telefonos: </label>
+								<input type="number" name="telefono" id="telefono"  class="form-control" placeholder="Telefonos" required/>
+								</div>
+
+								<div align="center" class="col-xs-12  col-sm-12 col-md-5 col-lg-5">
+								<label>Contacto: </label>
+								<input type="text" name="contacto" id="contacto"  class="form-control" placeholder="Contacto"/>
+								</div>	
+
+								<div class="col-xs-12  col-sm-12 col-md-6 col-lg-6">
+								<label>Horario de Atención: </label>
+								<input type="text" name="horario" id="horario"  class="form-control" placeholder="Usa hora militar" required/>
+								</div>
+
+								<div class="col-xs-12  col-sm-12 col-md-5 col-lg-5  has-default" >
+								<label>Tipo de Juzgado: </label>
+								<select name="TipJuz" id="TipJuz" class="form-control" aria-describedby="sizing-addon2" required>
+								    <option value="">Sin Seleccion</option>
+									<?php echo $obj_model-> getTipoJuzgado($conexion); ?>
+						     	 </select>
+							</div>	
 
 							</div>
 
@@ -141,6 +196,32 @@ $(document).ready(function(){
 							<input type="submit" name="btn_CrearJuzgado" id="btn_CrearJuzgado" class="btn btn-primary" value="Guardar" >
 							<input type="button" class="btn btn-primary" onclick="location.href='frm_ListaJuzgados.php'" value="Cancelar" >
 						</div>
+						<br>
+				<div class="ibody1 col-xs-12  col-sm-12 col-md-11 col-lg-11">
+					
+					<h5>Acronimos: </h5>
+					<div align="right" class="col-xs-6 col-sm-2 col-md-1 col-lg-1">
+					<H6>CE:</H6>
+					<h6>CSJ:</h6>
+					<h6>DSRJ:</h6>
+					<h6>TS:</h6>
+					<H6>JC:</H6>
+					<H6>TA:</H6>
+					<H6>JA:</H6>
+					<H6>JM:</H6>						
+					</div>
+					<div align="left" class="col-xs-6 col-sm-8 col-md-6 col-lg-6">
+					<H6>CONSEJO DE ESTADO </H6>
+					<h6>CONSEJO SECCIONAL DE LA JUDICATURA</h6>
+					<h6>DIRECCION SECCIONAL DE LA RAMA JUDICIAL </h6>
+					<h6>TRIBUNAL SUPERIOR</h6>
+					<H6>JUZGADO DE CIRCUITO</H6>
+					<H6>TRIBUNAL ADMINISTRATIVO</H6>
+					<H6>JUZGADO ADMINISTRATIVO </H6>
+					<H6>JUZGADO MUNICIPAL </H6>
+					</div>
+				</div>
+
 
 						</div>
 

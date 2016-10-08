@@ -25,11 +25,13 @@
 		echo "<META HTTP-EQUIV='refresh' CONTENT='3; URL=../vistas/frm_ListaTipoaccion.php'>";
 		echo '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-floppy-saved"></span> Se ha creado el tipo de acción '.$descripcion;
 		}else{
+		echo "<META HTTP-EQUIV='refresh' CONTENT='3; URL=../vistas/frm_ListaTipoaccion.php'>";
 		echo '<div class="alert alert-danger" role="alert"><span class="glyphicon  glyphicon-floppy-remove"></span> Error al guardar este tipo de acción, Comunicare con el administrador de Giustizia  </div>';
 		}			
 
 
 	}else{
+		echo "<META HTTP-EQUIV='refresh' CONTENT='3; URL=../vistas/frm_ListaTipoaccion.php'>";
 		echo '<div class="alert alert-danger" role="alert"><span class="glyphicon  glyphicon-floppy-remove"></span> Error al guardar este tipo de acción, Solo puede ser creado por un super usaurio  </div>';
 	}
 
