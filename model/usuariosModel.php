@@ -197,6 +197,7 @@
 
 		}
 
+
 		function getTipoUsuario($conexion)
 		{
 			$html_combo = "";
@@ -224,6 +225,31 @@
 			while ($tipodocumento = $qry->fetch_assoc())
 			{
 				$html_combo .= "<option value='".$tipodocumento['tipu_Id']."'>".$tipodocumento['tipu_TipoUsuario']."</option>";
+			}
+
+			return $html_combo;
+		}
+
+
+		function getQryTipJuzgadouno($conexion)
+		{
+			$juzgado= $_POST['juzg'];
+
+			$sqltip= "
+				SELECT * FROM tbl_juzgados WHERE (juz_Id='$juzgado')
+			";
+			$qrytip = $conexion->query($sqltip);
+
+			$curtip = $qrytip->fetch_assoc();
+			$tipjuz_id=$curtip['juz_TipoJuzgado'];
+
+			$html_combo = "";
+			$sql = "SELECT * FROM tbl_tipojuzgado WHERE (tipjuz_Id='$tipjuz_id')";
+			$qry = $conexion->query($sql);
+
+			while ($tipojuzgado = $qry->fetch_assoc())
+			{
+				$html_combo .= "<option value='".$tipojuzgado['tipjuz_Id']."'>".$tipojuzgado['tipjuz_TipoJuzgado']."</option>";
 			}
 
 			return $html_combo;
@@ -397,7 +423,7 @@
 
 			while ($estadousuario = $qry->fetch_assoc())
 			{
-				$html_combo .= "<option   value='".$estadousuario['estado_Id']."'>".$estadousuario['Estado_Estado']."</option>";
+				$html_combo .= "<option   value='".$estadousuario['estado_Id']."'>".$estadousuario['estado_Estado']."</option>";
 			}
 
 			return $html_combo;

@@ -26,13 +26,11 @@ $(document).ready(function(){
     $('#tbl_Juzgados').DataTable();
 });
 </script>
-
 	<article class="col-xs-12  col-sm-8 col-md-9 col-lg-9">
 		<div class="ibody1 col-xs-12  col-sm-12 col-md-12 col-lg-12">
 			<div align='center' class="jumbotron">
 			<h8 align='center'><b>JUZGADOS</b></h8>
 			</div>
-			<div >
 				<form name="flk_Juzgadosf" id="flk_Juzgadosf" method="POST" action="flk_Juzgados.php">
 					<div class="row">	
 						<div class="table-responsive">
@@ -41,6 +39,7 @@ $(document).ready(function(){
 								<div id="mensaje" style="display: none;">
 								</div>
 								<div class="panel-heading" align="right">
+									<input type="button" class="btn btn-info" data-toggle="modal" data-target="#msg_convenciones" value="Convenciones" id="btn_Convenciones" >
 									<?php
 										
 										if ($tipousuario=='1'){
@@ -60,10 +59,10 @@ $(document).ready(function(){
 								<thead>	
 									<td align="center"><span class="glyphicon glyphicon-sort-by-order-alt"></span><b> Id</b></td>
 									<td align="center"><span class="glyphicon glyphicon-sort-by-order-alt"></span><b> Juzgado</b></td>
-									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Dirección</b></d>
-									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Telfonos</b></d>
-									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Horarios</b></d>
-									<td align="center"><b> Seleccionar</b></d>	
+									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Dirección</b></td>
+									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Telfonos</b></td>
+									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Horarios</b></td>
+									<td align="center"><b> Seleccionar</b></td>	
 
 
 								</thead>
@@ -85,47 +84,21 @@ $(document).ready(function(){
 										        echo "</td>";												
 												print "</tr>";					
 											}
-										?>
-										
+										?>		
 								</tbody>
 							</table>
-							</div>	
+						</div>	
 					</div>
-					<div class="col-xs-12  col-sm-12 col-md-11 col-lg-11">
-						<br>
 					</div>
-					<br>
-				<div class="ibody1 col-xs-12  col-sm-12 col-md-11 col-lg-11">
-					
-					<h5>Acronimos: </h5>
-					<div align="right" class="col-xs-6 col-sm-2 col-md-1 col-lg-1">
-					<H6>CE:</H6>
-					<h6>CSJ:</h6>
-					<h6>DSRJ:</h6>
-					<h6>TS:</h6>
-					<H6>JC:</H6>
-					<H6>TA:</H6>
-					<H6>JA:</H6>
-					<H6>JM:</H6>						
-					</div>
-					<div align="left" class="col-xs-6 col-sm-8 col-md-6 col-lg-6">
-					<H6>CONSEJO DE ESTADO </H6>
-					<h6>CONSEJO SECCIONAL DE LA JUDICATURA</h6>
-					<h6>DIRECCION SECCIONAL DE LA RAMA JUDICIAL </h6>
-					<h6>TRIBUNAL SUPERIOR</h6>
-					<H6>JUZGADO DE CIRCUITO</H6>
-					<H6>TRIBUNAL ADMINISTRATIVO</H6>
-					<H6>JUZGADO ADMINISTRATIVO </H6>
-					<H6>JUZGADO MUNICIPAL </H6>
-					</div>
-				</div>
-
 				</form>
-			</div>
 		</div>
+	
+		<div class="col-xs-6 col-sm-8 col-md-6 col-lg-6">
+			<br>
+		</div>
+		
 	</article>
 	</section>
-	</div>
 
 <div class="modal fade bs-example-modal-lg" id="msg_crear" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-lg" role="document">
@@ -199,7 +172,7 @@ $(document).ready(function(){
 						<br>
 				<div class="ibody1 col-xs-12  col-sm-12 col-md-11 col-lg-11">
 					
-					<h5>Acronimos: </h5>
+					<h5>Convenciones: </h5>
 					<div align="right" class="col-xs-6 col-sm-2 col-md-1 col-lg-1">
 					<H6>CE:</H6>
 					<h6>CSJ:</h6>
@@ -235,6 +208,44 @@ $(document).ready(function(){
   </div>
 </div>
 
+
+<div class="modal fade bs-example-modal-lg" id="msg_convenciones" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-danger" id="myModalLabel"><b>Convenciones:</b></h4>
+      </div>
+      <div class="modal-footer" align="center">
+
+		<div class="ibody1 col-xs-12  col-sm-7 col-md-7 col-lg-7">
+			<div align="right" class="col-xs-6 col-sm-2 col-md-1 col-lg-1">
+				<H6>CE:</H6>
+				<h6>CSJ:</h6>
+				<h6>DSRJ:</h6>
+				<h6>TS:</h6>
+				<H6>JC:</H6>
+				<H6>TA:</H6>
+				<H6>JA:</H6>
+				<H6>JM:</H6>						
+			</div>
+			<div align="left" class="col-xs-6 col-sm-8 col-md-6 col-lg-6">
+				<H6>CONSEJO DE ESTADO </H6>
+				<h6>CONSEJO SECCIONAL DE LA JUDICATURA</h6>
+				<h6>DIRECCION SECCIONAL DE LA RAMA JUDICIAL </h6>
+				<h6>TRIBUNAL SUPERIOR</h6>
+				<H6>JUZGADO DE CIRCUITO</H6>
+				<H6>TRIBUNAL ADMINISTRATIVO</H6>
+				<H6>JUZGADO ADMINISTRATIVO </H6>
+				<H6>JUZGADO MUNICIPAL </H6>
+			</div>
+		</div>
+
+      	<span id="span1"></span>
+      </div>
+    </div>
+  </div>
+</div>
 
 <?php 
 		include('footer.php');
