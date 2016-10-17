@@ -33,7 +33,8 @@
 	}
 
 	$id 				=$nmax + 1;
-	$descripcion		=$conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
+	$descripcion1		=$conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
+	$descripcion		= strtr($descripcion1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
 
 	if ($tipusuario==1) {
 		$query="INSERT INTO tbl_clasificacionproceso(clapro_Id, clapro_ClasificacionProceso, clapro_Estado) VALUES ('$id', '$descripcion', '1')";

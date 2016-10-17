@@ -15,7 +15,8 @@
 	$oficina 			=$_SESSION['s_oficina'];
 	$tipusuario			=$_SESSION['s_tipusu'];
 
-	$descripcion		=$conexion->real_escape_string(strtoupper($_POST['descripcion']));
+	$descripcion1		=$conexion->real_escape_string(strtoupper($_POST['descripcion']));
+	$descripcion		= strtr($descripcion1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
 
 	if ($tipusuario==1) {
 		$query="INSERT INTO tbl_tipoaccion(TipAcc_TipoAccion, TipAcc_Estado) VALUES ('$descripcion', '1')";

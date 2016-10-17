@@ -39,9 +39,12 @@
 		$clave = 'ncQR'.$primernumero.'#';
 	}
 
-	$nombre 			=$conexion->real_escape_string(strtoupper($_POST['txt_nombre']));
-	$apellido 			=$conexion->real_escape_string(strtoupper($_POST['txt_apellidos']));
-	$direccion			=$conexion->real_escape_string(strtoupper($_POST['txt_direccion']));
+	$nombre1 			=$conexion->real_escape_string(strtoupper($_POST['txt_nombre']));
+	$nombre 			= strtr($nombre1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
+	$apellido1 			=$conexion->real_escape_string(strtoupper($_POST['txt_apellidos']));
+	$apellido 			= strtr($apellido1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
+	$direccion1			=$conexion->real_escape_string(strtoupper($_POST['txt_direccion']));
+	$direccion 			= strtr($direccion1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
 	$departamento		=$_POST['txt_departamento'];
 	$municipio			=$_POST['txt_municipio'];
 	$genero 			=$_POST['sel_genero'];	

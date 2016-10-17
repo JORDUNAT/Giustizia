@@ -23,7 +23,8 @@
 	$Codigo			= $_POST['txt_id'];
 	$departamento1 	= $conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
 	$departamento 	= strtr($departamento1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
-	$capital 		= $conexion->real_escape_string(strtoupper($_POST['txt_capital']));
+	$capital1 		= $conexion->real_escape_string(strtoupper($_POST['txt_capital']));
+	$capital 	 	= strtr($capital1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
 
 
 if($tipousuario==1){

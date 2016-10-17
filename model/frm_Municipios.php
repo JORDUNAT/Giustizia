@@ -32,7 +32,8 @@
 	}
 
 	$departamento		=$_POST['txt_Departamento'];
-	$municipio 			=$conexion->real_escape_string(strtoupper($_POST['txt_Municipio']));
+	$municipio1 		=$conexion->real_escape_string(strtoupper($_POST['txt_Municipio']));
+	$municipio 			= strtr($municipio1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
 
 	if($departamento<10)
 	{

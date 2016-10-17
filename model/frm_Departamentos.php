@@ -22,8 +22,10 @@
 		$codigo = $id;
 	}
 
-	$departamento		=$conexion->real_escape_string(strtoupper($_POST['txt_departamento']));
-	$capital 			=$conexion->real_escape_string(strtoupper($_POST['txt_capital']));
+	$departamento1	=$conexion->real_escape_string(strtoupper($_POST['txt_departamento']));
+	$departamento 	= strtr($departamento1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
+	$capital1 		=$conexion->real_escape_string(strtoupper($_POST['txt_capital']));
+	$capital 	 	= strtr($capital1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
 
 	if ($tipusuario==1) {
 		$query="INSERT INTO tbl_departamentos(depa_Id, depa_Codigo, depa_Departamento, depa_Capital) VALUES ('$id',  '$codigo', '$departamento', '$capital')";

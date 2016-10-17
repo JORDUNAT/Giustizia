@@ -33,7 +33,8 @@
 	}
 
 	$id 				=$nmax + 1;
-	$descripcion		=$conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
+	$descripcion1		=$conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
+	$descripcion		= strtr($descripcion1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
 
 	if ($tipusuario==1) {
 		$query="INSERT INTO tbl_tipojuzgado(tipjuz_Id, tipjuz_TipoJuzgado) VALUES ('$id', '$descripcion')";

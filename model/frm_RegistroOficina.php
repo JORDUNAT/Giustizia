@@ -40,8 +40,10 @@
 	}
 
 
-	$nombre 			=$conexion->real_escape_string(strtoupper($_POST['txt_nombre']));
-	$direccion			=$conexion->real_escape_string(strtoupper($_POST['txt_direccion']));
+	$nombre1 			=$conexion->real_escape_string(strtoupper($_POST['txt_nombre']));
+	$nombre 			= strtr($nombre1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
+	$direccion1			=$conexion->real_escape_string(strtoupper($_POST['txt_direccion']));
+	$direccion 			= strtr($direccion1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
 	$departamento		=$_POST['txt_departamento'];
 	$municipio			=$_POST['txt_municipio'];
 	$telefono 			=$conexion->real_escape_string($_POST['txt_telefono']);

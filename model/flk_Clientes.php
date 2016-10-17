@@ -27,7 +27,8 @@
 	$nombre 			= strtr($nombre1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
 	$apellidos1 		=$conexion->real_escape_string(strtoupper($_POST['txt_apellidos']));
 	$apellidos 			= strtr($apellidos1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
-	$direccion 			=$conexion->real_escape_string(strtoupper($_POST['txt_direccion']));	
+	$direccion1			=$conexion->real_escape_string(strtoupper($_POST['txt_direccion']));
+	$direccion 			= strtr($direccion1, 'áéíóúñ', 'ÁÉÍÓÚÑ');	
 	$telefono 			=$conexion->real_escape_string($_POST['txt_telefono']);
 	$celular 			=$conexion->real_escape_string($_POST['txt_celular']);
 	$email 				=strtoupper($_POST['txt_email']);
