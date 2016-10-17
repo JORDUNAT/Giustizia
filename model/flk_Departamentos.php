@@ -19,10 +19,11 @@
 	
 
 
-	$Id 			=($_POST['txt_id'])*1;
-	$Codigo			=$_POST['txt_id'];
-	$departamento 	=$conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
-	$capital 	=$conexion->real_escape_string(strtoupper($_POST['txt_capital']));
+	$Id 			= ($_POST['txt_id'])*1;
+	$Codigo			= $_POST['txt_id'];
+	$departamento1 	= $conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
+	$departamento 	= strtr($departamento1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
+	$capital 		= $conexion->real_escape_string(strtoupper($_POST['txt_capital']));
 
 
 if($tipousuario==1){

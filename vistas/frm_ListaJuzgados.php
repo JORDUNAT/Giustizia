@@ -166,36 +166,13 @@ $(document).ready(function(){
 						</div>
 
 						<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+							<input type="button" class="btn btn-info" data-toggle="modal" data-target="#msg_convenciones" value="Convenciones" id="btn_Convenciones" >
+
 							<input type="submit" name="btn_CrearJuzgado" id="btn_CrearJuzgado" class="btn btn-primary" value="Guardar" >
+
 							<input type="button" class="btn btn-primary" onclick="location.href='frm_ListaJuzgados.php'" value="Cancelar" >
 						</div>
 						<br>
-				<div class="ibody1 col-xs-12  col-sm-12 col-md-11 col-lg-11">
-					
-					<h5>Convenciones: </h5>
-					<div align="right" class="col-xs-6 col-sm-2 col-md-1 col-lg-1">
-					<H6>CE:</H6>
-					<h6>CSJ:</h6>
-					<h6>DSRJ:</h6>
-					<h6>TS:</h6>
-					<H6>JC:</H6>
-					<H6>TA:</H6>
-					<H6>JA:</H6>
-					<H6>JM:</H6>						
-					</div>
-					<div align="left" class="col-xs-6 col-sm-8 col-md-6 col-lg-6">
-					<H6>CONSEJO DE ESTADO </H6>
-					<h6>CONSEJO SECCIONAL DE LA JUDICATURA</h6>
-					<h6>DIRECCION SECCIONAL DE LA RAMA JUDICIAL </h6>
-					<h6>TRIBUNAL SUPERIOR</h6>
-					<H6>JUZGADO DE CIRCUITO</H6>
-					<H6>TRIBUNAL ADMINISTRATIVO</H6>
-					<H6>JUZGADO ADMINISTRATIVO </H6>
-					<H6>JUZGADO MUNICIPAL </H6>
-					</div>
-				</div>
-
-
 						</div>
 
 					</div>

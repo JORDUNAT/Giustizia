@@ -163,6 +163,43 @@
 			return $html_combo;
 		}
 
+
+		function getClientesSelect($conexion)
+		{
+			$oficina = $_SESSION['s_oficina'];
+			$html_combo = "";
+			$sql = "
+			SELECT usu_Documento, usu_Nombres, usu_Apellidos, usu_Consultorio,	usu_tipusu FROM tbl_usuarios WHERE (usu_Consultorio='$oficina') AND (usu_tipusu = 3)
+			"; 
+			$qry = $conexion->query($sql);
+			
+			while ($clientese = $qry->fetch_assoc())
+			{
+				$html_combo .= "<option id='clienteselec', name='clienteselec',  value='".$clientese['usu_Documento']."'>".$clientese['usu_Documento']." | ".$clientese['usu_Nombres']." ".$clientese['usu_Apellidos']."</option>";
+			}
+			
+
+			return $html_combo;
+		}
+
+		function getClientesAbogados($conexion)
+		{
+			$oficina = $_SESSION['s_oficina'];
+			$html_combo = "";
+			$sql = "
+			SELECT usu_Documento, usu_Nombres, usu_Apellidos, usu_Consultorio,	usu_tipusu FROM tbl_usuarios WHERE (usu_Consultorio='$oficina') AND (usu_tipusu = 4)
+			"; 
+			$qry = $conexion->query($sql);
+			
+			while ($abogado = $qry->fetch_assoc())
+			{
+				$html_combo .= "<option id='abogadoselec', name='abogadoselec',  value='".$abogado['usu_Documento']."'>".$abogado['usu_Documento']." | ".$abogado['usu_Nombres']." ".$abogado['usu_Apellidos']."</option>";
+			}
+			
+
+			return $html_combo;
+		}
+
 		function getTipoDocumento($conexion)
 		{
 
@@ -357,7 +394,7 @@
 			$qry = $conexion->query($sql);
 			$cursor = $qry->fetch_assoc();
 			//echo '<br>';
-			//echo $cursor['Cons_Cliente'];			
+			//echo $cursor['cons_Cliente'];			
 
 			return $cursor;
 		}			
@@ -375,7 +412,7 @@
 			$qry = $conexion->query($sql);
 			$cursor = $qry->fetch_assoc();
 			//echo '<br>';
-			//echo $cursor['Cons_Cliente'];			
+			//echo $cursor['cons_Cliente'];			
 
 			return $cursor;
 		}	
@@ -392,7 +429,7 @@
 			$qry = $conexion->query($sql);
 			$cursor = $qry->fetch_assoc();
 			//echo '<br>';
-			//echo $cursor['Cons_Cliente'];			
+			//echo $cursor['cons_Cliente'];			
 
 			return $cursor;
 		}	
@@ -409,7 +446,7 @@
 			$qry = $conexion->query($sql);
 			$cursor = $qry->fetch_assoc();
 			//echo '<br>';
-			//echo $cursor['Cons_Cliente'];			
+			//echo $cursor['cons_Cliente'];			
 
 			return $cursor;
 		}	
@@ -513,7 +550,7 @@
 			$qry = $conexion->query($sql);
 			$cursor = $qry->fetch_assoc();
 			//echo '<br>';
-			//echo $cursor['Cons_Cliente'];			
+			//echo $cursor['cons_Cliente'];			
 
 			return $cursor;
 		}
@@ -531,7 +568,7 @@
 			$qry = $conexion->query($sql);
 			$cursor = $qry->fetch_assoc();
 			//echo '<br>';
-			//echo $cursor['Cons_Cliente'];			
+			//echo $cursor['cons_Cliente'];			
 
 			return $cursor;
 		}
@@ -568,7 +605,7 @@
 			$qry = $conexion->query($sql);
 			$cursor = $qry->fetch_assoc();
 			//echo '<br>';
-			//echo $cursor['Cons_Cliente'];			
+			//echo $cursor['cons_Cliente'];			
 
 			return $cursor;
 		}
@@ -595,8 +632,11 @@
 		function getConsutlas($conexion) ////Consulta de las conusltas jurídicas de la Oficina
 		{
 			$oficina = $_SESSION['s_oficina'];
+
 			$html = array();
-			$sql = "SELECT A.Cons_Id, A.Cons_NoConsulta, A.Cons_Fecha, A.Cons_Atendido, A.Cons_Cliente, A.Cons_DetalleConsulta, A.Cons_Cuantia, A.Cons_TipoAccion, A.Cons_Observaciones, A.Cons_AbogadoAsignado, A.Cons_Estado, B.tipAcc_Id, B.tipAcc_TipoAccion FROM tbl_consultas A LEFT JOIN tbl_tipoaccion B ON A.Cons_TipoAccion=B.tipAcc_Id WHERE A.Cons_NoConsulta LIKE '%$oficina%'";
+			$sql = "
+				SELECT * FROM tbl_consultas WHERE cons_NoConsulta LIKE '%$oficina%'
+			";
 
 			$qry = $conexion->query($sql);
 			if (!$qry)
@@ -619,7 +659,7 @@
 
 			$html = array();
 			$sql = "
-			SELECT A.Cons_Id, A.Cons_NoConsulta, A.Cons_Fecha, A.Cons_Atendido, A.Cons_Cliente, A.Cons_DetalleConsulta, A.Cons_Cuantia, A.Cons_TipoAccion, A.Cons_Observaciones, A.Cons_AbogadoAsignado, A.Cons_Estado, B.tipAcc_Id, B.tipAcc_TipoAccion FROM tbl_consultas A LEFT JOIN tbl_tipoaccion B ON A.Cons_TipoAccion=B.tipAcc_Id WHERE A.Cons_AbogadoAsignado='$usuario_sesionado' AND A.Cons_Estado<>'2'
+			SELECT A.cons_Id, A.cons_NoConsulta, A.cons_Fecha, A.cons_Atendido, A.cons_Cliente, A.cons_DetalleConsulta, A.cons_Cuantia, A.cons_TipoAccion, A.cons_Observaciones, A.cons_AbogadoAsignado, A.cons_Estado, B.tipAcc_Id, B.tipAcc_TipoAccion FROM tbl_consultas A LEFT JOIN tbl_tipoaccion B ON A.cons_TipoAccion=B.tipAcc_Id WHERE A.cons_AbogadoAsignado='$usuario_sesionado' AND A.cons_Estado<>'2'
 			";
 
 			$qry = $conexion->query($sql);
@@ -734,7 +774,7 @@
 
 			$html = array();
 			$sql = "
-			SELECT A.Cons_Id, A.Cons_NoConsulta, A.Cons_Fecha, A.Cons_Atendido, A.Cons_Cliente, A.Cons_DetalleConsulta, A.Cons_Cuantia, A.Cons_TipoAccion, A.Cons_Observaciones, A.Cons_AbogadoAsignado, A.Cons_Estado, B.tipAcc_Id, B.tipAcc_TipoAccion FROM tbl_consultas A LEFT JOIN tbl_tipoaccion B ON A.Cons_TipoAccion=B.tipAcc_Id WHERE A.Cons_Cliente='$usuario_sesionado' AND A.Cons_Estado<>'2'
+			SELECT A.cons_Id, A.cons_NoConsulta, A.cons_Fecha, A.cons_Atendido, A.cons_Cliente, A.cons_DetalleConsulta, A.cons_Cuantia, A.cons_TipoAccion, A.cons_Observaciones, A.cons_AbogadoAsignado, A.cons_Estado, B.tipAcc_Id, B.tipAcc_TipoAccion FROM tbl_consultas A LEFT JOIN tbl_tipoaccion B ON A.cons_TipoAccion=B.tipAcc_Id WHERE A.cons_Cliente='$usuario_sesionado' AND A.cons_Estado<>'2'
 			";
 
 			$qry = $conexion->query($sql);
@@ -751,19 +791,24 @@
 
 		function getConsultaConsutla($conexion) //Consulta de los usuarios no clientes de acuero a cada oficina
 		{
-			$consulta = $_SESSION['s_Consulta'];
+			$consulta= $_POST['idconsulta'];
 
 			$html = array();
 			$sql = "
-		SELECT A.Cons_Id, A.Cons_NoConsulta, A.Cons_Fecha, A.Cons_Atendido, A.Cons_Cliente, B.usu_Nombres, B.usu_Apellidos, A.Cons_DetalleConsulta, A.Cons_Cuantia, A.Cons_Tramite, A.Cons_TipoAccion, C.tipAcc_TipoAccion, A.Cons_Observaciones, A.Cons_AbogadoAsignado, A.Cons_Estado  FROM tbl_consultas A INNER JOIN tbl_usuarios B ON A.Cons_Cliente = B.usu_Documento LEFT JOIN tbl_tipoaccion C ON A.Cons_TipoAccion = C.tipAcc_Id WHERE A.Cons_NoConsulta='$consulta'
+			SELECT A.cons_NoConsulta, A.cons_Id, A.cons_Fecha, A.cons_Atendido, A.cons_DetalleConsulta, A.cons_Cuantia,  A.cons_Observaciones, A.cons_AbogadoAsignado, A.cons_Cliente, A.cons_TipoAccion, A.cons_Estado, B.usu_Documento, B.usu_Nombres, B.usu_Apellidos, C.tipAcc_Id, C.tipAcc_TipoAccion
+			FROM 
+			tbl_consultas A INNER JOIN tbl_usuarios B ON (A.cons_Cliente=B.usu_Documento)
+			LEFT JOIN tbl_tipoaccion C ON (A.Cons_TipoAccion = C.TipAcc_Id)
+			WHERE (A.cons_Id='$consulta')
 			";
 
 			$qry = $conexion->query($sql);
-			$cursor = $qry->fetch_assoc();
-			//echo '<br>';
-			//echo $cursor['Cons_Cliente'];			
-
-			return $cursor;
+			if (!$qry)
+			{
+				return 'Error->'.mysql_error().',qry:'.$sql;
+			}
+			$html=$qry->fetch_assoc();
+			return $html;
 		}
 
 		function getConsConsUsu($conexion) //Consulta de los usuarios no clientes de acuero a cada oficina
@@ -773,7 +818,7 @@
 
 			$html = array();
 			$sql = "
-			SELECT A.Cons_Cliente, B.usu_Documento, B.usu_Nombres, B.usu_Apellidos FROM tbl_consultas A, tbl_usuarios B WHERE A.Cons_Cliente=B.usu_Documento AND A.Cons_NoConsulta='$consulta'
+			SELECT A.cons_Cliente, B.usu_Documento, B.usu_Nombres, B.usu_Apellidos FROM tbl_consultas A, tbl_usuarios B WHERE A.cons_Cliente=B.usu_Documento AND A.cons_NoConsulta='$consulta'
 			";
 
 			$qry = $conexion->query($sql);

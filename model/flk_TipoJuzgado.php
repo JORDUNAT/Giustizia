@@ -20,7 +20,8 @@
 
 
 	$Id 					=$_POST['txt_id'];
-	$tipjuz_TipoJuzgado 	=$conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
+	$tipjuz_TipoJuzgado1 	=$conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
+	$tipjuz_TipoJuzgado		= strtr($tipjuz_TipoJuzgado1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
 
 
 if($tipousuario==1){

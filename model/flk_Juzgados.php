@@ -16,12 +16,16 @@
 	$Logo=$_SESSION['s_logo'];	
 
 	$id				=$_POST['txt_item'];
-	$juzgado 		=$conexion->real_escape_string(strtoupper($_POST['txt_juzgado']));
-	$circuito 		=$conexion->real_escape_string(strtoupper($_POST['txt_circuito']));
-	$distrito 		=$conexion->real_escape_string(strtoupper($_POST['txt_distrito']));
+	$juzgado1 		=$conexion->real_escape_string(strtoupper($_POST['txt_juzgado']));
+	$juzgado 	 	= strtr($juzgado1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
+	$circuito1 		=$conexion->real_escape_string(strtoupper($_POST['txt_circuito']));
+	$circuito 	 	= strtr($circuito1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
+	$distrito1 		=$conexion->real_escape_string(strtoupper($_POST['txt_distrito']));
+	$distrito 	 	= strtr($distrito1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
 	$direccion 		=$conexion->real_escape_string(strtoupper($_POST['txt_direccion']));
 	$telefono 		=$_POST['txt_telefono'];
-	$contacto 		=$conexion->real_escape_string(strtoupper($_POST['txt_contacto']));
+	$contacto1 		=$conexion->real_escape_string(strtoupper($_POST['txt_contacto']));
+	$contacto1 	 	= strtr($contacto1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
 	$horario 		=$conexion->real_escape_string(strtoupper($_POST['txt_horario']));
 	$TipJuz 		=$_POST['txt_TipJuz'];
 

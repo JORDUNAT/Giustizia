@@ -25,7 +25,8 @@ $(document).ready(function()
 		        celular:{required:false},
 		        email:{required:true},
 		        fecha:{required:true},
-		        estrato:{required:true}
+		        estrato:{required:true},
+		        consulta:{required:true}
 			},
 			invalidHandler:function()
 			{
@@ -47,8 +48,9 @@ $(document).ready(function()
 	           var email1 			= $("input[name='email']").val();
 	           var fecha1 			= $("input[name='fecha']").val();
 	           var estrato1			= $("#estrato").val();
+	           var consulta1 		= $("textarea[name='consulta']").val();
 
-          	   var parametros = {'sel_TipDoc':TipDoc1, 'txt_documento':documento1, 'txt_nombre':nombre1, 'txt_apellidos':apellidos1, 'txt_direccion':direccion1, 'txt_departamento':departamento1, 'txt_municipio':municipios1, 'sel_genero':genero1, 'txt_telefono':telefono1, 'txt_celular':celular1, 'txt_email':email1, 'txt_fecha':fecha1, 'sel_estrato':estrato1};
+          	   var parametros = {'sel_TipDoc':TipDoc1, 'txt_documento':documento1, 'txt_nombre':nombre1, 'txt_apellidos':apellidos1, 'txt_direccion':direccion1, 'txt_departamento':departamento1, 'txt_municipio':municipios1, 'sel_genero':genero1, 'txt_telefono':telefono1, 'txt_celular':celular1, 'txt_email':email1, 'txt_fecha':fecha1, 'sel_estrato':estrato1, 'txt_consulta':consulta1};
 				   
 				$.ajax({
 	              type: 'POST',

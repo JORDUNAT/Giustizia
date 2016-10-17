@@ -24,7 +24,8 @@
 
 
 	$Id 			=($_POST['txt_id']);
-	$municipio 	=$conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
+	$municipio1 	=$conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
+	$municipio 	 	= strtr($municipio1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
 
 
 if($tipousuario==1){

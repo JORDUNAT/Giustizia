@@ -4,7 +4,6 @@
 
 	if(isset($_SESSION['s_usuario'])){
 		$sesion = True;
-		$_SESSION['s_Consulta']=$_GET['Consutla'];
 	}
 	else{
 		$sesion = False;
@@ -23,17 +22,15 @@
 	$resultado = $obj_model->getConsultaConsutla($conexion); //Resultado de la consulta del usuario que se encuentra con sesión iniciada
 	$accion = $obj_model->getTipoAccion($conexion);
 
-
-
 ?>
 	<article class="col-xs-12  col-sm-8 col-md-9 col-lg-9">
 		<div class="ibody1 col-xs-12  col-sm-12 col-md-12 col-lg-12">
 			<div align='center' class="jumbotron">
 			<?php 
-				if($resultado['Cons_Estado']==2){
-					echo "<h8 align='center'><b>CONSULTA No. ".$_SESSION['s_Consulta']." ARCHIVADA </b></h8>";
+				if($resultado['cons_Estado']==2){
+					echo "<h8 align='center'><b>CONSULTA No. ".$resultado['cons_NoConsulta']." ARCHIVADA </b></h8>";
 				}else{
-					echo "<h8 align='center'><b>GESTIONANDO CONSULTA: ".$_SESSION['s_Consulta']."</b></h8>";
+					echo "<h8 align='center'><b>GESTIONANDO CONSULTA: ".$resultado['cons_NoConsulta']."</b></h8>";
 				}
 
 			 ?>
@@ -48,7 +45,7 @@
 					<div class="row">	
 							<div div class="col-xs-12  col-sm-5 col-md-3 col-lg-3 ">
 							<label>Documento Cliente: </label>
-							<input type="number" min="1" name="documento" id="documento"  class="form-control" placeholder="Documento" aria-describedby="sizing-addon3" value="<?php echo $resultado['Cons_Cliente']?>" disabled="disabled" required/>
+							<input type="number" min="1" name="documento" id="documento"  class="form-control" placeholder="Documento" aria-describedby="sizing-addon3" value="<?php echo $resultado['cons_Cliente']?>" disabled="disabled" required/>
 							</div>
 
 
@@ -58,7 +55,7 @@
 						</div>
 
 							<div  class="col-xs-12  col-sm-5 col-md-3 col-lg-3">
-							<input type="number" min="1" name="documentooculto" id="documentooculto" style = "visibility:hidden"  class="form-control" placeholder="Documento" aria-describedby="sizing-addon3" value="<?php echo $resultado['Cons_Cliente']?>" required/>
+							<input type="number" min="1" name="documentooculto" id="documentooculto" style = "visibility:hidden"  class="form-control" placeholder="Documento" aria-describedby="sizing-addon3" value="<?php echo $resultado['cons_Cliente']?>" required/>
 							</div>
 
 
@@ -67,30 +64,31 @@
 
 						<div  class="col-xs-12  col-sm-6 col-md-3 col-lg-3">
 							<label>No. de Consulta: </label>
-							<input type="text" name="NoConsulta" id="NoConsulta"  class="form-control" aria-describedby="sizing-addon3" value="<?php echo $resultado['Cons_NoConsulta']?>" disabled>
+							<input type="text" name="NoConsulta" id="NoConsulta"  class="form-control" aria-describedby="sizing-addon3" value="<?php echo $resultado['cons_NoConsulta']?>" disabled>
 						</div>
 
 						<div  class="col-xs-12  col-sm-6 col-md-3 col-lg-3">
 							<label>Fecha de Consulta: </label>
-							<input type="text" name="FechaConsulta" id="FechaConsulta"  class="form-control" value="<?php echo $resultado['Cons_Fecha']?>" disabled>
+							<input type="text" name="FechaConsulta" id="FechaConsulta"  class="form-control" value="<?php echo $resultado['cons_Fecha']?>" disabled>
 						</div>						
 
 						<div class="col-xs-12  col-sm-6 col-md-3 col-lg-3">
 							<label>Atendido por: </label>
-							<input type="text" name="Atendido" id="Atendido"  class="form-control" aria-describedby="sizing-addon3" value="<?php echo $resultado['Cons_Atendido']?>" disabled>
+							<input type="text" name="Atendido" id="Atendido"  class="form-control" aria-describedby="sizing-addon3" value="<?php echo $resultado['cons_Atendido']?>" disabled>
 						</div>
 
 				<?php 
-					if ($resultado['Cons_Estado']==2){
+					if ($resultado['cons_Estado']==2){
 						echo '<div  class="col-xs-12  col-sm-6 col-md-3 col-lg-3">';
 						echo '<label>Cuantía: </label>';	
-						echo '<input type="number" name="Atendido" id="Atendido"  class="form-control" aria-describedby="sizing-addon3" value="'.$resultado['Cons_Cuantia'].'" disabled>';
+						echo '<input type="number" name="Atendido" id="Atendido"  class="form-control" aria-describedby="sizing-addon3" value="'.$resultado['cons_Cuantia'].'" disabled>';
 						echo '</div>';
 
 						echo '<div class="col-xs-12  col-sm-5 col-md-3 col-lg-3 " >';
 						echo '<label>Tipo de Acción: </label>';
+
 						echo '<select disabled name="TipAcc" id="TipAcc" class="form-control" aria-describedby="sizing-addon2">';
-						echo '<option value="'.$resultado['Cons_TipoAccion'].'">'.$resultado['TipAcc_TipoAccion'].'</option>';
+						echo '<option value="'.$resultado['cons_TipoAccion'].'">'.$resultado['tipAcc_TipoAccion'].'</option>';
 						echo $obj_model-> getTipoAccion($conexion);
 						echo '</select>';
 						echo '</div>';
@@ -98,25 +96,25 @@
 
 						echo '<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">';
 						echo '<label>Detalle de Consulta: </label>';
-						echo '<textarea disabled type="text" name="detaconsulta" id="detaconsulta" cols="15" rows="4" class="form-control" >'.$resultado['Cons_DetalleConsulta'].'</textarea>';
+						echo '<textarea disabled type="text" name="detaconsulta" id="detaconsulta" cols="15" rows="4" class="form-control" >'.$resultado['cons_DetalleConsulta'].'</textarea>';
 						echo '</div>';
 
 						echo '<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">';
 						echo '<label>Observaciones o Recomendaciones: </label>';
-						echo '<textarea disabled type="text" name="detaconsulta" id="detaconsulta" cols="15" rows="4" class="form-control" >'.$resultado['Cons_Observaciones'].'</textarea>';
+						echo '<textarea disabled type="text" name="detaconsulta" id="detaconsulta" cols="15" rows="4" class="form-control" >'.$resultado['cons_Observaciones'].'</textarea>';
 						echo '</div>';
 
 
 					}else{
 						echo '<div  class="col-xs-12  col-sm-6 col-md-3 col-lg-3">';
 						echo '<label>Cuantía: </label>';	
-						echo '<input type="number" name="Atendido" id="Atendido"  class="form-control" aria-describedby="sizing-addon3" value="'.$resultado['Cons_Cuantia'].'">';
+						echo '<input type="number" name="Atendido" id="Atendido"  class="form-control" aria-describedby="sizing-addon3" value="'.$resultado['cons_Cuantia'].'">';
 						echo '</div>';
 
 						echo '<div class="col-xs-12  col-sm-5 col-md-6 col-lg-6 " >';
 						echo '<label>Tipo de Acción: </label>';
 						echo '<select name="TipAcc" id="TipAcc" class="form-control" aria-describedby="sizing-addon2">';
-						echo '<option   value=value="'.$resultado['Cons_TipoAccion'].'">'.$resultado['TipAcc_TipoAccion'].'</option>';
+						echo '<option value="'.$resultado['cons_TipoAccion'].'">'.$resultado['tipAcc_TipoAccion'].'</option>';
 						echo $obj_model-> getTipoAccion($conexion);
 						echo '</select>';
 						echo '</div>';
@@ -124,12 +122,12 @@
 
 						echo '<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">';
 						echo '<label>Detalle de Consulta: </label>';
-						echo '<textarea type="text" name="detaconsulta" id="detaconsulta" cols="15" rows="4" class="form-control" >'.$resultado['Cons_DetalleConsulta'].'</textarea>';
+						echo '<textarea type="text" name="detaconsulta" id="detaconsulta" cols="15" rows="4" class="form-control" >'.$resultado['cons_DetalleConsulta'].'</textarea>';
 						echo '</div>';
 
 						echo '<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">';
 						echo '<label>Observaciones o Recomendaciones: </label>';
-						echo '<textarea type="text" name="detaconsulta" id="detaconsulta" cols="15" rows="4" class="form-control" >'.$resultado['Cons_Observaciones'].'</textarea>';
+						echo '<textarea type="text" name="detaconsulta" id="detaconsulta" cols="15" rows="4" class="form-control" >'.$resultado['cons_Observaciones'].'</textarea>';
 						echo '</div>';
 
 						
@@ -143,7 +141,7 @@
 
 						<div class="col-xs-12  col-sm-6 col-md-6 col-lg-6">
 							<input type="submit" name="btn_GeneExpediente" id="btn_GeneExpediente" class="btn btn-primary" value="Generar Expediente" >
-							<input type="button" class="btn btn-primary" onclick="location.href='frm_ListaConsultas.php'"value="Cancelar" >							
+							<input type="button" class="btn btn-primary" onclick="location.href='frm_ListaConsultas.php'" value="Cancelar" >							
 						</div>
 
 						<div class="col-xs-12  col-sm-5 col-md-5 col-lg-5">

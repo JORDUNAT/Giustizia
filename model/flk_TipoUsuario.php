@@ -20,7 +20,8 @@
 
 
 	$Id 				=$_POST['txt_id'];
-	$tipu_TipoUsuario 	=$conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
+	$tipu_TipoUsuario1 	=$conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
+	$tipu_TipoUsuario	= strtr($tipu_TipoUsuario1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
 
 
 if($tipousuario==1){

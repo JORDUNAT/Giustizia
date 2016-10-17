@@ -58,7 +58,7 @@ $(document).ready(function(){
 
 								<thead>								
 									<td align="center"><span class="glyphicon glyphicon-sort-by-order-alt"></span><b> Item</b></td>
-									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Clasificación de Procesos</b></d>
+									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Tipo de Acción</b></d>
 									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Estado</b></d>
 									<td align="center"><b> Seleccionar</b></d>	
 

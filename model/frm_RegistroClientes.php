@@ -54,19 +54,19 @@
 	$consulta 			=$conexion->real_escape_string(strtoupper($_POST['txt_consulta']));		
 	$pass 				=md5($clave);
 	$fecha_actual 		= date("Y-m-d");
-	$anno				= date("Y");	
+	$anno				= date("Y");
+	
 
 	$to 				= $email;
 
-		$sql = "SELECT usu_Documento, usu_Nombres, usu_Direccion, usu_Email, usu_Logo FROM tbl_usuarios WHERE (usu_tipusu='1' AND usu_Documento = '$oficina')";
+		$sql = "SELECT usu_Documento, usu_Nombres, usu_Direccion, usu_Email FROM tbl_usuarios WHERE (usu_tipusu='1' AND usu_Documento = '$oficina')";
 		$qry = $conexion->query($sql);
 		$resofis = mysqli_fetch_array($qry);
 
-		$to2				= $resofis['usu_Email'];
-		$logo 				= $resofis['usu_Logo'];
+		$to2			= $resofis['usu_Email'];
 
 
-		$cons_id ="SELECT * FROM tbl_consultas ORDER BY Cons_Id DESC LIMIT 1";
+		$cons_id ="SELECT * FROM tbl_consultas ORDER BY cons_Id DESC LIMIT 1";
 		$proceso = $conexion->query($cons_id);
 
 	if (!$proceso)	
@@ -75,7 +75,7 @@
 	}
 
 	if($proceso){
-		$consutarId=$proceso->fetch_assoc();
+		$consutarId	=$proceso->fetch_assoc();
 		$rec_conid 	= 	$consutarId['cons_Id'];
 		$nuevacon	= 	$rec_conid+1;
 
@@ -84,13 +84,13 @@
 	}
 
 
-		$query="INSERT INTO tbl_usuarios(usu_TipoDoc, usu_Documento, usu_Nombres, usu_Apellidos, usu_Email, usu_FechaNacimiento, usu_tipusu, usu_Consultorio, usu_Clave, usu_Celular, usu_Genero, usu_Direccion, usu_Logo, usu_Municipio, usu_Telefono, usu_Estrato, usu_Estado) VALUES ('$TipDoc', '$documento', '$nombre', '$apellido', '$email', '$fecha', '3',	'$oficina', '$pass', '$celular', '$genero', '$direccion', '$logo', '$municipio', '$telefono', '$estrato', '3')";
+		$query="INSERT INTO tbl_usuarios(usu_TipoDoc, usu_Documento, usu_Nombres, usu_Apellidos, usu_Email, usu_FechaNacimiento, usu_tipusu, usu_Consultorio, usu_Clave, usu_Celular, usu_Genero, usu_Direccion, usu_Municipio, usu_Telefono, usu_Estrato, usu_Estado) VALUES ('$TipDoc', '$documento', '$nombre', '$apellido', '$email', '$fecha', '3', '$oficina', '$pass', '$celular', '$genero', '$direccion', '$municipio', '$telefono', '$estrato', '3')";
 		$resultado=$conexion->query($query);
 
 
 		if($resultado>0){
 
-			$query="INSERT INTO tbl_consultas(cons_Id, cons_NoConsulta, cons_Fecha, cons_Atendido, cons_Cliente, cons_DetalleConsulta) VALUES ('$nuevacon', concat('$oficina','-','$nuevacon','-','$anno'), '$fecha_actual', 'Consutla Web' '$documento ', '$consulta')";
+			$query="INSERT INTO tbl_consultas(cons_Id, cons_NoConsulta, cons_Fecha, cons_Atendido, cons_DetalleConsulta, cons_Cliente, cons_Estado) VALUES ('$nuevacon', concat('$oficina','-','$nuevacon','-','$anno'), '$fecha_actual', 'Consutla Web', '$consulta', '$documento ', '1')";
 			$resultado=$conexion->query($query);
 
 			$mail -> From = 'desoftco@desoftco.co';
@@ -110,7 +110,7 @@
 		<p>Hola, gracias por registrar tu consulta, hemos remitido un correo a la oficina que elegiste, pronto se pondrán en contacto contigo y así prodras de disponer de Giustizia para la administración de tu consulta y/o expediente.</p>
 
 		<h3>Tu Usuario:  </b>'.$documento.'</h3>
-		<h3>Tu Clave:  </b>'.$clave.'</h3>
+		<h3>Tu Clave:  </b>ng'.$documento.'</h3>
 		<br>
 		<p> Ahora puedes ingresar a Giustizia y no olvides cambiar tu clave al ingresar.  <a href="http://www.desoftco.co/Giustizia/vistas/Index.php" title="Haz clic aqui">Haz clic aqui</a>.</b></p> 
 		<p>Atentamente,</p>
@@ -168,5 +168,5 @@
 			echo '<div class="alert alert-danger" role="alert"><span class="glyphicon  glyphicon-floppy-remove"></span> Error al guardar este la consulta, al parecer tu ya eres un usuario de Giustizia  </div>';
 			echo "<META HTTP-EQUIV='refresh' CONTENT='5; URL=../vistas/Index.php'>";
 		}
-	
+
 ?>

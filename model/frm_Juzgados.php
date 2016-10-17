@@ -33,10 +33,14 @@
 	}
 
 	$id 			=$nmax + 1;
-	$juzgado 		=$conexion->real_escape_string(strtoupper($_POST['txt_juzgado']));
-	$circuito 		=$conexion->real_escape_string(strtoupper($_POST['txt_circuito']));
-	$distrito 		=$conexion->real_escape_string(strtoupper($_POST['txt_distrito']));
-	$direccion 		=$conexion->real_escape_string(strtoupper($_POST['txt_direccion']));
+	$juzgado1 		=$conexion->real_escape_string(strtoupper($_POST['txt_juzgado']));
+	$juzgado 	 	= strtr($juzgado1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
+	$circuito1 		=$conexion->real_escape_string(strtoupper($_POST['txt_circuito']));
+	$circuito 	 	= strtr($circuito1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
+	$distrito1 		=$conexion->real_escape_string(strtoupper($_POST['txt_distrito']));
+	$distrito 	 	= strtr($distrito1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
+	$direccion1		=$conexion->real_escape_string(strtoupper($_POST['txt_direccion']));
+	$direccion 		= strtr($direccion1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
 	$telefono 		=$_POST['txt_telefono'];
 	$contacto 		=$conexion->real_escape_string(strtoupper($_POST['txt_contacto']));
 	$horario 		=$conexion->real_escape_string(strtoupper($_POST['txt_horario']));

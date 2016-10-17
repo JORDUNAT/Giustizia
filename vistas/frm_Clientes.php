@@ -118,6 +118,16 @@
 							<br>
 						</div>
 
+						<div class="ibody1 col-xs-12  col-sm-12 col-md-12 col-lg-12">
+							<label>Descripción de la Consulta: </label>
+							<textarea type="text" name="consulta" id="consulta" cols="15" rows="4" class="form-control" ></textarea>
+							<br>
+						</div>
+
+						<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+							<br>
+						</div>
+
 						<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12" align="rigth">
 							<input type="submit" name="btn_NuevoCliente" id="btn_NuevoCliente" class="btn btn-primary" value="Guardar" >
 							<input type="button" class="btn btn-primary" id="btn_CancelarCrearCliente" value="Cancelar" >

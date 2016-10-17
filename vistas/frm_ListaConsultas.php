@@ -10,6 +10,7 @@
 	}
 
 	$tipousuario=$_SESSION['s_tipusu'];
+	$oficina = $_SESSION['s_oficina'];
 
 	include('nav.php');
 	include('menu.php');
@@ -18,6 +19,7 @@
 	$obj_model = new usuariosModel();
 	$data = $obj_model -> getConsutlas($conexion);
 	$datausu = $obj_model -> getConsutlasUsuario($conexion);	
+	$undata = $obj_model-> getConsutlasCliente($conexion);
 	$undata = $obj_model-> getConsutlasCliente($conexion);
 ?>
 
@@ -38,7 +40,7 @@
 			<h8 align='center'><b>CONTROL DE CONSULTAS JURÍDICAS</b></h8>
 			</div>
 			<div >
-				<form name="frm_ListaConsutlas" id="frm_ListaConsutlas" >
+				<form name="frm_ListaConsutlas" id="frm_ListaConsutlas" method="POST" action="flk_Consultas.php">
 					<div class="row">	
 						<div class="table-responsive">
 						<div class="panel panel-default">
@@ -47,7 +49,9 @@
 									<?php
 										
 										if ($tipousuario<>'3'){
-											echo '<input type="button" class="btn btn-default" value="Crear Consulta" id="btn_crearcliente" >';
+											echo '<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#msg_crear" value="Crear Consulta" id="btn_crearconsulta" >';
+											echo ' ';
+											echo '<input type="submit" class="btn btn-primary" value="Editar" id="btn_Editar">';
 										     }
 										else{ 
 										     echo '<input type="button" class="btn btn-default" value="Crear Consulta" disabled="disabled" >';
@@ -77,15 +81,15 @@
 											{
 												print "<tr>";
 												print "<th>".$cont."</th>";
-												print "<th align='center'>".$consulta["Cons_NoConsulta"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Fecha"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Atendido"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Cliente"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Cuantia"]."</th>";
-												print "<th align='center'>".$consulta["Cons_AbogadoAsignado"]."</th>";												
-										        echo '<td align="center"><button class="btn btn-default" type="button" aria-hidden="true" onclick="'."location.href='flk_Consultas.php?Consutla=".$consulta['Cons_NoConsulta']."'".'">'."
-														<span class='glyphicon  glyphicon-pencil'></span>
-													</button></td>";
+												print "<th align='center'>".$consulta["cons_NoConsulta"]."</th>";
+												print "<th align='center'>".$consulta["cons_Fecha"]."</th>";
+												print "<th align='center'>".$consulta["cons_Atendido"]."</th>";
+												print "<th align='center'>".$consulta["cons_Cliente"]."</th>";
+												print "<th align='center'>".$consulta["cons_Cuantia"]."</th>";
+												print "<th align='center'>".$consulta["cons_AbogadoAsignado"]."</th>";												
+										        echo '<td align="center">';
+												echo '<input type="radio" name="idconsulta" id="idconsulta" value="'.$consulta["cons_Id"].'" required>';
+										        echo "</td>";
 												print "</tr>";
 												$cont++;					
 											}
@@ -94,15 +98,15 @@
 											{
 												print "<tr>";
 												print "<th>".$cont."</th>";
-												print "<th align='center'>".$consulta["Cons_NoConsulta"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Fecha"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Atendido"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Cliente"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Cuantia"]."</th>";
-												print "<th align='center'>".$consulta["Cons_AbogadoAsignado"]."</th>";												
-										        echo '<td align="center"><button class="btn btn-default" type="button" aria-hidden="true" onclick="'."location.href='flk_Consultas.php?Consutla=".$consulta['Cons_NoConsulta']."'".'">'."
-														<span class='glyphicon  glyphicon-pencil'></span>
-													</button></td>";
+												print "<th align='center'>".$consulta["cons_NoConsulta"]."</th>";
+												print "<th align='center'>".$consulta["cons_Fecha"]."</th>";
+												print "<th align='center'>".$consulta["cons_Atendido"]."</th>";
+												print "<th align='center'>".$consulta["cons_Cliente"]."</th>";
+												print "<th align='center'>".$consulta["cons_Cuantia"]."</th>";
+												print "<th align='center'>".$consulta["cons_AbogadoAsignado"]."</th>";												
+										        echo '<td align="center">';
+												echo '<input type="radio" name="juzg" id="juzg" value="'.$consulta["cons_Id"].'" required>';
+										        echo "</td>";
 												print "</tr>";
 												$cont++;			
 											}
@@ -111,15 +115,15 @@
 											{
 												print "<tr>";
 												print "<th>".$cont."</th>";
-												print "<th align='center'>".$consulta["Cons_NoConsulta"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Fecha"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Atendido"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Cliente"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Cuantia"]."</th>";
-												print "<th align='center'>".$consulta["Cons_AbogadoAsignado"]."</th>";												
-										        echo '<td align="center"><button class="btn btn-default" type="button" aria-hidden="true" onclick="'."location.href='flk_Consultas.php?Consutla=".$consulta['Cons_NoConsulta']."'".'">'."
-														<span class='glyphicon  glyphicon-pencil'></span>
-													</button></td>";
+												print "<th align='center'>".$consulta["cons_NoConsulta"]."</th>";
+												print "<th align='center'>".$consulta["cons_Fecha"]."</th>";
+												print "<th align='center'>".$consulta["cons_Atendido"]."</th>";
+												print "<th align='center'>".$consulta["cons_Cliente"]."</th>";
+												print "<th align='center'>".$consulta["cons_Cuantia"]."</th>";
+												print "<th align='center'>".$consulta["cons_AbogadoAsignado"]."</th>";												
+										        echo '<td align="center">';
+												echo '<input type="radio" name="juzg" id="juzg" value="'.$consulta["cons_Id"].'" required>';
+										        echo "</td>";
 												print "</tr>";
 												$cont++;						
 											}
@@ -138,6 +142,84 @@
 	</article>
 	</section>
 	</div>
+
+
+<div class="modal fade bs-example-modal-lg" id="msg_crear" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-danger" id="myModalLabel"><b>Estas Creando una Consulta</b></h4>
+      </div>
+      <div class="modal-footer" align="center">
+				<form name="frm_crear" id="frm_crear" method="POST" action="">
+					<div class="row" align="center">	
+
+					<div id="mensaje" style="display: none;">
+					</div>
+
+							<div class="col-xs-12  col-sm-6 col-md-6 col-lg-6  has-default" >
+								<label>Cliente: </label>
+								<select name="cliente" id="cliente" class="form-control" aria-describedby="sizing-addon2" required>
+								    <option value="">Sin Seleccion</option>
+									<?php echo $obj_model-> getClientesSelect($conexion); ?>
+						     	 </select>
+
+							</div>
+
+
+						<div class="col-xs-12  col-sm-5 col-md-5 col-lg-5 ">
+						<label>Tipo de Acción: </label>
+						<select name="TipAcc" id="TipAcc" class="form-control" aria-describedby="sizing-addon2">
+						<option value="">Sin Selección...</option>
+						<?php echo  $obj_model-> getTipoAccion($conexion); ?>
+						</select>
+						</div>
+
+						<div class="col-xs-12  col-sm-6 col-md-6 col-lg-6  has-default" >
+							<label>Asignar Abogado: </label>
+							<select name="abogado" id="abogado" class="form-control" aria-describedby="sizing-addon2" required>
+							<option value="">Sin Seleccion</option>
+								<?php echo $obj_model-> getClientesAbogados($conexion); ?>
+						    </select>
+
+						</div>
+
+						<div class="col-xs-12  col-sm-5 col-md-5 col-lg-5 ">
+							<label>Cuantía del Proceso: </label>
+							<span id="input-symbol">$</span><input type="number" name="cuantia" id="cuantia" class="form-control" />
+						</div>
+							
+							<br>
+						<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+							<label>Descripción de la Consulta: </label>
+							<textarea type="text" name="detaconsulta" id="detaconsulta" cols="15" rows="3" class="form-control" ></textarea>
+						</div>
+
+						<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+						<label>Observaciones o Recomendaciones: </label>
+						<textarea type="text" name="observaciones" id="observaciones" cols="15" rows="3" class="form-control" ></textarea>
+						</div>
+
+						<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+
+						</div>
+
+						<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
+							<input type="submit" name="btn_CrearConsulta" id="btn_CrearConsulta" class="btn btn-primary" value="Guardar" >
+							<input type="button" class="btn btn-primary" onclick="location.href='frm_ListaConsultas.php'" value="Cancelar" >
+						</div>
+
+					</div>
+
+					
+				</form>
+      	<br/>
+      	<span id="span1"></span>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

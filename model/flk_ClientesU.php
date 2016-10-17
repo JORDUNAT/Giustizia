@@ -23,8 +23,10 @@
 
 	$TipDoc 			=$_POST['sel_TipDoc'];
 	$documento 			=$_POST['txt_documento'];
-	$nombre 			=$conexion->real_escape_string(strtoupper($_POST['txt_nombre']));
-	$apellidos 			=$conexion->real_escape_string(strtoupper($_POST['txt_apellidos']));
+	$nombre1 			=$conexion->real_escape_string(strtoupper($_POST['txt_nombre']));
+	$nombre 			= strtr($nombre1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
+	$apellidos1			=$conexion->real_escape_string(strtoupper($_POST['txt_apellidos']));
+	$apellidos 			= strtr($apellidos1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
 	$direccion  		=$conexion->real_escape_string(strtoupper($_POST['txt_direccion']));	
 	$telefono 			=$conexion->real_escape_string($_POST['txt_telefono']);
 	$celular 			=$conexion->real_escape_string($_POST['txt_celular']);

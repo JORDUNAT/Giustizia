@@ -19,8 +19,9 @@
 	
 
 
-	$Id 			=$_POST['txt_id'];
-	$tipodocumento 	=$conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
+	$Id 				=$_POST['txt_id'];
+	$tipodocumento1 	=$conexion->real_escape_string(strtoupper($_POST['txt_descripcion']));
+	$tipodocumento		= strtr($tipodocumento1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
 
 
 if($tipousuario==1){
