@@ -650,6 +650,27 @@
 			return $html;
 		}
 
+		function getConsutlasHis($conexion) ////Consulta de las conusltas jurídicas de la Oficina
+		{
+			$oficina = $_SESSION['s_oficina'];
+
+			$html = array();
+			$sql = "
+				SELECT * FROM tbl_consultas WHERE (cons_NoConsulta LIKE '%$oficina%') AND (cons_Estado<>1)
+			";
+
+			$qry = $conexion->query($sql);
+			if (!$qry)
+			{
+				return 'Error->'.mysql_error().',qry:'.$sql;
+			}
+			while ($cursor = $qry->fetch_assoc())
+			{
+				array_push($html,$cursor);
+			}
+			return $html;
+		}
+
 
 		function getConsutlasUsuario($conexion) //Consulta de las conusltas jurídicas asignadas al usuario sesionado
 		{
@@ -659,7 +680,7 @@
 
 			$html = array();
 			$sql = "
-			SELECT A.cons_Id, A.cons_NoConsulta, A.cons_Fecha, A.cons_Atendido, A.cons_Cliente, A.cons_DetalleConsulta, A.cons_Cuantia, A.cons_TipoAccion, A.cons_Observaciones, A.cons_AbogadoAsignado, A.cons_Estado, B.tipAcc_Id, B.tipAcc_TipoAccion FROM tbl_consultas A LEFT JOIN tbl_tipoaccion B ON A.cons_TipoAccion=B.tipAcc_Id WHERE A.cons_AbogadoAsignado='$usuario_sesionado' AND A.cons_Estado<>'2'
+			SELECT A.cons_Id, A.cons_NoConsulta, A.cons_Fecha, A.cons_Atendido, A.cons_Cliente, A.cons_DetalleConsulta, A.cons_Cuantia, A.cons_TipoAccion, A.cons_Observaciones, A.cons_AbogadoAsignado, A.cons_Estado, B.tipAcc_Id, B.tipAcc_TipoAccion FROM tbl_consultas A LEFT JOIN tbl_tipoaccion B ON A.cons_TipoAccion=B.tipAcc_Id WHERE A.cons_AbogadoAsignado='$usuario_sesionado' AND A.cons_Estado='1'
 			";
 
 			$qry = $conexion->query($sql);
@@ -674,6 +695,28 @@
 			return $html;
 		}		
 
+		function getConsutlasUsuarioHis($conexion) //Consulta de las conusltas jurídicas asignadas al usuario sesionado
+		{
+			$oficina = $_SESSION['s_oficina'];
+			$usuario_sesionado = $_SESSION['s_usuario'];
+
+
+			$html = array();
+			$sql = "
+			SELECT A.cons_Id, A.cons_NoConsulta, A.cons_Fecha, A.cons_Atendido, A.cons_Cliente, A.cons_DetalleConsulta, A.cons_Cuantia, A.cons_TipoAccion, A.cons_Observaciones, A.cons_AbogadoAsignado, A.cons_Estado, B.tipAcc_Id, B.tipAcc_TipoAccion FROM tbl_consultas A LEFT JOIN tbl_tipoaccion B ON A.cons_TipoAccion=B.tipAcc_Id WHERE A.cons_AbogadoAsignado='$usuario_sesionado' AND A.cons_Estado<>'1'
+			";
+
+			$qry = $conexion->query($sql);
+			if (!$qry)
+			{
+				return 'Error->'.mysql_error().',qry:'.$sql;
+			}
+			while ($cursor = $qry->fetch_assoc())
+			{
+				array_push($html,$cursor);
+			}
+			return $html;
+		}	
 
 		function getListaDepartamento($conexion) //Listado de departamentos
 
@@ -774,7 +817,29 @@
 
 			$html = array();
 			$sql = "
-			SELECT A.cons_Id, A.cons_NoConsulta, A.cons_Fecha, A.cons_Atendido, A.cons_Cliente, A.cons_DetalleConsulta, A.cons_Cuantia, A.cons_TipoAccion, A.cons_Observaciones, A.cons_AbogadoAsignado, A.cons_Estado, B.tipAcc_Id, B.tipAcc_TipoAccion FROM tbl_consultas A LEFT JOIN tbl_tipoaccion B ON A.cons_TipoAccion=B.tipAcc_Id WHERE A.cons_Cliente='$usuario_sesionado' AND A.cons_Estado<>'2'
+			SELECT A.cons_Id, A.cons_NoConsulta, A.cons_Fecha, A.cons_Atendido, A.cons_Cliente, A.cons_DetalleConsulta, A.cons_Cuantia, A.cons_TipoAccion, A.cons_Observaciones, A.cons_AbogadoAsignado, A.cons_Estado, B.tipAcc_Id, B.tipAcc_TipoAccion FROM tbl_consultas A LEFT JOIN tbl_tipoaccion B ON A.cons_TipoAccion=B.tipAcc_Id WHERE A.cons_Cliente='$usuario_sesionado' AND A.cons_Estado='1'
+			";
+
+			$qry = $conexion->query($sql);
+			if (!$qry)
+			{
+				return 'Error->'.mysql_error().',qry:'.$sql;
+			}
+			while ($cursor = $qry->fetch_assoc())
+			{
+				array_push($html,$cursor);
+			}
+			return $html;
+		}	
+
+		function getConsutlasClienteHis($conexion) //Consulta de los usuarios no clientes de acuero a cada oficina
+		{
+			$oficina = $_SESSION['s_oficina'];
+			$usuario_sesionado = $_SESSION['s_usuario'];
+
+			$html = array();
+			$sql = "
+			SELECT A.cons_Id, A.cons_NoConsulta, A.cons_Fecha, A.cons_Atendido, A.cons_Cliente, A.cons_DetalleConsulta, A.cons_Cuantia, A.cons_TipoAccion, A.cons_Observaciones, A.cons_AbogadoAsignado, A.cons_Estado, B.tipAcc_Id, B.tipAcc_TipoAccion FROM tbl_consultas A LEFT JOIN tbl_tipoaccion B ON A.cons_TipoAccion=B.tipAcc_Id WHERE A.cons_Cliente='$usuario_sesionado' AND A.cons_Estado='1'
 			";
 
 			$qry = $conexion->query($sql);

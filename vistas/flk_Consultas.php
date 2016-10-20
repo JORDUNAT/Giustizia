@@ -27,7 +27,7 @@
 		<div class="ibody1 col-xs-12  col-sm-12 col-md-12 col-lg-12">
 			<div align='center' class="jumbotron">
 			<?php 
-				if($resultado['cons_Estado']==2){
+				if($resultado['cons_Estado']==3 || $resultado['cons_Estado']==4){
 					echo "<h8 align='center'><b>CONSULTA No. ".$resultado['cons_NoConsulta']." ARCHIVADA </b></h8>";
 				}else{
 					echo "<h8 align='center'><b>GESTIONANDO CONSULTA: ".$resultado['cons_NoConsulta']."</b></h8>";
@@ -130,27 +130,22 @@
 						echo '<textarea type="text" name="detaconsulta" id="detaconsulta" cols="15" rows="4" class="form-control" >'.$resultado['cons_Observaciones'].'</textarea>';
 						echo '</div>';
 
-						
-						
+						echo '<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">';
+						echo '</div>';
+
+						echo '<div class="col-xs-12  col-sm-3 col-md-3 col-lg-3">';
+						echo '<input type="submit" name="btn_GeneExpediente" id="btn_GeneExpediente" class="btn btn-primary" value="Generar Expediente" >';
+						echo '</div>';
+
+						echo '<div class="col-xs-12  col-sm-3 col-md-3 col-lg-3">';
+						echo '<input type="submit" name="btn_ArchivarConsulta" id="btn_ArchivarConsulta" class="btn btn-danger" value="Archivar Consulta" >';
+						echo '</div>';
 					}
 				?>
-
-
-						<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
-						</div>
-
-						<div class="col-xs-12  col-sm-6 col-md-6 col-lg-6">
-							<input type="submit" name="btn_GeneExpediente" id="btn_GeneExpediente" class="btn btn-primary" value="Generar Expediente" >
+										
+						<div class="col-xs-12  col-sm-3 col-md-3 col-lg-3">	
 							<input type="button" class="btn btn-primary" onclick="location.href='frm_ListaConsultas.php'" value="Cancelar" >							
 						</div>
-
-						<div class="col-xs-12  col-sm-5 col-md-5 col-lg-5">
-
-							<input type="submit" name="btn_ArchivarConsulta" id="btn_ArchivarConsulta" class="btn btn-danger" value="Archivar Consulta" >
-							
-						</div>
-
-
 					</div>
 				</form>
 			</div>

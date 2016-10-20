@@ -51,6 +51,7 @@
                 <li><a href="#" class="sub" tabindex="1"><span class="glyphicon  glyphicon-cloud"></span> <b> </b> CONSULTAS</a>
                     <ul>
                         <li><a href="frm_ListaConsultas.php">Administrar Consultas</a></li>
+                        <li><a href="frm_ListaConsultasHis.php">Historico Consultas</a></li>
                     </ul>
                 </li>
 
