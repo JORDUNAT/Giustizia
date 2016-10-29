@@ -81,7 +81,7 @@
 					if ($resultado['cons_Estado']==2){
 						echo '<div  class="col-xs-12  col-sm-6 col-md-3 col-lg-3">';
 						echo '<label>Cuantía: </label>';	
-						echo '<input type="number" name="Atendido" id="Atendido"  class="form-control" aria-describedby="sizing-addon3" value="'.$resultado['cons_Cuantia'].'" disabled>';
+						echo '<input type="number" name="cuantia" id="cuantia"  class="form-control" aria-describedby="sizing-addon3" value="'.$resultado['cons_Cuantia'].'" disabled>';
 						echo '</div>';
 
 						echo '<div class="col-xs-12  col-sm-5 col-md-3 col-lg-3 " >';
@@ -101,14 +101,14 @@
 
 						echo '<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">';
 						echo '<label>Observaciones o Recomendaciones: </label>';
-						echo '<textarea disabled type="text" name="detaconsulta" id="detaconsulta" cols="15" rows="4" class="form-control" >'.$resultado['cons_Observaciones'].'</textarea>';
+						echo '<textarea disabled type="text" name="observaciones" id="observaciones" cols="15" rows="4" class="form-control" >'.$resultado['cons_Observaciones'].'</textarea>';
 						echo '</div>';
 
 
 					}else{
 						echo '<div  class="col-xs-12  col-sm-6 col-md-3 col-lg-3">';
 						echo '<label>Cuantía: </label>';	
-						echo '<input type="number" name="Atendido" id="Atendido"  class="form-control" aria-describedby="sizing-addon3" value="'.$resultado['cons_Cuantia'].'">';
+						echo '<input type="number" name="cuantia" id="cuantia"  class="form-control" aria-describedby="sizing-addon3" value="'.$resultado['cons_Cuantia'].'">';
 						echo '</div>';
 
 						echo '<div class="col-xs-12  col-sm-5 col-md-6 col-lg-6 " >';
@@ -146,6 +146,11 @@
 						<div class="col-xs-12  col-sm-3 col-md-3 col-lg-3">	
 							<input type="button" class="btn btn-primary" onclick="location.href='frm_ListaConsultas.php'" value="Cancelar" >							
 						</div>
+
+						<div  class="col-xs-12  col-sm-5 col-md-3 col-lg-3">
+							<input type="number" min="1" name="consultaoculta" id="consultaoculta" style = "visibility:hidden"  class="form-control" aria-describedby="sizing-addon3" value="<?php echo $resultado['cons_NoConsulta']?>" required/>
+						</div>
+
 					</div>
 				</form>
 			</div>

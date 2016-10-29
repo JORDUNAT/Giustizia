@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-06-2016 a las 03:54:37
+-- Tiempo de generación: 20-10-2016 a las 12:44:55
 -- Versión del servidor: 10.1.13-MariaDB
--- Versión de PHP: 5.6.21
+-- Versión de PHP: 5.6.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,38 +23,54 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_casificacionproceso`
+-- Estructura de tabla para la tabla `tbl_agenda`
 --
 
-CREATE TABLE `tbl_casificacionproceso` (
+CREATE TABLE `tbl_agenda` (
+  `agen_NumeroCita` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `agen_LugarCita` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `agen_Municipio` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `agen_FechaCita` datetime NOT NULL,
+  `agen_Observaciones` text COLLATE utf8_spanish_ci,
+  `agen_Expediente` varchar(35) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_clasificacionproceso`
+--
+
+CREATE TABLE `tbl_clasificacionproceso` (
   `clapro_Id` int(11) NOT NULL,
-  `clapro_CasificacionProceso` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `clapro_ClasificacionProceso` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
   `clapro_Estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `tbl_casificacionproceso`
+-- Volcado de datos para la tabla `tbl_clasificacionproceso`
 --
 
-INSERT INTO `tbl_casificacionproceso` (`clapro_Id`, `clapro_CasificacionProceso`, `clapro_Estado`) VALUES
-(1, 'Ordinario', 1),
-(2, 'Ordinario Sumario', 1),
-(3, 'Abreviado', 1),
-(4, 'Verbal', 1),
-(5, 'Verbal Sumario', 1),
-(6, 'Deslinde y Amojonamiento', 1),
-(7, 'Expropiación', 1),
-(8, 'Divisorio Pequeñas Comunidades', 1),
-(9, 'Divisorio Grandes Comunidades', 1),
-(10, 'De Ejecución Singular', 1),
-(11, 'Con Acción Real o Prendaria', 1),
-(12, 'Concurso de Acreedores', 1),
-(13, 'Sucesiones', 1),
-(14, 'Liquidación de Sociedades Conyugales', 1),
-(15, 'Liquidación de Sociedades Civiles y Comerciales', 1),
-(16, 'Proceso Penal en Curso (Ante Fiscalía)', 1),
-(17, 'Proceso Penal en Curso (Juzgado Penal Municipal)', 1),
-(19, 'JJOT', 2);
+INSERT INTO `tbl_clasificacionproceso` (`clapro_Id`, `clapro_ClasificacionProceso`, `clapro_Estado`) VALUES
+(1, 'ORDINARIO', 1),
+(2, 'ORDINARIO SUMARIO', 1),
+(3, 'ABREVIADO PREUBA', 1),
+(4, 'VERBAL', 1),
+(5, 'VERBAL SUMARIO', 1),
+(6, 'DESLINDE Y AMOJONAMIENTO', 1),
+(7, 'EXPROPIACION', 1),
+(8, 'DIVISORIO PEQUEÑAS COMUNIDADES', 1),
+(9, 'DIVISORIO GRANDES COMUNIDADES', 1),
+(10, 'DE EJECUCION SINGULAR', 1),
+(11, 'CON ACCION REAL O PRENDARIA', 1),
+(12, 'CONCURSO DE ACREEDORES', 1),
+(13, 'SUCESIONES', 1),
+(14, 'LIQUIDACION DE SOCIEDADES CONYUGALES', 1),
+(15, 'LIQUIDACION DE SOCIEDADES CIVILES Y COMERCIALES', 1),
+(16, 'PROCESO PENAL EN CURSO (ANTE FISCALIA)', 1),
+(17, 'PROCESO PENAL EN CURSO (JUZGADO PENAL MUNICIPAL)', 1),
+(18, 'PRUEBA DE JULIAN 13092016', 1),
+(19, 'NUEVO TIPO CREACION +1', 2);
 
 -- --------------------------------------------------------
 
@@ -63,28 +79,29 @@ INSERT INTO `tbl_casificacionproceso` (`clapro_Id`, `clapro_CasificacionProceso`
 --
 
 CREATE TABLE `tbl_consultas` (
-  `Cons_Id` int(11) NOT NULL,
-  `Cons_NoConsulta` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `Cons_Fecha` date NOT NULL,
-  `Cons_Atendido` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `Cons_Cliente` int(11) NOT NULL,
-  `Cons_DetalleConsulta` longtext COLLATE utf8_spanish_ci NOT NULL,
-  `Cons_Cuantia` bigint(20) DEFAULT NULL,
-  `Cons_Tramite` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `Cons_TipoAccion` int(11) DEFAULT NULL,
-  `Cons_Observaciones` text COLLATE utf8_spanish_ci,
-  `Cons_AbogadoAsignado` int(11) DEFAULT NULL,
-  `Cons_Estado` int(11) NOT NULL
+  `cons_Id` int(11) NOT NULL,
+  `cons_NoConsulta` varchar(20) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Se crea con la unión separados por _ de "C" y los campos "cons_DocumentoConsultorio", "cons_Id" y el año de "cons_FechaConsulta"',
+  `cons_Fecha` date NOT NULL,
+  `cons_Atendido` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `cons_DetalleConsulta` text COLLATE utf8_spanish_ci NOT NULL,
+  `cons_Cuantia` bigint(20) DEFAULT NULL,
+  `cons_Observaciones` text COLLATE utf8_spanish_ci,
+  `cons_AbogadoAsignado` int(11) DEFAULT NULL,
+  `cons_Cliente` int(11) NOT NULL,
+  `cons_TipoAccion` int(11) DEFAULT NULL,
+  `cons_Estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tbl_consultas`
 --
 
-INSERT INTO `tbl_consultas` (`Cons_Id`, `Cons_NoConsulta`, `Cons_Fecha`, `Cons_Atendido`, `Cons_Cliente`, `Cons_DetalleConsulta`, `Cons_Cuantia`, `Cons_Tramite`, `Cons_TipoAccion`, `Cons_Observaciones`, `Cons_AbogadoAsignado`, `Cons_Estado`) VALUES
-(2, '789456000-2-2016', '2016-05-18', 'Consutla Web', 98765432, 'PRUEBA DE ENVIO DE DOS CORREOS', NULL, NULL, NULL, NULL, NULL, 1),
-(1, '800123456-1-2015', '2015-12-16', 'Consutla Web', 1000123456, 'SI NO PUEDES MODIFICAR LA APLICACION NI EL PROCEDIMIENTO ALMACENADO, ¿QUE Sí PUEDES MODIFICAR? NO Sé EN QUé MODO PODEMOS AYUDARTE, PERO LO QUE DEBERíAS HACER ES HABLAR CON EL QUE Sí PUEDA HACER CAMBIOS EN LAS APLICACIONES, YA QUE SERá QUIEN PUEDA AYUDARTE.', NULL, NULL, NULL, NULL, NULL, 2),
-(3, '800123456-3-2015', '2016-05-23', '80062885', 1000123456, 'PRUEBA DE FORMULARIO DE FRM_LISACONSULTAS.PHP ', 1000000, 'SFASDF', 2, 'AFASDFASD', 80062885, 1);
+INSERT INTO `tbl_consultas` (`cons_Id`, `cons_NoConsulta`, `cons_Fecha`, `cons_Atendido`, `cons_DetalleConsulta`, `cons_Cuantia`, `cons_Observaciones`, `cons_AbogadoAsignado`, `cons_Cliente`, `cons_TipoAccion`, `cons_Estado`) VALUES
+(1, '800123456-1-2016', '2016-10-02', '800123456', 'Pruba de Consulta con Oscar Javier Orduña', 0, NULL, NULL, 80123456, 1, 1),
+(2, '800123456-2-2016', '2016-10-15', 'Consutla Web', 'SE REALIZAR REGISTRO DE CONSULTA PARA REGISTRO DESDE EL CLIENTE LIZ YEIMMY', NULL, NULL, NULL, 52850158, NULL, 1),
+(3, '800123456-3-2016', '2016-10-15', '800123456', 'SE REALIZAR REGISTRO DE CLIENTE Y CONSULTA PARA REGISTRO DESDE LA CLAVE DE ADMINISTRADOR. NICOLLE', NULL, NULL, NULL, 1000123456, NULL, 1),
+(4, '800123456-4-2016', '2016-10-17', '800123456', 'SE REGISTRA CONSULTA DESDE CREACIÓN DE CONSULTA, LIZ', 0, 'SE REGISTRA OBSERVACIONES DESDE CREACIÓN DE CONSULTA, LIZ', 80062885, 52850158, 3, 1),
+(5, '800123456-5-2016', '2016-10-17', '800123456', 'SE REGISTRA CONSULTA DESDE CREACIÓN DE CONSULTA, NICOLLE ORDUÑA', 1200000, 'SE REGISTRA OBSERVACIONES DESDE CREACIÓN DE CONSULTA, NICOLLE ORDUÑA', 80062885, 1000123456, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -105,6 +122,7 @@ CREATE TABLE `tbl_departamentos` (
 
 INSERT INTO `tbl_departamentos` (`depa_Id`, `depa_Codigo`, `depa_Departamento`, `depa_Capital`) VALUES
 (5, '05', 'ANTIOQUIA', 'MEDELLIN'),
+(6, '06', 'NUEVO DEPARTAMENTO', 'NUEVA CAPITAL'),
 (8, '08', 'ATLÁNTICO', 'BARRANQUILLA'),
 (11, '11', 'BOGOTÁ D.C', 'BOGOTA'),
 (13, '13', 'BOLÍVAR', 'CARTAGENA'),
@@ -141,22 +159,47 @@ INSERT INTO `tbl_departamentos` (`depa_Id`, `depa_Codigo`, `depa_Departamento`, 
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tbl_especialidades`
+--
+
+CREATE TABLE `tbl_especialidades` (
+  `espe_Id` int(11) NOT NULL,
+  `espe_Especialidad` varchar(25) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_especialidades`
+--
+
+INSERT INTO `tbl_especialidades` (`espe_Id`, `espe_Especialidad`) VALUES
+(1, 'PENAL'),
+(2, 'ADMINISTRATIVO'),
+(3, 'FAMILIA'),
+(4, 'COBRANZAS'),
+(5, 'LABORAL'),
+(6, 'CIVIL'),
+(7, 'DISCIPLINARIO');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tbl_estados`
 --
 
 CREATE TABLE `tbl_estados` (
-  `Estado_Id` int(11) NOT NULL,
-  `Estado_Estado` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+  `estado_Id` int(11) NOT NULL,
+  `estado_Estado` varchar(10) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tbl_estados`
 --
 
-INSERT INTO `tbl_estados` (`Estado_Id`, `Estado_Estado`) VALUES
+INSERT INTO `tbl_estados` (`estado_Id`, `estado_Estado`) VALUES
 (1, 'ACTIVO'),
 (2, 'INACTIVO'),
-(3, 'EN PROCESO');
+(3, 'EN PROCESO'),
+(4, 'ARCHIVADO');
 
 -- --------------------------------------------------------
 
@@ -166,8 +209,8 @@ INSERT INTO `tbl_estados` (`Estado_Id`, `Estado_Estado`) VALUES
 
 CREATE TABLE `tbl_estratos` (
   `estr_Id` int(11) NOT NULL,
-  `estr_Estrato` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `estr_Estrato` varchar(10) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tbl_estratos`
@@ -188,18 +231,15 @@ INSERT INTO `tbl_estratos` (`estr_Id`, `estr_Estrato`) VALUES
 --
 
 CREATE TABLE `tbl_expedientes` (
-  `exp_Expediente` varchar(35) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `exp_NumeroExpediente` varchar(35) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Se crea con la unión separados por _ de "E" y los campos "exp_DocumentoConsultorio", "exp_Id" y el año de "exp_Fecha_Expediente"',
   `exp_Id` int(11) NOT NULL,
-  `exp_Fecha` date NOT NULL,
-  `exp_Valor` int(11) NOT NULL DEFAULT '0',
-  `exp_Estado` int(11) NOT NULL,
-  `exp_Soporte` int(11) NOT NULL,
-  `exp_Observaciones` int(11) NOT NULL,
-  `exp_TipoJuzgado` int(11) NOT NULL,
-  `exp_Consulta` varchar(20) COLLATE utf32_unicode_ci NOT NULL,
-  `exp_Consultorio` int(11) NOT NULL,
-  `exp_ClasiProceso` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_unicode_ci;
+  `exp_FechaExpediente` date NOT NULL,
+  `exp_EstadoExpediente` varchar(10) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Abierto\nAnulado\nArchivado',
+  `exp_Soportes` text COLLATE utf8_spanish_ci,
+  `exp_ObservacionExpedientes` longtext COLLATE utf8_spanish_ci,
+  `exp_Consulta` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
+  `exp_clasificacionproceso` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -208,18 +248,18 @@ CREATE TABLE `tbl_expedientes` (
 --
 
 CREATE TABLE `tbl_festivos` (
-  `Fecha` date NOT NULL,
-  `Dia` int(11) NOT NULL,
-  `Mes` int(11) NOT NULL,
-  `Anno` int(4) NOT NULL,
-  `Celebracion` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `fest_Fecha` date NOT NULL,
+  `fest_Dia` int(11) DEFAULT NULL,
+  `fest_Mes` int(11) DEFAULT NULL,
+  `fest_Anno` int(11) DEFAULT NULL,
+  `fest_Celebracion` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tbl_festivos`
 --
 
-INSERT INTO `tbl_festivos` (`Fecha`, `Dia`, `Mes`, `Anno`, `Celebracion`) VALUES
+INSERT INTO `tbl_festivos` (`fest_Fecha`, `fest_Dia`, `fest_Mes`, `fest_Anno`, `fest_Celebracion`) VALUES
 ('2015-01-12', 12, 1, 2015, 'Día de los Reyes Magos'),
 ('2015-03-23', 23, 3, 2015, 'Día de San José'),
 ('2015-03-29', 29, 3, 2015, 'Domingo de Ramos'),
@@ -340,6 +380,341 @@ INSERT INTO `tbl_festivos` (`Fecha`, `Dia`, `Mes`, `Anno`, `Celebracion`) VALUES
 ('2020-12-25', 25, 12, 2020, 'Día de Navidad'),
 ('2021-01-01', 1, 1, 2021, 'Año Nuevo'),
 ('2021-07-20', 20, 7, 2021, 'Grito de Independencia');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_gestion`
+--
+
+CREATE TABLE `tbl_gestion` (
+  `gest_Id` int(11) NOT NULL,
+  `gest_FechaInicio` date NOT NULL,
+  `gest_DiasDuracion` int(11) NOT NULL,
+  `gest_FechaVen` date NOT NULL COMMENT 'Esta fecha se calcula de la Fecha de la Gestión más los Dias de Duración.',
+  `gest_Terminado` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Donde 0 corresponde a que NO se ha terminado dicha gestión',
+  `gest_FechaIngreso` date NOT NULL COMMENT 'Corresponde a la fecha en la que se crea el registro de la  Gestión',
+  `gest_FechaTerminacion` date NOT NULL COMMENT 'Corresponde a la fecha en que se da por terminada la gestión.',
+  `gest_Observación` longtext COLLATE utf8_spanish_ci,
+  `gest_TipoGestion` int(11) NOT NULL,
+  `gest_Expediente` varchar(35) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_juzgados`
+--
+
+CREATE TABLE `tbl_juzgados` (
+  `juz_Id` int(11) NOT NULL,
+  `juz_Juzgado` varchar(80) COLLATE utf8_spanish_ci NOT NULL,
+  `juz_Circuito` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `juz_Distrito` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `juz_Direccion` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `juz_Telefono` varchar(80) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `juz_Contacto` varchar(80) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `juz_HorarioAtencion` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `juz_TipoJuzgado` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_juzgados`
+--
+
+INSERT INTO `tbl_juzgados` (`juz_Id`, `juz_Juzgado`, `juz_Circuito`, `juz_Distrito`, `juz_Direccion`, `juz_Telefono`, `juz_Contacto`, `juz_HorarioAtencion`, `juz_TipoJuzgado`) VALUES
+(1, 'CE: 076 PENAL CON FUNCION DE CONTROL DE GARANTIAS DE BOGOTA ', '', '', 'CRA.28 A NO.18 A -67 BLOQUE C PIS. 3', '4280910', '', '08:00 - 13:00 y 14:00  a 17:00', 5),
+(2, 'CSJ: 001 SALA ADMINISTRATIVA DE BOGOTA ', '', '', 'CLL 85 # 11-96 PIS. 4', '', '', '08:00 - 13:00 y 14:00  a 17:00', 6),
+(3, 'CSJ: 002 SALA ADMINISTRATIVA DE BOGOTA ', '', '', 'CLL 85 # 11-96 PIS. 4', '', '', '08:00 - 13:00 y 14:00  a 17:00', 6),
+(4, 'CSJ: 003 SALA ADMINISTRATIVA DE BOGOTA ', '', '', 'CLL 85 # 11-96 PIS. 4', '', '', '08:00 - 13:00 y 14:00  a 17:00', 6),
+(5, 'CSJ: 000 SALA DISCIPLINARIA DE BOGOTA ', '', '', 'CLL 85 11-96 PISO2', '(fax) 6214036', '', '08:00 a 12:00 y 13:00 a 17:00', 7),
+(6, 'CSJ: 001 SALA DISCIPLINARIA DE BOGOTA ', '', '', 'CLL 85 11-96 PIS. 7', '', '', '08:00 a 12:00 y 13:00 a 17:00', 7),
+(7, 'CSJ: 002 SALA DISCIPLINARIA DE BOGOTA ', '', '', 'CLL 85 11-96 PIS. 5 KK', '6213889', '', '08:00 a 12:00 y 13:00 a 17:00', 7),
+(8, 'CSJ: 003 SALA DISCIPLINARIA DE BOGOTA ', '', '', 'CLL 85 11-96 PIS. 6', '', '', '08:00 a 12:00 y 13:00 a 17:00', 7),
+(9, 'CSJ: 004 SALA DISCIPLINARIA DE BOGOTA ', '', '', 'CLL 85 11-96 PISO6', '6214135', '', '08:00 a 12:00 y 13:00 a 17:00', 7),
+(10, 'CSJ: 005 SALA DISCIPLINARIA DE BOGOTA ', '', '', 'CLL 85 11-96 PISO6', '', '', '08:00 a 12:00 y 13:00 a 17:00', 7),
+(11, 'CSJ: 006 SALA DISCIPLINARIA DE BOGOTA ', '', '', 'CLL 85 11-96 PIS. 4', '6360724', '', '08:00 a 12:00 y 13:00 a 17:00', 7),
+(12, 'CSJ: 007 SALA DISCIPLINARIA DE BOGOTA ', '', '', 'CLL 85 11-96 PIS. 5', '', '', '08:00 a 12:00 y 13:00 a 17:00', 7),
+(13, 'CSJ: 008 SALA DISCIPLINARIA DE BOGOTA ', '', '', 'CLL 85 11-96 PISO7', '', '', '08:00 a 12:00 y 13:00 a 17:00', 7),
+(14, 'CSJ: 751 SALA DISCIPLINARIA DE BOGOTA ', '', '', 'CLL 85 No 11-96 PIS. 3', '6213886', '', '08:00 - 13:00 y 14:00  a 17:00', 7),
+(15, 'CSJ: 752 SALA DISCIPLINARIA DE BOGOTA ', '', '', 'CLL 85 No 11-96 PIS. 3', '6213886', '', '08:00 - 13:00 y 14:00  a 17:00', 7),
+(16, 'CSJ: 753 SALA DISCIPLINARIA DE BOGOTA ', '', '', 'CLL 85 No 11-96 PIS. 3', '6213886', '', '08:00 - 13:00 y 14:00  a 17:00', 7),
+(17, 'DSRJ: 001 CENTRO DE SERVICIOS ADMINISTRATIVOS ', '', '', 'CLL 11 No 9A-24 PIS. 1', '2840479', '', '08:00 a 12:00 y 13:00 a 17:00', 1),
+(18, 'TS: 001 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFICINA 526 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(19, 'TS: 002 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFICINA 511 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(20, 'TS: 003 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 524 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(21, 'TS: 004 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 523 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(22, 'TS: 005 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 521 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(23, 'TS: 006 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 514 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(24, 'TS: 007 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 518 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(25, 'TS: 008 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 516 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(26, 'TS: 009 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 512 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(27, 'TS: 010 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 510 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(28, 'TS: 011 CIVIL DE BOGOTA ', '', '', 'CLL 24 A No 53-75 (AV. LA ESPERANZA) TORRE D', '', '', '08:00 a 12:00 y 13:00 a 17:00', 2),
+(29, 'TS: 012 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 506 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(30, 'TS: 013 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 504 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(31, 'TS: 014 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 503 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(32, 'TS: 015 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 505 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(33, 'TS: 016 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 507 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(34, 'TS: 017 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 509 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(35, 'TS: 018 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 513 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(36, 'TS: 019 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 515 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(37, 'TS: 020 CIVIL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 517 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 2),
+(38, 'TS: 704 CIVIL DE BOGOTA ', '', '', 'AVENIDA CLL 24 N 53-28 BLOQUE C PIS. 4', '', '', '08:00 - 13:00 y 14:00  a 17:00', 2),
+(39, 'TS: 001 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 706 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(40, 'TS: 002 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 704TORRE D', '', '', '08:00 a 12:00 y 13:00 a 17:00', 4),
+(41, 'TS: 003 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 708 TORRE D', '', '', '08:00 a 12:00 y 13:00 a 17:00', 4),
+(42, 'TS: 004 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 710 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(43, 'TS: 005 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 712 TORRE D PIS. 7', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(44, 'TS: 006 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 718 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(45, 'TS: 007 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 714TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(46, 'TS: 008 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 716 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(47, 'TS: 009 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 721TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(48, 'TS: 010 PENAL DE BOGOTA ', '', '', 'CLL 24 A No 53-75 (AV. LA ESPERANZA) TORRE C', '', '', '08:00 a 12:00 y 13:00 a 17:00', 4),
+(49, 'TS: 011 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 723TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(50, 'TS: 012 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 717 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(51, 'TS: 013 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 715 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(52, 'TS: 014 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 722 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(53, 'TS: 015 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 711TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(54, 'TS: 016 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 703 TORRE D', '', '', '08:00 a 12:00 y 13:00 a 17:00', 4),
+(55, 'TS: 017 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 707 TORRE D', '', '', '08:00 a 12:00 y 13:00 a 17:00', 4),
+(56, 'TS: 018 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 705 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(57, 'TS: 019 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 604 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(58, 'TS: 020 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 709 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(59, 'TS: 021 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 605 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(60, 'TS: 022 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. B 06 TORRE C', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(61, 'TS: 023 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 603 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(62, 'TS: 024 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 PIS. 7 TORRE D', '', '', '08:00 a 12:00 y 13:00 a 17:00', 4),
+(63, 'TS: 025 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 617 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(64, 'TS: 026 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 608TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(65, 'TS: 027 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 701TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(66, 'TS: 028 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. B 03 TORRE D PIS. 7', '', '', '08:00 a 12:00 y 13:00 a 17:00', 4),
+(67, 'TS: 029 PENAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 724TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(68, 'TS: 030 PENAL DE BOGOTA ', '', '', 'AVENIDA CLL 24 N 53-28 TORRE D PIS. 7', '', '', '08:00 a 12:00 y 13:00 a 17:00', 4),
+(69, 'TS: 001 LABORAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 624 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 3),
+(70, 'TS: 002 LABORAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 623 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 3),
+(71, 'TS: 003 LABORAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 622 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 3),
+(72, 'TS: 004 LABORAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 621 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 3),
+(73, 'TS: 005 LABORAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 616 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 3),
+(74, 'TS: 006 LABORAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 618 TORRE D', '', '', '08:00 a 12:00 y 13:00 a 17:00', 3),
+(75, 'TS: 007 LABORAL DE BOGOTA ', '', '', 'AV. LA ESPERANZA 53-28 OFI. 614 TORRE D', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 3),
+(76, 'CE: 006 SALA PLENA DE LO CONTENCIOSO ADMINISTRATIVO DE MEDELLIN', '', '', 'EDIFICIO RODRIGO LARA BONILLA CLL 49 # 51-52', '2320275', '', '08:00 - 13:00 y 14:00  a 17:00', 8),
+(77, 'CSJ: 001 SALA DISCIPLINARIA DE MEDELLIN', '', '', 'PALACIO DE JUSTICIA -LA ALPUJARRA- CRA 52 NRO 42-73 PIS. 4', '2321314 (fax) 2627983', '', '08:00 a 12:00 y 13:00 a 17:00', 7),
+(78, 'CSJ: 002 SALA DISCIPLINARIA DE MEDELLIN', '', '', 'PALACIO DE JUSTICIA -LA ALPUJARRA- CRA 52 NRO 42-73 PIS. 4', '2628683 (fax) 2627983', '', '08:00 a 12:00 y 13:00 a 17:00', 7),
+(79, 'CSJ: 003 SALA DISCIPLINARIA DE MEDELLIN', '', '', 'PALACIO DE JUSTICIA -LA ALPUJARRA- CRA 52 NRO 42-73', '2321839 (fax) 2325602', '', '08:00 a 12:00 y 13:00 a 17:00', 7),
+(80, 'CSJ: 004 SALA DISCIPLINARIA DE MEDELLIN', '', '', 'EDIFICIO ALVAREZ ESTRADA - CONFIAR CRA 52 No 43-52', '2616235', '', '08:00 - 13:00 y 14:00  a 17:00', 7),
+(81, 'CSJ: 005 SALA DISCIPLINARIA DE MEDELLIN', '', '', 'EDIFICIO ALVAREZ ESTRADA - CONFIAR CRA 52 No 43-52', '2622112', '', '08:00 - 13:00 y 14:00  a 17:00', 7),
+(82, 'CSJ: 002 SALA UNICA DE MEDELLIN', '', '', 'EDIFICIO ALVAREZ ESTRADA - CONFIAR CRA 52 No 43-52', '2623906', '', '08:00 - 13:00 y 14:00  a 17:00', 9),
+(83, 'DSRJ: 001 OFICINA JUDICIAL DE MEDELLIN', '', '', 'CRA 52 N. 4273', '', '', '08:00 - 12:00pm y 1:00 p.m a 17:00', 10),
+(84, 'DSRJ: 001 CENTRO DE SERVICIOS ADMINISTRATIVOS ', '', '', 'CARRERA 52 42-73 PIS. 26', '(fax) 232862', '', '08:00 a 12:00 y 13:00 a 17:00', 1),
+(85, 'TS: 001 CIVIL DE MEDELLIN', '', '', 'CLL 49 # 51-52', '5121930 (fax) 5122213', '', '08:00 a 12:00 y 13:00 a 17:00', 2),
+(86, 'TS: SALA 003 CIVIL - FAMILIA DE ANTIOQUIA', '', '', 'PALACIO DE JUSTICIA -LA ALPUJARRA- CRA 52 NRO 42-73', '2325654(fax) 2624627', '', '08:00 a 12:00 y 13:00 a 17:00', 11),
+(87, 'TS: SALA 004 CIVIL - FAMILIA DE ANTIOQUIA', '', '', 'PALACIO DE JUSTICIA -LA ALPUJARRA- CRA 52 NRO 42-73', '2325654 (fax) 2624627', '', '08:00 a 12:00 y 13:00 a 17:00', 11),
+(88, 'JC: 001 PENAL ESPECIALIZADO DE ANTIOQUIA (DEPTO)', '', '', 'PALACIO DE JUSTICIA -LA ALPUJARRA- CRA 52 NRO 42-73 PIS. 21', '2625715 (fax) 2625801', '', '08:00 a 12:00 y 13:00 a 17:00', 12),
+(89, 'JC: 002 PENAL ESPECIALIZADO DE ANTIOQUIA (DEPTO)', '', '', 'PALACIO DE JUSTICIA -LA ALPUJARRA- CRA 52 NRO 42-73 PIS. 21', '2625591 (fax) 2328622', '', '08:00 a 12:00 y 13:00 a 17:00', 12),
+(90, 'JC: 001 EJECUCION DE PENAS Y MEDIDAS DE SEGURIDAD DE ANTIOQUIA (', '', '', 'PALACIO DE JUSTICIA -LA ALPUJARRA- CRA 52 NRO 42-73', '2328262 (fax) 2328262', '', '08:00 a 12:00 y 13:00 a 17:00', 13),
+(91, 'JC: 002 EJECUCION DE PENAS Y MEDIDAS DE SEGURIDAD DE ANTIOQUIA (', '', '', 'PALACIO DE JUSTICIA -LA ALPUJARRA- CRA 52 NRO 42-73', '2325752 (fax) 2328622', '', '08:00 a 12:00 y 13:00 a 17:00', 13),
+(92, 'CE: 006 SALA PLENA DE LO CONTENCIOSO ADMINISTRATIVO DE MEDELLIN', '', '', 'EDIFICIO RODRIGO LARA BONILLA CLL 49 # 51-52', '2320275', '', '08:00 - 13:00 y 14:00  a 17:00', 8),
+(93, 'CSJ: 001 SALA DISCIPLINARIA DE MEDELLIN', '', '', 'PALACIO DE JUSTICIA -LA ALPUJARRA- CRA 52 NRO 42-73 PIS. 4', '2321314 (fax) 2627983', '', '08:00 a 12:00 y 13:00 a 17:00', 7),
+(94, 'CSJ: 002 SALA DISCIPLINARIA DE MEDELLIN', '', '', 'PALACIO DE JUSTICIA -LA ALPUJARRA- CRA 52 NRO 42-73 PIS. 4', '2628683 (fax) 2627983', '', '08:00 a 12:00 y 13:00 a 17:00', 7),
+(95, 'CSJ: 003 SALA DISCIPLINARIA DE MEDELLIN', '', '', 'PALACIO DE JUSTICIA -LA ALPUJARRA- CRA 52 NRO 42-73', '2321839 (fax) 2325602', '', '08:00 a 12:00 y 13:00 a 17:00', 7),
+(96, 'CSJ: 001 SALA ADMINISTRATIVA DE BARRANQUILLA', '', '', 'CLLE. 40 No 44 - 80 PIS. 6 PALACIO DE JUSTICIA', '3410135 (fax) 3410159', '', '08:00 a 12 PM y 2 PM a 6 PM', 6),
+(97, 'CSJ: 002 SALA ADMINISTRATIVA DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PIS. 6 PALACIO DE JUSTICIA', '3410177 (fax) 3410159', '', '08:00 a 12 PM y 2 PM a 6 PM', 6),
+(98, 'CSJ: 001 SALA DISCIPLINARIA DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3410151 (fax) 3410145', '', '08:00 a 12 PM y 2 PM a 6 PM', 7),
+(99, 'CSJ: 002 SALA DISCIPLINARIA DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3410166 (fax) 3410145', '', '08:00 a 12 PM y 2 PM a 6 PM', 7),
+(100, 'CSJ: 003 SALA DISCIPLINARIA DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3410146 (fax) 3410145', '', '08:00 a 12 PM y 2 PM a 6 PM', 7),
+(101, 'DSRJ: 001 CENTRO DE SERVICIOS ADMINISTRATIVOS ', '', '', 'CARRERA 44 No 38 - 26 PIS. 1', '(fax) 3449524', '', '08:00 a 12 PM y 2 PM a 6 PM', 1),
+(102, 'TS: 001 PENAL DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(103, 'TS: 002 PENAL DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '3402458', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(104, 'TS: 003 PENAL DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '3402588', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(105, 'TS: 001 LABORAL DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '3449882', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(106, 'TS: 002 LABORAL DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(107, 'TS: 003 LABORAL DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '3401930', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(108, 'TS: 004 LABORAL DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '3402143', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(109, 'TS: 005 LABORAL DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '3402544', '', '08:00 a 12 PM y 2 PM a 6PM', 3),
+(110, 'TS: 006 LABORAL DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(111, 'TS: 007 LABORAL DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(112, 'TS: 008 LABORAL DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(113, 'TS: 009 LABORAL DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(114, 'TS: 001 SALA CIVIL - FAMILIA DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '3402478', '', '08:00 a 12 PM y 2 PM a 6 PM', 11),
+(115, 'TS: 002 SALA CIVIL - FAMILIA DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '3401702', '', '08:00 a 12 PM y 2 PM a 6 PM', 11),
+(116, 'TS: 003 SALA CIVIL - FAMILIA DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '3401702', '', '08:00 a 12 PM y 2 PM a 6 PM', 11),
+(117, 'TS: 004 SALA CIVIL - FAMILIA DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 11),
+(118, 'TS: 005 SALA CIVIL - FAMILIA DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 11),
+(119, 'TS: 006 SALA CIVIL - FAMILIA DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 11),
+(120, 'TS: 007 SALA CIVIL - FAMILIA DE BARRANQUILLA', '', '', 'CARRERA 45 No 44 - 12', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 11),
+(121, 'TS: 008 SALA CIVIL - FAMILIA DE BARRANQUILLA', '', '', 'CLL 44 No 45 - 17 ESQUINA', '3402042', '', '08:00 a 12 PM y 2 PM a 6 PM', 11),
+(122, 'TA: 001 SIN SECCION DE BARRANQUILLA', '', '', 'CLL 40 CARR 45 Y 46 PIS. 9', '3517135', '', '08:00 a 12 PM y 2 PM a 6 PM', 14),
+(123, 'TA: 002 SIN SECCION DE BARRANQUILLA', '', '', 'CLL 40 CARR 45 Y 46 PIS. 9', '3517144', '', '08:00 a 12:00 y 13:00 a 17:00', 14),
+(124, 'TA: 003 SIN SECCION DE BARRANQUILLA', '', '', 'CLL 40 CARR 45 Y 46 PIS. 9', '3517193', '', '08:00 a 12:00 y 13:00 a 17:00', 14),
+(125, 'TA: 004 SIN SECCION DE BARRANQUILLA', '', '', 'CLL 40 CARR 45 Y 46 PIS. 9', '3517461', '', '08:00 a 12:00 y 13:00 a 17:00', 14),
+(126, 'TA: 005 SIN SECCION DE BARRANQUILLA', '', '', 'CLL 40 CARR 45 Y 46 PIS. 9', '3517061', '', '08:00 a 12:00 y 13:00 a 17:00', 14),
+(127, 'TA: 006 SIN SECCION DE BARRANQUILLA', '', '', 'CLL 40 CARR 45 Y 46 PIS. 9', '3510991', '', '08:00 a 12:00 y 13:00 a 17:00', 14),
+(128, 'JC: 001 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PIS. 8 PALACIO DE JUSTICIA', '3407178', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(129, 'JC: 002 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3518421', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(130, 'JC: 003 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3401147', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(131, 'JC: 004 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3401934', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(132, 'JC: 005 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3400617', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(133, 'JC: 006 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(134, 'JC: 007 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3406760', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(135, 'JC: 008 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(136, 'JC: 009 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PIS. 8 PALACIO DE JUSTICIA', '3518251', '', '08:00 - 13:00 y 14:00  a 6:00 pm', 2),
+(137, 'JC: 010 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3518245', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(138, 'JC: 011 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3404436', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(139, 'JC: 012 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(140, 'JC: 013 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3402581', '', '08:00 a 12 PM y2 PM a 6 PM', 2),
+(141, 'JC: 014 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3407559', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(142, 'JC: 001 PENAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA PIS. 11', '3402813', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(143, 'JC: 002 PENAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA PIS. 11', '3405494', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(144, 'JC: 004 PENAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3406329', '', '08:00 a 12 PM y 2 PM a 6PM', 4),
+(145, 'JC: 005 PENAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3449267', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(146, 'JC: 006 PENAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA PIS. 10', '3407032', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(147, 'JC: 007 PENAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3404763', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(148, 'JC: 008 PENAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3418395', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(149, 'JC: 001 LABORAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3405625', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(150, 'JC: 002 LABORAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3407502', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(151, 'JC: 003 LABORAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3407501', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(152, 'JC: 004 LABORAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3403541', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(153, 'JC: 005 LABORAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3515216', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(154, 'JC: 006 LABORAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3416574', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(155, 'JC: 007 LABORAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3514219', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(156, 'JC: 008 LABORAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3510646', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(157, 'JC: 009 LABORAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3407100', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(158, 'JC: 010 LABORAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(159, 'JC: 011 LABORAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3512503', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(160, 'JC: 012 LABORAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(161, 'JC: 013 LABORAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3512608', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(162, 'JC: 014 LABORAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3412411', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(163, 'JC: 015 LABORAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3410199', '', '08:00 a 12 PM y 2 PM a 6 PM', 3),
+(164, 'JC: 001 PENAL ESPECIALIZADO DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3404460', '', '08:00 a 12 PM y 2 PM a 6 PM', 12),
+(165, 'JC: 001 FAMILIA DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3408651', '', '08:00 a 12 PM y 2 PM a 6 PM', 15),
+(166, 'JC: 002 FAMILIA DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3518248', '', '08:00 a 12 PM y 2 PM a 6 PM', 15),
+(167, 'JC: 003 FAMILIA DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3516871', '', '08:00 a 12 PM y 2 PM a 6 PM', 15),
+(168, 'JC: 004 FAMILIA DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3517558', '', '08:00 a 12 PM y 2 PM a 6 PM', 15),
+(169, 'JC: 005 FAMILIA DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3516483', '', '08:00 a 12 PM y 2 PM a 6 PM', 15),
+(170, 'JC: 006 FAMILIA DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3401479', '', '08:00 a 12 PM y 2 PM a 6 PM', 15),
+(171, 'JC: 007 FAMILIA DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3410023', '', '08:00 a 12 PM y 2 PM a 6 PM', 15),
+(172, 'JC: 008 FAMILIA DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3510297', '', '08:00 a 12 PM y 2 PM a 6 PM', 15),
+(173, 'JC: 009 FAMILIA DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3449352', '', '08:00 a 12 PM y 2 PM a 6 PM', 15),
+(174, 'JC: 001 PENAL PARA ADOLESCENTES CON FUNCION DE CONOCIMIENTO DE B', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 16),
+(175, 'JC: 002 PENAL PARA ADOLESCENTES CON FUNCION DE CONOCIMIENTO DE B', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 16),
+(176, 'JC: 001 MENORES DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3406176', '', '08:00 a 12 PM y 2 PM a 6 PM', 17),
+(177, 'JC: 001 EJECUCION DE PENAS Y MEDIDAS DE SEGURIDAD DE BARRANQUILL', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3517823', '', '08:00 a 12 PM y 2 PM a 6 PM', 13),
+(178, 'JC: 002 EJECUCION DE PENAS Y MEDIDAS DE SEGURIDAD DE BARRANQUILL', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3515629', '', '08:00 a 12 PM y 2 PM a 6 PM', 13),
+(179, 'JC: 003 EJECUCION DE PENAS Y MEDIDAS DE SEGURIDAD DE BARRANQUILL', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3414742', '', '08:00 a 12 PM y 2 PM a 6 PM', 13),
+(180, 'JC: 004 EJECUCION DE PENAS Y MEDIDAS DE SEGURIDAD DE BARRANQUILL', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3512547', '', '08:00 a 12 PM y 2 PM a 6 PM', 13),
+(181, 'JA: 001 SIN SECCION DE BARRANQUILLA', '', '', 'CARRERA 44 No 38 - 26 PIS. 1', '3410219', '', '08:00 a 12 PM y 2 PM a 6 PM', 14),
+(182, 'JA: 002 SIN SECCION DE BARRANQUILLA', '', '', 'CARRERA 44 No 38 - 26 PIS. 1', '3410020', '', '08:00 a 12 PM y 2 PM a 6 PM', 14),
+(183, 'JA: 003 SIN SECCION DE BARRANQUILLA', '', '', 'CARRERA 44 No 38 - 26 PIS. 1', '3410025', '', '08:00 a 12 PM y 2 PM a 6 PM', 14),
+(184, 'JA: 004 SIN SECCION DE BARRANQUILLA', '', '', 'CARRERA 44 No 38 - 26 PIS. 1', '3410027', '', '08:00 a 12 PM y 2 PM a 6 PM', 14),
+(185, 'JA: 005 SIN SECCION DE BARRANQUILLA', '', '', 'CARRERA 44 No 38 - 26 PIS. 1', '3410028', '', '08:00 a 12 PM y 2 PM a 6 PM', 14),
+(186, 'JA: 006 SIN SECCION DE BARRANQUILLA', '', '', 'CARRERA 44 No 38 - 26 PIS. 1', '3410029', '', '08:00 a 12 PM y 2 PM a 6 PM', 14),
+(187, 'JA: 007 SIN SECCION DE BARRANQUILLA', '', '', 'CARRERA 44 No 38 - 26 PIS. 1', '3410031', '', '08:00 a 12 PM y 2 PM a 6 PM', 14),
+(188, 'JA: 008 SIN SECCION DE BARRANQUILLA', '', '', 'CARRERA 44 No 38 - 26 PIS. 1', '3410035', '', '08:00 a 12 PM y 2 PM a 6 PM', 14),
+(189, 'JA: 009 SIN SECCION DE BARRANQUILLA', '', '', 'CARRERA 44 No 38 - 26 PIS. 1', '3410047', '', '08:00 a 12 PM y 2 PM a 6 PM', 14),
+(190, 'JA: 010 SIN SECCION DE BARRANQUILLA', '', '', 'CARRERA 44 No 38 - 26 PIS. 1', '3410035', '', '08:00 a 12 PM y 2 PM a 6 PM', 14),
+(191, 'JA: 011 SIN SECCION DE BARRANQUILLA', '', '', 'CARRERA 44 No 38 - 26 PIS. 1', '3410046', '', '08:00 a 12 PM y 2 PM a 6 PM', 14),
+(192, 'JA: 012 SIN SECCION DE BARRANQUILLA', '', '', 'CARRERA 44 No 38 - 26 PIS. 1', '3410038', '', '08:00 a 12 PM y 2 PM a 6 PM', 14),
+(193, 'JM: 001 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3402252', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(194, 'JM: 002 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3402254', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(195, 'JM: 003 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3403680', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(196, 'JM: 004 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3402256', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(197, 'JM: 005 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3402261', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(198, 'JM: 006 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3400807', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(199, 'JM: 007 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3402269', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(200, 'JM: 008 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3400806', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(201, 'JM: 009 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3402276', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(202, 'JM: 010 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3404126', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(203, 'JM: 011 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3404707', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(204, 'JM: 012 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3403434', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(205, 'JM: 013 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3407115', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(206, 'JM: 014 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3406352', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(207, 'JM: 015 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3405675', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(208, 'JM: 016 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3418603', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(209, 'JM: 017 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3417876', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(210, 'JM: 018 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3512490', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(211, 'JM: 019 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3402295', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(212, 'JM: 020 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3405402', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(213, 'JM: 021 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3405814', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(214, 'JM: 022 CIVIL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3404286', '', '08:00 a 12 PM y 2 PM a 6 PM', 2),
+(215, 'JM: 001 PENAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3405401', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(216, 'JM: 002 PENAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3402152', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(217, 'JM: 003 PENAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3402567', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(218, 'JM: 004 PENAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3403856', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(219, 'JM: 006 PENAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3410960', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(220, 'JM: 007 PENAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3407099', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(221, 'JM: 008 PENAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3416751', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(222, 'JM: 009 PENAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3513293', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(223, 'JM: 010 PENAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3400702', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(224, 'JM: 011 PENAL DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '3402654', '', '08:00 a 12 PM y 2 PM a 6 PM', 4),
+(225, 'JM: 001 PENAL PARA ADOLESCENTES CON FUNCION DE CONTROL DE GARANTIA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 18),
+(226, 'JM: 002 PENAL PARA ADOLESCENTES CON FUNCION DE CONTROL DE GARANTIA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 18),
+(227, 'JM: 003 PENAL PARA ADOLESCENTES CON FUNCION DE CONTROL DE GARANTIA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 18),
+(228, 'JM: 004 PENAL PARA ADOLESCENTES CON FUNCION DE CONTROL DE GARANTIA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 18),
+(229, 'JM: 012 PENAL CON FUNCION DE CONTROL DE GARANTIAS DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 5),
+(230, 'JM: 013 PENAL CON FUNCION DE CONTROL DE GARANTIAS DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 5),
+(231, 'JM: 014 PENAL CON FUNCION DE CONTROL DE GARANTIAS DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 5),
+(232, 'JM: 015 PENAL CON FUNCION DE CONTROL DE GARANTIAS DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 5),
+(233, 'JM: 016 PENAL CON FUNCION DE CONTROL DE GARANTIAS DE BARRANQUILLA', '', '', 'CLL 40 No 44 - 80 PALACIO DE JUSTICIA', '', '', '08:00 a 12 PM y 2 PM a 6 PM', 5),
+(234, 'CSJ: 001 SALA ADMINISTRATIVA DE CUNDINAMARCA (DEPT', '', '', 'CRA 10 No 14-33 PIS. 18', '3422032', '', '08:00 - 13:00 y 14:00  a 17:00', 6),
+(235, 'CSJ: 002 SALA ADMINISTRATIVA DE CUNDINAMARCA (DEPT', '', '', 'CRA 10 No 14-33 PIS. 18', '2845507', '', '08:00 - 13:00 y 14:00  a 17:00', 6),
+(236, 'CSJ: 000 SALA DISCIPLINARIA DE CUNDINAMARCA (DEPTO', '', '', 'CRA 10 No 14-33 PIS. 18', '', '', '08:00 - 13:00 y 14:00  a 17:00', 7),
+(237, 'CSJ: 001 SALA DISCIPLINARIA DE CUNDINAMARCA (DEPTO', '', '', 'CRA 10 No 14-33 PIS. 18', '2825460', '', '08:00 - 13:00 y 14:00  a 17:00', 7),
+(238, 'CSJ: 002 SALA DISCIPLINARIA DE CUNDINAMARCA (DEPTO', '', '', 'CRA 10 No 14-33 PIS. 18', '3345104', '', '08:00 - 13:00 y 14:00  a 17:00', 7),
+(239, 'TS: 001 PENAL DE CUNDINAMARCA (DEPTO)', '', '', '(AV. ESPERANZA) 53 - 28 TORRE A OFI 409', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(240, 'TS: 002 PENAL DE CUNDINAMARCA (DEPTO)', '', '', '(AV. ESPERANZA) 53 - 28 TORRE A OFI 413', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(241, 'TS: 003 PENAL DE CUNDINAMARCA (DEPTO)', '', '', 'AV. ESPERANZA)53 -28 TORRE A OFI 415', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(242, 'TS: 004 PENAL DE CUNDINAMARCA (DEPTO)', '', '', '(AV. ESPERANZA) 53 -28 TORRE A OFI 410', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(243, 'TS: 005 PENAL DE CUNDINAMARCA (DEPTO)', '', '', '(AV. ESPERANZA) 5 3 - 28 TORRE A OFI 414', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 4),
+(244, 'TS: 000 LABORAL DE CUNDINAMARCA (DEPTO)', '', '', '(AV. ESPERANZA) 53 - 28 TORRE A OFI 322', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 3),
+(245, 'TS: 001 LABORAL DE CUNDINAMARCA (DEPTO)', '', '', '(AV. ESPERANZA) 53 - 28 TORRE A OFI 316', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 3),
+(246, 'TS: 002 LABORAL DE CUNDINAMARCA (DEPTO)', '', '', 'AVENIDA CLL 24 N 53-28 TORRE A PIS. 3', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 3),
+(247, 'TS: 003 LABORAL DE CUNDINAMARCA (DEPTO)', '', '', 'AV. ESPERANZA 53 - 28 TORRE A OFI 312', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 3),
+(248, 'TS: 001 SALA CIVIL - FAMILIA DE CUNDINAMARCA (DEPTO)', '', '', 'CLL 24A No 53-75 (AV. ESPERANZA)', '', '', '08:00 a 12:00 y 13:00 a 17:00', 11),
+(249, 'TS: 002 SALA CIVIL - FAMILIA DE CUNDINAMARCA (DEPTO)', '', '', 'CLL 24A No 53-75 (AV. ESPERANZA)', '', '', '08:00 a 12:00 y 13:00 a 17:00', 11),
+(250, 'TS: 003 SALA CIVIL - FAMILIA DE CUNDINAMARCA (DEPTO)', '', '', '(AV. ESPERANZA) TORRE A OFI. 318', '', '', '08:00 a 12:00 y 13:00 a 17:00', 11),
+(251, 'TS: 004 SALA CIVIL - FAMILIA DE CUNDINAMARCA (DEPTO)', '', '', '(AV. ESPERANZA) 53 - 28 TORRE A OFI 315', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 11),
+(252, 'TS: 005 SALA CIVIL - FAMILIA DE CUNDINAMARCA (DEPTO)', '', '', 'AVENIDA CLL 24 N 53-28 TORRE A PIS. 3', '', '', '08:00 a 12:00 y 13:00 a 17:00', 11),
+(253, 'TA: 001 SECCION PRIMERA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 210 TORRE D', '', '', '08:00 a 12:00 y 13:00 a 17:00', 19),
+(254, 'TA: 002 SECCION PRIMERA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 412 TORRE A', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 19),
+(255, 'TA: 003 SECCION PRIMERA DE CUNDINAMARCA (DEPTO)', '', '', 'CLL 24A No 53-75 (AV. ESPERANZA) TORRE A', '', '', '08:00 a 12:00 y 13:00 a 17:00', 19),
+(256, 'TA: 004 SECCION PRIMERA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 212 TORRE A', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 19),
+(257, 'TA: 005 SECCION PRIMERA DE CUNDINAMARCA (DEPTO)', '', '', 'AV LA ESPERANZA 53-28 OFI. 211 TORRE A', '', '', '08:00 a 12:00 y 13:00 a 17:00', 19),
+(258, 'TA: 006 SECCION PRIMERA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53 - 28 OFI. 411 TORRE A PIS. 4', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 19),
+(259, 'TA: 701 SECCION PRIMERA DE CUNDINAMARCA (DEPTO)', '', '', 'CLL 12 No 9 A 23 TORRE NORTE PIS. 2', '2820312', '', '08:00 - 13:00 y 14:00  a 17:00', 19),
+(260, 'TA: 703 SECCION PRIMERA DE CUNDINAMARCA (DEPTO)', '', '', 'CLL 12 No 9 A 23 TORRE NORTE PIS. 2', '2820268', '', '08:00 - 13:00 y 14:00  a 17:00', 19),
+(261, 'TA: 001 SECCION SEGUNDA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 108 TORRE C', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 20),
+(262, 'TA: 002 SECCION SEGUNDA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 106 TORRE C', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 20),
+(263, 'TA: 003 SECCION SEGUNDA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 206 TORRE C', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 20),
+(264, 'TA: 004 SECCION SEGUNDA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. B 05 TORRE C', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 20),
+(265, 'TA: 005 SECCION SEGUNDA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 209 TORRE C', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 20),
+(266, 'TA: 006 SECCION SEGUNDA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 210 TORRE C', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 20),
+(267, 'TA: 007 SECCION SEGUNDA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 105 TORRE C PIS. 1', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 20),
+(268, 'TA: 008 SECCION SEGUNDA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. B 07 TORRE C', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 20),
+(269, 'TA: 009 SECCION SEGUNDA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 208 TORRE C', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 20),
+(270, 'TA: 010 SECCION SEGUNDA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 107 TORRE C', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 20),
+(271, 'TA: 011 SECCION SEGUNDA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. B 08 TORREC', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 20),
+(272, 'TA: 012 SECCION SEGUNDA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 109 TORRE C', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 20),
+(273, 'TA: 701 SECCION SEGUNDA DE CUNDINAMARCA (DEPTO)', '', '', 'CLL 12 No 9 A 23 TORRE NORTE PIS. 2', '2820216', '', '08:00 - 13:00 y 14:00  a 17:00', 20),
+(274, 'TA: 703 SECCION SEGUNDA DE CUNDINAMARCA (DEPTO)', '', '', 'CLL 12 No 9 A 23 TORRE NORTE PIS. 2', '2820367', '', '08:00 - 13:00 y 14:00  a 17:00', 20),
+(275, 'TA: 001 SECCION TERCERA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 207 TORRE A', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 21),
+(276, 'TA: 002 SECCION TERCERA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 108 TORRE A', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 21),
+(277, 'TA: 003 SECCION TERCERA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 113 TORRE A', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 21),
+(278, 'TA: 004 SECCION TERCERA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 111 TORRE A', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 21),
+(279, 'TA: 005 SECCION TERCERA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 110 TORRE A', '', '', '08:00 a 12:00 y 13:00 a 17:00', 21),
+(280, 'TA: 006 SECCION TERCERA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 112 TORRE A', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 21),
+(281, 'TA: 702 SECCION TERCERA DE CUNDINAMARCA (DEPTO)', '', '', 'CLL 12 No 9 A 23 TORRE NORTE PIS. 2', '2820031', '', '08:00 - 13:00 y 14:00  a 17:00', 21),
+(282, 'TA: 001 SECCION CUARTA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. 309 TORRE A', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 22),
+(283, 'TA: 002 SECCION CUARTA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. B 07 TORRE A', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 22),
+(284, 'TA: 003 SECCION CUARTA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. B 09 TORRE A', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 22),
+(285, 'TA: 004 SECCION CUARTA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. B 11 TORRE A', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 22),
+(286, 'TA: 005 SECCION CUARTA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. B 12 TORRE A', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 22),
+(287, 'TA: 006 SECCION CUARTA DE CUNDINAMARCA (DEPTO)', '', '', 'AV. LA ESPERANZA 53-28 OFI. B 10 TORRE A', '', '', '08:00 a 1 PM y 2 PM a 5 PM', 22),
+(288, 'JC: 001 PENAL ESPECIALIZADO DE CUNDINAMARCA (DEPTO)', '', '', 'CLL 31NO.6-24 PIS. 6', '3235543', '', '08:00 a 1 PM y 2 PM a 5 PM', 12),
+(289, 'JC: 002 PENAL ESPECIALIZADO DE CUNDINAMARCA (DEPTO)', '', '', 'CLL 31NO.6-24 PIS. 6', '3381143', '', '08:00 a 1 PM y 2 PM a 5 PM', 12),
+(290, 'JUZGADO 501 PENAL ESPECIALIZADO DE CIRCUITO DE CUNDINAMARCA (DEPTO)', '', '', 'CLL 31NO.6-24 PIS. 6', '(fax) 2888957', '', '08:00 a 12:00 y 13:00 a 17:00', 12),
+(291, 'JC: 751 PENAL ESPECIALIZADO DE CUNDINAMARCA (DEPTO)', '', '', 'CLL 31 NO.6-24 PIS. 6', '3235543', '', '08:00 - 13:00 y 14:00  a 17:00', 12),
+(292, 'CE: PRUEBA DE JULIAN', 'DOCE', 'DOCE', 'CRA 11 NO 39-04 SUR', '3610095', 'JULIAN ORDUÑA TOVAR', '08:00 A 12:00 Y 13:00 A 17:00', 15);
 
 -- --------------------------------------------------------
 
@@ -507,6 +882,7 @@ INSERT INTO `tbl_municipios` (`muni_Codigo`, `muni_Departamento`, `muni_Municipi
 ('08832', 8, 'TUBARA'),
 ('08849', 8, 'USIACURI'),
 ('11001', 11, 'BOGOTA'),
+('11123', 11, 'NUEVO MUNICIPIO'),
 ('13001', 13, 'CARTAGENA'),
 ('13006', 13, 'ACHI'),
 ('13030', 13, 'ALTOS DEL ROSARIO'),
@@ -1482,19 +1858,170 @@ INSERT INTO `tbl_municipios` (`muni_Codigo`, `muni_Departamento`, `muni_Municipi
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_tareas`
+-- Estructura de tabla para la tabla `tbl_tipoaccion`
 --
 
-CREATE TABLE `tbl_tareas` (
-  `Id` int(11) NOT NULL,
-  `Taera` varchar(25) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `tbl_tipoaccion` (
+  `tipAcc_Id` int(11) NOT NULL,
+  `tipAcc_TipoAccion` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `TipAcc_Estado` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `tbl_tareas`
+-- Volcado de datos para la tabla `tbl_tipoaccion`
 --
 
-INSERT INTO `tbl_tareas` (`Id`, `Taera`) VALUES
+INSERT INTO `tbl_tipoaccion` (`tipAcc_Id`, `tipAcc_TipoAccion`, `TipAcc_Estado`) VALUES
+(1, ' ACCION DE CUMPLIMIENTO', 1),
+(2, ' ACCION DE GRUPO', 1),
+(3, ' ACCION DE TUTELA', 1),
+(4, ' ACCION POPULAR', 1),
+(5, ' ACUERDO DE PAGO', 1),
+(6, ' ACUERDO OBLIGACIONES CON HIJOS MENORES DE EDAD', 1),
+(7, ' ADOPCION', 1),
+(8, ' ALLANAMIENTO A LA DEMANDA', 1),
+(9, ' AMPARO AL DOMICILIO DEL PROPIETARIO', 1),
+(10, ' AMPLIACION DE HIPOTECA', 1),
+(11, ' APERTURA Y PUBLICACION DE TESTAMENTO CERRADO', 1),
+(12, ' AUMENTO O DISMINUCION DE CUOTA ALIMENTARIA', 1),
+(13, ' AUTORIZACION REFORMA ESTATUTARIA', 1),
+(14, ' AVISO PAGO PRESTACIONES SOCIALES FALLECIMIENTO DEL TRABAJADOR', 1),
+(15, ' CANCELACION DE PATRIMONIO DE FAMILIA', 1),
+(16, ' CANCELACION Y REPOSICION DE TITULO VALOR', 1),
+(17, ' CAPITULACIONES MATRIMONIALES', 1),
+(18, ' CERTIFICACION SOBRE LEGALIDAD PROCESO DE CESION', 1),
+(19, ' CESION O VENTA DE DERECHOS LITIGIOSOS', 1),
+(20, ' CESION O VENTA DERECHOS HEREDITARIOS', 1),
+(21, ' COMPRAVENTA CON PACTO DE RETROVENTA', 1),
+(22, ' COMPRAVENTA DE INMUEBLE', 1),
+(23, ' COMPRAVENTA DE VEHICULO AUTOMOTOR', 1),
+(24, ' COMPRAVENTA DE VEHICULO AUTOMOTOR CON RESERVA DE DOMINIO', 1),
+(25, ' CONSTITUCION DE EMPRESA UNIPERSONAL', 1),
+(26, ' CONSTITUCION DE HIPOTECA PARA GARANTIZAR SALDO', 1),
+(27, ' CONSTITUCION DE PARTE CIVIL PROCESO PENAL', 1),
+(28, ' CONSTITUCION DE SOCIEDAD COLECTIVA', 1),
+(29, ' CONSTITUCION DE UNA SAS', 1),
+(30, ' CONTESTACION ACCION DE TUTELA', 1),
+(31, ' CONTRATO DE ARRENDAMIENTO DE BIEN MUEBLE', 1),
+(32, ' CONTRATO DE ARRENDAMIENTO DE LOCAL COMERCIAL', 1),
+(33, ' CONTRATO DE COMODATO', 1),
+(34, ' CONTRATO DE SUMINISTRO', 1),
+(35, ' CONTRATO PRESTACION DE SERVICIOS PROFESIONALES INDEPENDIENTES', 1),
+(36, ' CORRECION DE ERRORES REGISTRO CIVIL ', 1),
+(37, ' DECLARACION DE MUERTE POR DESAPARECIMIENTO', 1),
+(38, ' DECLARACION DE UNION MARITAL DE HECHO', 1),
+(39, ' DECLARACION EXTRAJUICIO', 1),
+(40, ' DENUNCIA PENAL GENERAL', 1),
+(41, ' DERECHO DE PETICION DE INFORMACION Y COPIAS', 1),
+(42, ' DERECHO DE PETICION DE INTER?S GENERAL', 1),
+(43, ' DERECHO DE PETICION EN INTER?S PARTICULAR', 1),
+(44, ' DESISTIMIENTO ACCION DE TUTELA', 1),
+(45, ' DESISTIMIENTO DE DERECHO DE PETICION', 1),
+(46, ' DESISTIMIENTO QUERELLA', 1),
+(47, ' DILIGENCIA DE INVENTARIO Y AVALUOS DE BIENES SUCESORALES', 1),
+(48, ' DISOLUCION DESOCIEDAD CONYUGAL SIN BIENES COMUNES', 1),
+(49, ' DIVISION MATERIAL', 1),
+(50, ' EJECUTIVO CON TITULO HIPOTECARIO', 1),
+(51, ' EJECUTIVO DE ALIMENTOS ', 1),
+(52, ' EJECUTIVO LABORAL', 1),
+(53, ' EJECUTIVO SINGULAR', 1),
+(54, ' ELECTORAL', 1),
+(55, ' ESTIPULACIONES PROBATORIAS', 1),
+(56, ' EXCEPCIONES PREVIAS PROCESO EJECUTIVO REPOSICION CONTRA MANDAMIENTO DE PAGO', 1),
+(57, ' EXEPCIONES DE M?RITO PROCESO EJECUTIVO DE CHEQUE', 1),
+(58, ' FIANZA ABIERTA', 1),
+(59, ' FIJACION DE CUOTA ALIMENTARIA', 1),
+(60, ' FIJACION DE NUEVO VALOR ARRENDAMIENTO', 1),
+(61, ' FILIACION EXTRAMATRIMONIAL', 1),
+(62, ' FILIACION NATURAL', 1),
+(63, ' HABEAS CORPUS', 1),
+(64, ' IMPOSICION DE SERVIDUMBRE', 1),
+(65, ' IMPUGNACION DE DESICIONES SOCIALES', 1),
+(66, ' IMPUGNACION DE PATERNIDAD', 1),
+(67, ' INCIDENTE DE NULIDAD DEL REMATE', 1),
+(68, ' INCIDENTE EN PROCESO CIVIL', 1),
+(69, ' INTERDICCION JUDICIAL X DISCAPACIDAD MENTAL ABSOLUTA', 1),
+(70, ' INTERROGATORIO DE PARTE COMO PRUEBA ANTICIPADA', 1),
+(71, ' LANZAMIENTO POR OCUPACION DE HECHO DE PREDIOS URBANOS', 1),
+(72, ' LEGITIMACION DE HIJO EXTRAMATRIMONIAL', 1),
+(73, ' LEVANTAMIENTO DE FUERO SINDICAL', 1),
+(74, ' LEVANTAMIENTO DE MEDIDAS CAUTELARES POR UN TERCERO', 1),
+(75, ' LIQUIDACION DE SOCIEDAD PATRIMONIAL UNION MARITAL DE HECHO', 1),
+(76, ' NULIDAD', 1),
+(77, ' NULIDAD DE MATRIMONIO CIVIL', 1),
+(78, ' NULIDAD Y RESTABLECIMIENTO DEL DERECHO', 1),
+(79, ' ORDINARIA CIVIL', 1),
+(80, ' ORDINARIO LABORAL', 1),
+(81, ' PAGO POR CONSIGNACION', 1),
+(82, ' PRIVACION DE ADMINISTRACION DE LOS BIENES DEL HIJO', 1),
+(83, ' PRIVACION DE LA PATRIA POTESTAD', 1),
+(84, ' PROCESO DE PERTENENCIA', 1),
+(85, ' PROMESA DE COMPRAVENTA DE INMUEBLE', 1),
+(86, ' QUEJA CONTRA ENTIDAD ASEGURADORA', 1),
+(87, ' QUEJA CONTRA ENTIDAD FINANCIERA', 1),
+(88, ' QUEJA POR DENEGACION DE AUTO APELABLE', 1),
+(89, ' QUERELLA DE RECUPERACION DEL ESPACIO PUBLICO', 1),
+(90, ' QUERELLA POR PERTURBACION A LA POSESION O MERA TENENCIA', 1),
+(91, ' RECONOCIMIENTO DE HIJO EXTRAMATRIMONIAL', 1),
+(92, ' RECURSO DE APELACION ', 1),
+(93, ' RECURSO DE RECONSIDERACION', 1),
+(94, ' RECURSO DE REPOSICION', 1),
+(95, ' RECURSO DE REPOSICION SUBSIDIO APELACION', 1),
+(96, ' REFORMA ESTATUTOS', 1),
+(97, ' REINTEGRO', 1),
+(98, ' RELACION DE INVENTARIOS Y AVALUO DE BIENES', 1),
+(99, ' RENDICION PROVOCADA DE CUENTAS', 1),
+(100, ' REQUERIMIENTO ORDINARIO', 1),
+(101, ' RESPONSABILIDAD EN CONTRATOS DE TRANSPORTE', 1),
+(102, ' RESPUESTA A REQUERIMIENTO ESPECIAL', 1),
+(103, ' RESPUESTA A REQUERIMIENTO ORDINARIO', 1),
+(104, ' RESTITUCION DE INMUEBLE ARRENDADO', 1),
+(105, ' RESTITUCION DE INMUEBLE EN VENTA', 2),
+(106, ' REVOCATORIA DIRECTA', 1),
+(107, ' REVOCATORIA TRIBUTARIA', 1),
+(108, ' SEPARACION DE BIENES', 1),
+(109, ' SEPARACION DE CUERPOS', 1),
+(110, ' TERMINACION DEL PROCESO EJECUTIVO POR PAGO', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_tipodocumento`
+--
+
+CREATE TABLE `tbl_tipodocumento` (
+  `tipdoc_Id` int(11) NOT NULL,
+  `tipdoc_Descripcion` varchar(25) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_tipodocumento`
+--
+
+INSERT INTO `tbl_tipodocumento` (`tipdoc_Id`, `tipdoc_Descripcion`) VALUES
+(1, 'CEDULA DE CIUDADANIA'),
+(2, 'NIT'),
+(3, 'TARJETA DE IDENTIDAD'),
+(4, 'REGISTRO CIVIL'),
+(5, 'CEDULA DE EXTRANJERIA'),
+(6, 'OTRO TIPO');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_tipogestion`
+--
+
+CREATE TABLE `tbl_tipogestion` (
+  `tipges_Id` int(11) NOT NULL,
+  `tipges_TipoGestion` varchar(30) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_tipogestion`
+--
+
+INSERT INTO `tbl_tipogestion` (`tipges_Id`, `tipges_TipoGestion`) VALUES
 (1, 'CONCEPTO'),
 (2, 'PODER'),
 (3, 'DEMANDA'),
@@ -1513,155 +2040,42 @@ INSERT INTO `tbl_tareas` (`Id`, `Taera`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_tipoaccion`
+-- Estructura de tabla para la tabla `tbl_tipojuzgado`
 --
 
-CREATE TABLE `tbl_tipoaccion` (
-  `TipAcc_Id` int(11) NOT NULL,
-  `TipAcc_TipoAccion` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `TipAcc_Estado` int(11) NOT NULL
+CREATE TABLE `tbl_tipojuzgado` (
+  `tipjuz_Id` int(11) NOT NULL,
+  `tipjuz_TipoJuzgado` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `tbl_tipoaccion`
+-- Volcado de datos para la tabla `tbl_tipojuzgado`
 --
 
-INSERT INTO `tbl_tipoaccion` (`TipAcc_Id`, `TipAcc_TipoAccion`, `TipAcc_Estado`) VALUES
-(1, 'ACCION DE CUMPLIMIENTO', 1),
-(2, 'ACCION DE GRUPO', 1),
-(3, 'ACCION DE TUTELA', 1),
-(4, 'ACCION POPULAR', 1),
-(5, 'ACUERDO DE PAGO', 1),
-(6, 'ACUERDO OBLIGACIONES CON HIJOS MENORES DE EDAD', 1),
-(7, 'ADOPCION', 1),
-(8, 'ALLANAMIENTO A LA DEMANDA', 1),
-(9, 'AMPARO AL DOMICILIO DEL PROPIETARIO', 1),
-(10, 'AMPLIACION DE HIPOTECA', 1),
-(11, 'APERTURA Y PUBLICACION DE TESTAMENTO CERRADO', 1),
-(12, 'AUMENTO O DISMINUCION DE CUOTA ALIMENTARIA', 1),
-(13, 'AUTORIZACION REFORMA ESTATUTARIA', 1),
-(14, 'AVISO PAGO PRESTACIONES SOCIALES FALLECIMIENTO DEL TRABAJADOR', 1),
-(15, 'CANCELACION DE PATRIMONIO DE FAMILIA', 1),
-(16, 'CANCELACION Y REPOSICION DE TITULO VALOR', 1),
-(17, 'CAPITULACIONES MATRIMONIALES', 1),
-(18, 'CERTIFICACION SOBRE LEGALIDAD PROCESO DE CESION', 1),
-(19, 'CESION O VENTA DE DERECHOS LITIGIOSOS', 1),
-(20, 'CESION O VENTA DERECHOS HEREDITARIOS', 1),
-(21, 'COMPRAVENTA CON PACTO DE RETROVENTA', 1),
-(22, 'COMPRAVENTA DE INMUEBLE', 1),
-(23, 'COMPRAVENTA DE VEHICULO AUTOMOTOR', 1),
-(24, 'COMPRAVENTA DE VEHICULO AUTOMOTOR CON RESERVA DE DOMINIO', 1),
-(25, 'CONSTITUCION DE EMPRESA UNIPERSONAL', 1),
-(26, 'CONSTITUCION DE HIPOTECA PARA GARANTIZAR SALDO', 1),
-(27, 'CONSTITUCION DE PARTE CIVIL PROCESO PENAL', 1),
-(28, 'CONSTITUCION DE SOCIEDAD COLECTIVA', 1),
-(29, 'CONSTITUCION DE UNA SAS', 1),
-(30, 'CONTESTACION ACCION DE TUTELA', 1),
-(31, 'CONTRATO DE ARRENDAMIENTO DE BIEN MUEBLE', 1),
-(32, 'CONTRATO DE ARRENDAMIENTO DE LOCAL COMERCIAL', 1),
-(33, 'CONTRATO DE COMODATO', 1),
-(34, 'CONTRATO DE SUMINISTRO', 1),
-(35, 'CONTRATO PRESTACION DE SERVICIOS PROFESIONALES INDEPENDIENTES', 1),
-(36, 'CORRECION DE ERRORES REGISTRO CIVIL ', 1),
-(37, 'DECLARACION DE MUERTE POR DESAPARECIMIENTO', 1),
-(38, 'DECLARACION DE UNION MARITAL DE HECHO', 1),
-(39, 'DECLARACION EXTRAJUICIO', 1),
-(40, 'DENUNCIA PENAL GENERAL', 1),
-(41, 'DERECHO DE PETICION DE INFORMACION Y COPIAS', 1),
-(42, 'DERECHO DE PETICION DE INTER?S GENERAL', 1),
-(43, 'DERECHO DE PETICION EN INTER?S PARTICULAR', 1),
-(44, 'DESISTIMIENTO ACCION DE TUTELA', 1),
-(45, 'DESISTIMIENTO DE DERECHO DE PETICION', 1),
-(46, 'DESISTIMIENTO QUERELLA', 1),
-(47, 'DILIGENCIA DE INVENTARIO Y AVALUOS DE BIENES SUCESORALES', 1),
-(48, 'DISOLUCION DESOCIEDAD CONYUGAL SIN BIENES COMUNES', 1),
-(49, 'DIVISION MATERIAL', 1),
-(50, 'EJECUTIVO CON TITULO HIPOTECARIO', 1),
-(51, 'EJECUTIVO DE ALIMENTOS ', 1),
-(52, 'EJECUTIVO LABORAL', 1),
-(53, 'EJECUTIVO SINGULAR', 1),
-(54, 'ELECTORAL', 1),
-(55, 'ESTIPULACIONES PROBATORIAS', 1),
-(56, 'EXCEPCIONES PREVIAS PROCESO EJECUTIVO REPOSICION CONTRA MANDAMIENTO DE PAGO', 1),
-(57, 'EXEPCIONES DE M?RITO PROCESO EJECUTIVO DE CHEQUE', 1),
-(58, 'FIANZA ABIERTA', 1),
-(59, 'FIJACION DE CUOTA ALIMENTARIA', 1),
-(60, 'FIJACION DE NUEVO VALOR ARRENDAMIENTO', 1),
-(61, 'FILIACION EXTRAMATRIMONIAL', 1),
-(62, 'FILIACION NATURAL', 1),
-(63, 'HABEAS CORPUS', 1),
-(64, 'IMPOSICION DE SERVIDUMBRE', 1),
-(65, 'IMPUGNACION DE DESICIONES SOCIALES', 1),
-(66, 'IMPUGNACION DE PATERNIDAD', 1),
-(67, 'INCIDENTE DE NULIDAD DEL REMATE', 1),
-(68, 'INCIDENTE EN PROCESO CIVIL', 1),
-(69, 'INTERDICCION JUDICIAL X DISCAPACIDAD MENTAL ABSOLUTA', 1),
-(70, 'INTERROGATORIO DE PARTE COMO PRUEBA ANTICIPADA', 1),
-(71, 'LANZAMIENTO POR OCUPACION DE HECHO DE PREDIOS URBANOS', 1),
-(72, 'LEGITIMACION DE HIJO EXTRAMATRIMONIAL', 1),
-(73, 'LEVANTAMIENTO DE FUERO SINDICAL', 1),
-(74, 'LEVANTAMIENTO DE MEDIDAS CAUTELARES POR UN TERCERO', 1),
-(75, 'LIQUIDACION DE SOCIEDAD PATRIMONIAL UNION MARITAL DE HECHO', 1),
-(76, 'NULIDAD', 1),
-(77, 'NULIDAD DE MATRIMONIO CIVIL', 1),
-(78, 'NULIDAD Y RESTABLECIMIENTO DEL DERECHO', 1),
-(79, 'ORDINARIA CIVIL', 1),
-(80, 'ORDINARIO LABORAL', 1),
-(81, 'PAGO POR CONSIGNACION', 1),
-(82, 'PRIVACION DE ADMINISTRACION DE LOS BIENES DEL HIJO', 1),
-(83, 'PRIVACION DE LA PATRIA POTESTAD', 1),
-(84, 'PROCESO DE PERTENENCIA', 1),
-(85, 'PROMESA DE COMPRAVENTA DE INMUEBLE', 1),
-(86, 'QUEJA CONTRA ENTIDAD ASEGURADORA', 1),
-(87, 'QUEJA CONTRA ENTIDAD FINANCIERA', 1),
-(88, 'QUEJA POR DENEGACION DE AUTO APELABLE', 1),
-(89, 'QUERELLA DE RECUPERACION DEL ESPACIO PUBLICO', 1),
-(90, 'QUERELLA POR PERTURBACION A LA POSESION O MERA TENENCIA', 1),
-(91, 'RECONOCIMIENTO DE HIJO EXTRAMATRIMONIAL', 1),
-(92, 'RECURSO DE APELACION ', 1),
-(93, 'RECURSO DE RECONSIDERACION', 1),
-(94, 'RECURSO DE REPOSICION', 1),
-(95, 'RECURSO DE REPOSICION SUBSIDIO APELACION', 1),
-(96, 'REFORMA ESTATUTOS', 1),
-(97, 'REINTEGRO', 1),
-(98, 'RELACION DE INVENTARIOS Y AVALUO DE BIENES', 1),
-(99, 'RENDICION PROVOCADA DE CUENTAS', 1),
-(100, 'REQUERIMIENTO ORDINARIO', 1),
-(101, 'RESPONSABILIDAD EN CONTRATOS DE TRANSPORTE', 1),
-(102, 'RESPUESTA A REQUERIMIENTO ESPECIAL', 1),
-(103, 'RESPUESTA A REQUERIMIENTO ORDINARIO', 1),
-(104, 'RESTITUCION DE INMUEBLE ARRENDADO', 1),
-(105, 'RESTITUCION DE INMUEBLE ARRENDADO', 1),
-(106, 'REVOCATORIA DIRECTA', 1),
-(107, 'REVOCATORIA TRIBUTARIA', 1),
-(108, 'SEPARACION DE BIENES', 1),
-(109, 'SEPARACION DE CUERPOS', 1),
-(110, 'TERMINACION DEL PROCESO EJECUTIVO POR PAGO', 1),
-(111, 'Prueba Julian', 1),
-(112, 'Prueba Julian 2 Editado', 2);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbl_tipodocumento`
---
-
-CREATE TABLE `tbl_tipodocumento` (
-  `Id` int(11) NOT NULL,
-  `Descripcion` varchar(35) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tbl_tipodocumento`
---
-
-INSERT INTO `tbl_tipodocumento` (`Id`, `Descripcion`) VALUES
-(1, 'CEDULA DE CIUDADANIA'),
-(2, 'NIT'),
-(3, 'TARJETA DE IDENTIDAD'),
-(4, 'REGISTRO CIVIL'),
-(5, 'CEDULA DE EXTRANJERIA'),
-(6, 'TARJETA DE IDENTIDAD EXTRANJERA');
+INSERT INTO `tbl_tipojuzgado` (`tipjuz_Id`, `tipjuz_TipoJuzgado`) VALUES
+(1, 'CENTRO DE SERVICIOS ADMINISTRATIVOS'),
+(2, 'CIVIL'),
+(3, 'LABORAL'),
+(4, 'PENAL'),
+(5, 'PENAL CON FUNCION DE CONTROL DE GARANTIAS'),
+(6, 'SALA ADMINISTRATIVA'),
+(7, 'SALA DISCIPLINARIA'),
+(8, 'SALA PLENA DE LO CONTENCIOSO ADMINISTRATIVO'),
+(9, 'SALA UNICA'),
+(10, 'OFICINA JUDICIAL'),
+(11, 'SALA CIVIL - FAMILIA'),
+(12, 'PENAL ESPECIALIZADO'),
+(13, 'EJECUCION DE PENAS Y MEDIDAS DE SEGURIDAD'),
+(14, 'SIN SECCION'),
+(15, 'FAMILIA'),
+(16, 'PENAL PARA ADOLESCENTES CON FUNCION DE CONOCIMIENTO'),
+(17, 'MENORES'),
+(18, 'PENAL PARA ADOLESCENTES CON FUNCION DE CONTROL DE GARANTIAS'),
+(19, 'SECCION PRIMERA'),
+(20, 'SECCION SEGUNDA'),
+(21, 'SECCION TERCERA'),
+(22, 'SECCION CUARTA'),
+(23, 'NUEVO TIPO  JUZGADO');
 
 -- --------------------------------------------------------
 
@@ -1671,19 +2085,20 @@ INSERT INTO `tbl_tipodocumento` (`Id`, `Descripcion`) VALUES
 
 CREATE TABLE `tbl_tipousuario` (
   `tipu_Id` int(11) NOT NULL,
-  `tipu_TipoUsuario` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `tipu_TipoUsuario` varchar(25) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tbl_tipousuario`
 --
 
 INSERT INTO `tbl_tipousuario` (`tipu_Id`, `tipu_TipoUsuario`) VALUES
-(1, 'OFICINA'),
+(1, 'ADMINISTRADOR'),
 (2, 'CONSULTOR'),
 (3, 'CLIENTE'),
 (4, 'ABOGADO'),
-(5, 'SECRETARIA');
+(5, 'SECRETARIA'),
+(6, 'OTRO TIPO DE USUARIO');
 
 -- --------------------------------------------------------
 
@@ -1692,59 +2107,62 @@ INSERT INTO `tbl_tipousuario` (`tipu_Id`, `tipu_TipoUsuario`) VALUES
 --
 
 CREATE TABLE `tbl_usuarios` (
-  `usu_TipoDoc` int(11) NOT NULL,
-  `usu_Documento` bigint(11) NOT NULL COMMENT 'Documento del Usuario',
-  `usu_Nombres` varchar(60) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `usu_Apellidos` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `usu_Email` varchar(90) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `usu_Documento` int(11) NOT NULL,
+  `usu_Nombres` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `usu_Apellidos` varchar(60) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `usu_Email` varchar(90) COLLATE utf8_spanish_ci NOT NULL,
   `usu_FechaNacimiento` date DEFAULT NULL,
-  `usu_tipusu` int(11) NOT NULL,
   `usu_Consultorio` int(11) NOT NULL,
-  `usu_Clave` varchar(60) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `usu_Celular` varchar(20) DEFAULT NULL,
-  `usu_Genero` varchar(1) DEFAULT NULL,
-  `usu_Direccion` varchar(150) DEFAULT NULL,
-  `usu_Departamento` int(11) NOT NULL,
-  `usu_Municipio` varchar(5) NOT NULL,
-  `usu_Telefono` varchar(15) DEFAULT NULL,
-  `usu_Estrato` int(1) DEFAULT NULL,
+  `usu_Clave` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `usu_Celular` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL COMMENT 'Uno\nDos\nTres\nCuatro\nCinco\nSeis',
+  `usu_Telefono` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `usu_Genero` varchar(1) COLLATE utf8_spanish_ci DEFAULT NULL COMMENT 'M\nF',
+  `usu_Direccion` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL COMMENT 'Casado\nSoltero\nSeparado\nViudo\nUnion Libre',
+  `usu_Logo` varchar(250) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `usu_TipoDoc` int(11) NOT NULL,
+  `usu_Estrato` int(11) DEFAULT NULL,
+  `usu_tipusu` int(11) NOT NULL,
   `usu_Estado` int(11) NOT NULL,
-  `usu_Logo` varchar(250) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `usu_Municipio` varchar(5) COLLATE utf8_spanish_ci NOT NULL,
+  `usu_Especialidad` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tbl_usuarios`
 --
 
-INSERT INTO `tbl_usuarios` (`usu_TipoDoc`, `usu_Documento`, `usu_Nombres`, `usu_Apellidos`, `usu_Email`, `usu_FechaNacimiento`, `usu_tipusu`, `usu_Consultorio`, `usu_Clave`, `usu_Celular`, `usu_Genero`, `usu_Direccion`, `usu_Departamento`, `usu_Municipio`, `usu_Telefono`, `usu_Estrato`, `usu_Estado`, `usu_Logo`) VALUES
-(1, 10062885, 'YINA LILIANA ', 'TOVAR HERNANDEZ', 'JJORDUNA-TOVAR@MISENA.EDU.CO', NULL, 4, 800123456, '6163d5c0c375dfb47e3584e885760edd', '3102345678', 'F', NULL, 11, '11001', '3610095', NULL, 1, '../archivos_subidos/800123456/Logo800123456.png'),
-(1, 20062885, 'ANA MARIA', 'HERNANDEZ RODRIGUEZ', 'JJORDUNA-TOVAR@MISENA.EDU.CO', NULL, 5, 800123456, '84359d49a118d4943a590f80dc96b05c', '3102345678', 'F', NULL, 11, '11001', '3610095', NULL, 1, '../archivos_subidos/800123456/Logo800123456.png'),
-(1, 41545701, 'MAIRELA', 'TOVAR HERNANDEZ', 'JORDUNAT@HOTMAIL.COM', NULL, 5, 800123456, '2f14b2b28611b84a2ece92daead11181', '3103047709', 'F', NULL, 11, '11001', '3610095', 2, 1, '../archivos_subidos/800123456/Logo800123456.png'),
-(1, 76062885, 'OSCAR JAVIER', 'ORDUÑA TOVAR', 'JJORDUNA-TOVAR@MISENA.EDU.CO', NULL, 4, 800123456, '07074c21296feebb2ad70769d6a8dfd6', '3102345678', 'M', NULL, 11, '11001', '3610095', NULL, 1, '../archivos_subidos/800123456/Logo800123456.png'),
-(1, 78062885, 'JHON ALEJANDRO', 'NIÑO TOVAR', 'JJORDUNA-TOVAR@MISENA.EDU.CO', NULL, 4, 800123456, 'a78c6cd5c43b04e5f881183f0b278325', '3102345678', 'M', NULL, 11, '11001', '3610095', NULL, 1, '../archivos_subidos/800123456/Logo800123456.png'),
-(1, 80062885, 'JAIRO JULIAN', 'ORDUÑA TOVAR', 'JJORDUNA-TOVAR@MISENA.EDU.CO', '1979-03-20', 4, 800123456, '266630830eeb742a11e26833410c7f02', '3115959599', 'M', 'CRA 11 No. 39-04 SUR', 11, '11001', '3610095', 2, 1, '../archivos_subidos/800123456/Logo800123456.png'),
-(1, 98765432, 'LUIS YAIR', 'GALLEGO CARRILLO', 'JJORDUNA-TOVAR@MISENA.EDU.CO', '1979-03-20', 3, 789456000, 'b8a49420e73337b70c904110499bc3ad', '3102345678', 'M', 'CRA 11 39-04 SUR', 11, '11001', '3610095', 2, 1, '0'),
-(2, 789456000, 'OFICINA JURIDICA ORDUÑA SAS', NULL, 'JORDUNAT@HOTMAIL.COM', NULL, 1, 789456000, '000f42c8cb4c8eeb1b3bef18cafd4931', '3115959599', NULL, 'CLL 12 NO. 12-95 INT 4 APTO 204', 11, '11001', '3729147', NULL, 1, '../archivos_subidos/789456000/Logo789456000.png'),
-(2, 800123456, 'CONSULTORIO POLITECNICO GRANCOLOMBIANO', NULL, 'JORDUNAT@HOTMAIL.COM', NULL, 1, 800123456, 'd95113b3b7f71bb59f52585a4bb01cd6', '', NULL, 'CRA 13 NO. 69 - 54 ', 11, '11001', '3040404', NULL, 1, '../archivos_subidos/800123456/Logo800123456.png'),
-(2, 900654321, 'ABOGADOS ASOCIADOS', NULL, 'JORDUNAT@HOTMAIL.COM', NULL, 1, 900654321, 'cc0e5e48c8eea301df1a4d2447284df5', '3115959599', NULL, 'CRA 17 NO. 35-89 ', 11, '11001', '2303030', NULL, 1, '0'),
-(3, 1000123456, 'NICOLLE VANESSA', 'ORDUÑA GALLEGO', 'NORDUNAG@HOTMAIL.COM', '2003-03-01', 3, 800123456, '82615ed7fe990524d0bd02982a0a562d', '3208525452', 'F', 'CRA 11 NO. 39-04 SUR', 11, '11001', '3729147', 2, 1, '../archivos_subidos/800123456/Logo800123456.png'),
-(1, 1080062885, 'ANGEL SEBASTIAN', 'PEREZ TOVAR', 'JJORDUNA-TOVAR@MISENA.EDU.CO', NULL, 4, 800123456, '2b170881c83867b381a3af42eba2be0f', '3102345678', 'M', NULL, 11, '11001', '3610095', NULL, 3, '0');
+INSERT INTO `tbl_usuarios` (`usu_Documento`, `usu_Nombres`, `usu_Apellidos`, `usu_Email`, `usu_FechaNacimiento`, `usu_Consultorio`, `usu_Clave`, `usu_Celular`, `usu_Telefono`, `usu_Genero`, `usu_Direccion`, `usu_Logo`, `usu_TipoDoc`, `usu_Estrato`, `usu_tipusu`, `usu_Estado`, `usu_Municipio`, `usu_Especialidad`) VALUES
+(52850158, 'LIZ YEIMMY', 'GALLEGO CARRILLO', 'JJORDUNA-TOVAR@MISENA.EDU.CO', '1980-04-29', 800123456, 'e2f45c99da6c740f3288ed2ced9ad021', '3115959599', '3729147', 'F', 'CRA 11 NO 39-04 SUR', NULL, 1, 2, 3, 3, '11001', NULL),
+(80062885, 'JAIRO JULIAN', 'ORDUÑA TOVAR', 'JJORDUNA-TOVAR@MISENA.EDU.CO', '1979-03-20', 800123456, '266630830eeb742a11e26833410c7f02', '3115959599', '3729147', 'M', 'CRA 11 39 - 04 SUR', '../archivos_subidos/800123456/Logo800123456.png', 1, 1, 4, 1, '11001', 1),
+(80123456, 'OSCAR JAVIER', 'ORDUÑA TOVAR', 'JJORDUNA-TOVAR@MISENA.EDU.CO', '1976-03-27', 800123456, 'af4f8f343391bcae658df4f8ba3acf1a', '3115959599', '3610095', 'M', 'ORDUÑA TOVAR', '../archivos_subidos/800123456/Logo800123456.png', 1, 2, 3, 1, '11001', NULL),
+(800123456, 'CONSULTORIO POLITECNICO GRANCOLOMBIANO', NULL, 'JJORDUNA-TOVAR@MISENA.EDU.CO', NULL, 800123456, 'd95113b3b7f71bb59f52585a4bb01cd6', '3213456789', '3112345', NULL, 'CRA 13 NO. 69 - 54 ', '../archivos_subidos/800123456/Logo800123456.png', 2, NULL, 1, 1, '11001', NULL),
+(900654321, 'ABOGADOS ASOCIADOS', NULL, 'JJORDUNA-TOVAR@MISENA.EDU.CO', NULL, 900654321, 'cc0e5e48c8eea301df1a4d2447284df5', '3115959599', '3610095', NULL, 'CRA 17 NO. 35-89', NULL, 2, NULL, 1, 1, '11001', NULL),
+(1000123456, 'NICOLLE VANESSA', 'ORDUÑA GALLEGO', 'JJORDUNA-TOVAR@MISENA.EDU.CO', '2003-03-01', 800123456, '7644858e1e57097c561a2797a797f31e', '3115959599', '3729147', 'F', 'CRA 11 NO 39-04 SUR', NULL, 2, 2, 3, 1, '11001', NULL);
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `tbl_casificacionproceso`
+-- Indices de la tabla `tbl_agenda`
 --
-ALTER TABLE `tbl_casificacionproceso`
+ALTER TABLE `tbl_agenda`
+  ADD PRIMARY KEY (`agen_NumeroCita`),
+  ADD KEY `fk_tbl_Agenda_tbl_Expedientes1` (`agen_Expediente`);
+
+--
+-- Indices de la tabla `tbl_clasificacionproceso`
+--
+ALTER TABLE `tbl_clasificacionproceso`
   ADD PRIMARY KEY (`clapro_Id`);
 
 --
 -- Indices de la tabla `tbl_consultas`
 --
 ALTER TABLE `tbl_consultas`
-  ADD PRIMARY KEY (`Cons_NoConsulta`);
+  ADD PRIMARY KEY (`cons_NoConsulta`),
+  ADD KEY `fk_tbl_Consultas_tbl_Usuarios1` (`cons_Cliente`),
+  ADD KEY `fk_tbl_Consultas_tbl_tipoaccion1` (`cons_TipoAccion`);
 
 --
 -- Indices de la tabla `tbl_departamentos`
@@ -1753,10 +2171,16 @@ ALTER TABLE `tbl_departamentos`
   ADD PRIMARY KEY (`depa_Id`);
 
 --
+-- Indices de la tabla `tbl_especialidades`
+--
+ALTER TABLE `tbl_especialidades`
+  ADD PRIMARY KEY (`espe_Id`);
+
+--
 -- Indices de la tabla `tbl_estados`
 --
 ALTER TABLE `tbl_estados`
-  ADD PRIMARY KEY (`Estado_Id`);
+  ADD PRIMARY KEY (`estado_Id`);
 
 --
 -- Indices de la tabla `tbl_estratos`
@@ -1768,38 +2192,60 @@ ALTER TABLE `tbl_estratos`
 -- Indices de la tabla `tbl_expedientes`
 --
 ALTER TABLE `tbl_expedientes`
-  ADD PRIMARY KEY (`exp_Expediente`);
+  ADD PRIMARY KEY (`exp_NumeroExpediente`),
+  ADD KEY `fk_tbl_Expedientes_tbl_Consultas1` (`exp_Consulta`),
+  ADD KEY `fk_tbl_Expedientes_tbl_clasificacionproceso1` (`exp_clasificacionproceso`);
 
 --
 -- Indices de la tabla `tbl_festivos`
 --
 ALTER TABLE `tbl_festivos`
-  ADD PRIMARY KEY (`Fecha`);
+  ADD PRIMARY KEY (`fest_Fecha`);
+
+--
+-- Indices de la tabla `tbl_gestion`
+--
+ALTER TABLE `tbl_gestion`
+  ADD PRIMARY KEY (`gest_Id`),
+  ADD KEY `fk_tbl_Gestion_tbl_Expedientes1` (`gest_Expediente`),
+  ADD KEY `fk_tbl_Gestion_tbl_TipoGestion1` (`gest_TipoGestion`);
+
+--
+-- Indices de la tabla `tbl_juzgados`
+--
+ALTER TABLE `tbl_juzgados`
+  ADD PRIMARY KEY (`juz_Id`),
+  ADD KEY `fk_tbl_Juzgados_tbl_TipoJuzgado1` (`juz_TipoJuzgado`);
 
 --
 -- Indices de la tabla `tbl_municipios`
 --
 ALTER TABLE `tbl_municipios`
-  ADD PRIMARY KEY (`muni_Codigo`),
-  ADD KEY `Departamento` (`muni_Departamento`);
-
---
--- Indices de la tabla `tbl_tareas`
---
-ALTER TABLE `tbl_tareas`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`muni_Codigo`);
 
 --
 -- Indices de la tabla `tbl_tipoaccion`
 --
 ALTER TABLE `tbl_tipoaccion`
-  ADD PRIMARY KEY (`TipAcc_Id`);
+  ADD PRIMARY KEY (`tipAcc_Id`);
 
 --
 -- Indices de la tabla `tbl_tipodocumento`
 --
 ALTER TABLE `tbl_tipodocumento`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`tipdoc_Id`);
+
+--
+-- Indices de la tabla `tbl_tipogestion`
+--
+ALTER TABLE `tbl_tipogestion`
+  ADD PRIMARY KEY (`tipges_Id`);
+
+--
+-- Indices de la tabla `tbl_tipojuzgado`
+--
+ALTER TABLE `tbl_tipojuzgado`
+  ADD PRIMARY KEY (`tipjuz_Id`);
 
 --
 -- Indices de la tabla `tbl_tipousuario`
@@ -1811,51 +2257,59 @@ ALTER TABLE `tbl_tipousuario`
 -- Indices de la tabla `tbl_usuarios`
 --
 ALTER TABLE `tbl_usuarios`
-  ADD PRIMARY KEY (`usu_Documento`);
+  ADD PRIMARY KEY (`usu_Documento`),
+  ADD KEY `fk_tbl_Usuarios_tbl_TipoDocumento` (`usu_TipoDoc`),
+  ADD KEY `fk_tbl_Usuarios_tbl_estratos1` (`usu_Estrato`),
+  ADD KEY `fk_tbl_Usuarios_tbl_Tipousuario1` (`usu_tipusu`),
+  ADD KEY `fk_tbl_Usuarios_tbl_estados1` (`usu_Estado`),
+  ADD KEY `fk_tbl_Usuarios_tbl_Municipios1` (`usu_Municipio`),
+  ADD KEY `fk_tbl_Usuarios_tbl_Especialidades1_idx` (`usu_Especialidad`);
 
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `tbl_casificacionproceso`
---
-ALTER TABLE `tbl_casificacionproceso`
-  MODIFY `clapro_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
---
--- AUTO_INCREMENT de la tabla `tbl_estados`
---
-ALTER TABLE `tbl_estados`
-  MODIFY `Estado_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT de la tabla `tbl_estratos`
---
-ALTER TABLE `tbl_estratos`
-  MODIFY `estr_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT de la tabla `tbl_tipoaccion`
---
-ALTER TABLE `tbl_tipoaccion`
-  MODIFY `TipAcc_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
---
--- AUTO_INCREMENT de la tabla `tbl_tipodocumento`
---
-ALTER TABLE `tbl_tipodocumento`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT de la tabla `tbl_tipousuario`
---
-ALTER TABLE `tbl_tipousuario`
-  MODIFY `tipu_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `tbl_municipios`
+-- Filtros para la tabla `tbl_agenda`
 --
-ALTER TABLE `tbl_municipios`
-  ADD CONSTRAINT `munic_depar` FOREIGN KEY (`muni_Departamento`) REFERENCES `tbl_departamentos` (`depa_Id`) ON UPDATE CASCADE;
+ALTER TABLE `tbl_agenda`
+  ADD CONSTRAINT `fk_tbl_Agenda_tbl_Expedientes1` FOREIGN KEY (`agen_Expediente`) REFERENCES `tbl_expedientes` (`exp_NumeroExpediente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `tbl_consultas`
+--
+ALTER TABLE `tbl_consultas`
+  ADD CONSTRAINT `fk_tbl_Consultas_tbl_Usuarios1` FOREIGN KEY (`cons_Cliente`) REFERENCES `tbl_usuarios` (`usu_Documento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tbl_Consultas_tbl_tipoaccion1` FOREIGN KEY (`cons_TipoAccion`) REFERENCES `tbl_tipoaccion` (`tipAcc_Id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `tbl_expedientes`
+--
+ALTER TABLE `tbl_expedientes`
+  ADD CONSTRAINT `fk_tbl_Expedientes_tbl_Consultas1` FOREIGN KEY (`exp_Consulta`) REFERENCES `tbl_consultas` (`cons_NoConsulta`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tbl_Expedientes_tbl_clasificacionproceso1` FOREIGN KEY (`exp_clasificacionproceso`) REFERENCES `tbl_clasificacionproceso` (`clapro_Id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `tbl_gestion`
+--
+ALTER TABLE `tbl_gestion`
+  ADD CONSTRAINT `fk_tbl_Gestion_tbl_Expedientes1` FOREIGN KEY (`gest_Expediente`) REFERENCES `tbl_expedientes` (`exp_NumeroExpediente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tbl_Gestion_tbl_TipoGestion1` FOREIGN KEY (`gest_TipoGestion`) REFERENCES `tbl_tipogestion` (`tipges_Id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `tbl_juzgados`
+--
+ALTER TABLE `tbl_juzgados`
+  ADD CONSTRAINT `fk_tbl_Juzgados_tbl_TipoJuzgado1` FOREIGN KEY (`juz_TipoJuzgado`) REFERENCES `tbl_tipojuzgado` (`tipjuz_Id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `tbl_usuarios`
+--
+ALTER TABLE `tbl_usuarios`
+  ADD CONSTRAINT `fk_tbl_Usuarios_tbl_Especialidades1` FOREIGN KEY (`usu_Especialidad`) REFERENCES `tbl_especialidades` (`espe_Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tbl_Usuarios_tbl_TipoDocumento` FOREIGN KEY (`usu_TipoDoc`) REFERENCES `tbl_tipodocumento` (`tipdoc_Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tbl_Usuarios_tbl_estados1` FOREIGN KEY (`usu_Estado`) REFERENCES `tbl_estados` (`estado_Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tbl_Usuarios_tbl_estratos1` FOREIGN KEY (`usu_Estrato`) REFERENCES `tbl_estratos` (`estr_Id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
