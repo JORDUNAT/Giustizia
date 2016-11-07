@@ -4,6 +4,7 @@
  */
 $.extend($.validator.messages, {
 	required: "Debes diligenciar este campo",
+	requiredob: "El campo Observaciones es obligatorio",
 	remote: "Por favor, rellena este campo.",
 	email: "Por favor, escribe una dirección de correo válida.",
 	url: "Por favor, escribe una URL válida.",

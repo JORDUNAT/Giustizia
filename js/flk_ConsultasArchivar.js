@@ -1,10 +1,10 @@
 // JavaScript Document
 //Fecha creado: 27/09/2015
-//Propósito: Modificación Clientes
+//Propósito: Archivar una consulta
 
 $(document).ready(function()
 {
-  //Evento sobre el botón modifica un cliente en vista fll_Clientes.php
+  //Evento sobre el botón modifica un cliente en vista flk_Consultas.php
 
   $('#btn_ArchivarConsulta').click(function()
   {
@@ -14,10 +14,10 @@ $(document).ready(function()
       rules:
       {
             consultaoculta:{required:true},
-            cuantia:{required:true},
+            cuantia:{required:false},
             TipAcc:{required:true},
             detaconsulta:{required:true},
-            observaciones:{required:true}  
+            observaciones:{required:false}  
       },
       invalidHandler:function()
       {
@@ -29,15 +29,15 @@ $(document).ready(function()
              var consultaoculta1    = $("input[name='consultaoculta']").val();        
              var cuantia1            = $("input[name='cuantia']").val();      
              var TipAcc1            = $("#TipAcc").val();
-             var detaconsulta1      = $("input[name='detaconsulta']").val();
-             var observaciones1     = $("input[name='observaciones']").val();
+             var detaconsulta1      = $("textarea[name='detaconsulta']").val();
+             var observaciones1     = $("textarea[name='observaciones']").val();
 
             var parametros = {'txt_consulta':consultaoculta1, 'txt_cuantia':cuantia1, 'txt_TipAcc':TipAcc1, 'txt_detaconsulta':detaconsulta1, 'txt_observaciones1':observaciones1};
 
            
         $.ajax({
                 type: 'POST',
-                url:  '../model/flk_Consultas.php',
+                url:  '../model/flk_ConsultasArch.php',
                 data: parametros,
                 async : true,
                 success: function(data){

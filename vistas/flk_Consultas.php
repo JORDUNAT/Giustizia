@@ -78,7 +78,7 @@
 						</div>
 
 				<?php 
-					if ($resultado['cons_Estado']==2){
+					if ($resultado['cons_Estado']==2 || $resultado['cons_Estado']==4){
 						echo '<div  class="col-xs-12  col-sm-6 col-md-3 col-lg-3">';
 						echo '<label>Cuantía: </label>';	
 						echo '<input type="number" name="cuantia" id="cuantia"  class="form-control" aria-describedby="sizing-addon3" value="'.$resultado['cons_Cuantia'].'" disabled>';
@@ -148,7 +148,7 @@
 						</div>
 
 						<div  class="col-xs-12  col-sm-5 col-md-3 col-lg-3">
-							<input type="number" min="1" name="consultaoculta" id="consultaoculta" style = "visibility:hidden"  class="form-control" aria-describedby="sizing-addon3" value="<?php echo $resultado['cons_NoConsulta']?>" required/>
+							<input type="text" name="consultaoculta" id="consultaoculta" style = "visibility:hidden"  class="form-control" aria-describedby="sizing-addon3" value="<?php echo $resultado['cons_NoConsulta']?>" required/>
 						</div>
 
 					</div>
