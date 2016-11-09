@@ -37,7 +37,7 @@
 			
 			</div>
 			<div >
-				<form name="flk_consultas" id="flk_consultas" method="POST" action="">
+				<form name="flk_consultas" id="flk_consultas" method="POST" action="frm_Expedientes.php">
 
 					<div id="mensaje" style="display: none;">
 					</div>
@@ -127,7 +127,7 @@
 
 						echo '<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">';
 						echo '<label>Observaciones o Recomendaciones: </label>';
-						echo '<textarea type="text" name="detaconsulta" id="detaconsulta" cols="15" rows="4" class="form-control" >'.$resultado['cons_Observaciones'].'</textarea>';
+						echo '<textarea type="text" name="observaciones" id="observaciones" cols="15" rows="4" class="form-control" >'.$resultado['cons_Observaciones'].'</textarea>';
 						echo '</div>';
 
 						echo '<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">';

@@ -32,7 +32,7 @@ $(document).ready(function()
              var detaconsulta1      = $("textarea[name='detaconsulta']").val();
              var observaciones1     = $("textarea[name='observaciones']").val();
 
-            var parametros = {'txt_consulta':consultaoculta1, 'txt_cuantia':cuantia1, 'txt_TipAcc':TipAcc1, 'txt_detaconsulta':detaconsulta1, 'txt_observaciones1':observaciones1};
+            var parametros = {'txt_consulta':consultaoculta1, 'txt_cuantia':cuantia1, 'txt_TipAcc':TipAcc1, 'txt_detaconsulta':detaconsulta1, 'txt_observaciones':observaciones1};
 
            
         $.ajax({

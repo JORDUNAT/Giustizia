@@ -635,7 +635,7 @@
 
 			$html = array();
 			$sql = "
-				SELECT * FROM tbl_consultas WHERE cons_NoConsulta LIKE '%$oficina%'
+				SELECT * FROM tbl_consultas WHERE cons_Estado = 1 AND (cons_NoConsulta LIKE '%$oficina%')
 			";
 
 			$qry = $conexion->query($sql);
@@ -656,7 +656,7 @@
 
 			$html = array();
 			$sql = "
-				SELECT * FROM tbl_consultas WHERE (cons_NoConsulta LIKE '%$oficina%') AND (cons_Estado<>1)
+				SELECT * FROM tbl_consultas WHERE (cons_NoConsulta LIKE '%$oficina%') AND (cons_Estado=4)
 			";
 
 			$qry = $conexion->query($sql);
@@ -865,6 +865,28 @@
 			tbl_consultas A INNER JOIN tbl_usuarios B ON (A.cons_Cliente=B.usu_Documento)
 			LEFT JOIN tbl_tipoaccion C ON (A.Cons_TipoAccion = C.TipAcc_Id)
 			WHERE (A.cons_Id='$consulta')
+			";
+
+			$qry = $conexion->query($sql);
+			if (!$qry)
+			{
+				return 'Error->'.mysql_error().',qry:'.$sql;
+			}
+			$html=$qry->fetch_assoc();
+			return $html;
+		}
+
+		function getConsultaExpedientes($conexion) //Consulta de los usuarios no clientes de acuero a cada oficina
+		{
+			$consulta =$_POST['consultaoculta'];
+
+			$html = array();
+			$sql = "
+			SELECT A.cons_NoConsulta, A.cons_Id, A.cons_Fecha, A.cons_Atendido, A.cons_DetalleConsulta, A.cons_Cuantia,  A.cons_Observaciones, A.cons_AbogadoAsignado, A.cons_Cliente, A.cons_TipoAccion, A.cons_Estado, B.usu_Documento, B.usu_Nombres, B.usu_Apellidos, C.tipAcc_Id, C.tipAcc_TipoAccion
+			FROM 
+			tbl_consultas A INNER JOIN tbl_usuarios B ON (A.cons_Cliente=B.usu_Documento)
+			LEFT JOIN tbl_tipoaccion C ON (A.Cons_TipoAccion = C.TipAcc_Id)
+			WHERE (A.cons_NoConsulta='$consulta')
 			";
 
 			$qry = $conexion->query($sql);

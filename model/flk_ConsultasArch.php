@@ -29,11 +29,6 @@
 	$observaciones1 	=$conexion->real_escape_string(strtoupper($_POST['txt_observaciones']));
 	$observaciones 		= strtr($observaciones1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
 
-	echo $detalleconsulta;
-	echo "<br>"
-	echo $observaciones;
-
-/*
 	if($observaciones1=""){
 		echo '<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-floppy-remove"></span> Debes diligenciar en obseraciones las causas por las cuales se archvia la Consulta. ';
 	}else{
@@ -43,20 +38,19 @@
 			$resultado=$conexion->query($query);
 
 			if($resultado>0){
-				echo '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-floppy-saved"></span> Se ha archivado la  consulta '.$consulta;
+				echo '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-floppy-saved"></span> Se ha archivado la  consulta '.$consulta.' correctamente.';
 				echo "<META HTTP-EQUIV='refresh' CONTENT='3; URL=../vistas/frm_ListaConsultasHis.php'>";		
 			} else {
-				echo '<div class="alert alert-danger" role="alert"><span class="glyphicon  glyphicon-floppy-remove"></span> Error al guardar Cliente, por favor contacta con el Administrador  </div>';
+				echo '<div class="alert alert-danger" role="alert"><span class="glyphicon  glyphicon-floppy-remove"></span> Error al archivar la Consulta, por favor contacta con el Administrador  </div>';
 				echo "<META HTTP-EQUIV='refresh' CONTENT='3; URL=../vistas/frm_ListaConsultas.php'>";
 
 			}
 		}
-			else
-			{	echo '<div class="alert alert-danger" role="alert"><span class="glyphicon  glyphicon-floppy-remove"></span>Solo se puede modificar  un Cliente cuando se es Administrador o cuando se es el usuario que se esta modificando </div>';		
+		else
+		{	
+			echo '<div class="alert alert-danger" role="alert"><span class="glyphicon  glyphicon-floppy-remove"></span>No cuentas con los privilegios suficientes para archviar  una Consulta. </div>';		
 			echo "<META HTTP-EQUIV='refresh' CONTENT='3; URL=../vistas/frm_ListaConsultas.php'>";
 
-			}
+		}
 	}
-
-	*/
 ?>
