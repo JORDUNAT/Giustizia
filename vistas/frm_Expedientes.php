@@ -75,6 +75,9 @@
 						</select>
 						</div>
 
+						</div> 
+
+
 
 						<div class="col-xs-12  col-sm-6 col-md-3 col-lg-3 has-default">
 						<label>Telefono: </label>
@@ -129,7 +132,7 @@
 						<div class="col-xs-12  col-sm-12 col-md-6 col-lg-12">
 						</div>
 
-						</div>
+						
 
 					</div>
 				</form>

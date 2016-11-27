@@ -406,7 +406,7 @@
 
 			$html = array();
 			$sql = "
-				SELECT * FROM tbl_departamentos WHERE 	depa_Id = '$departamento'
+				SELECT * FROM tbl_departamentos WHERE depa_Id = '$departamento'
 			";
 
 			$qry = $conexion->query($sql);
@@ -621,7 +621,7 @@
 
 			while ($departamentos = $qry->fetch_assoc())
 			{
-				$html_combo .= "<option value='".$departamentos['depa_Id']."'>".$departamentos['depa_Departamento']."</option>";
+				$html_combo .= "<option value='".$departamentos['depa_Codigo']."'>".$departamentos['depa_Departamento']."</option>";
 			}
 
 			return $html_combo;
@@ -798,7 +798,7 @@
 
 			$html = array();
 			$sql = "
-				SELECT A.muni_Codigo, A.muni_Departamento, A.muni_Municipio, B.depa_Id, B.depa_Departamento FROM tbl_municipios A, tbl_departamentos B WHERE (muni_Codigo='$id') AND (A.muni_Departamento= B.depa_Id)
+				SELECT A.muni_Codigo, A.muni_Departamento, A.muni_Municipio, B.depa_Codigo, B.depa_Departamento FROM tbl_municipios A, tbl_departamentos B WHERE (muni_Codigo='$id') AND (A.muni_Departamento= B.depa_Codigo)
 			";
 
 			$qry = $conexion->query($sql);
