@@ -43,28 +43,27 @@
 		$mail -> isHtml(true);
 		$mail -> Body = '
 		
-		<header style="margin:auto">
-		<div style="background:#551500; color:#fff; margin:2%, 2%, 2%, 2%">
-        	<h1> <img style="margin:4%, 4%, 4%, 4%" src="http://www.desoftco.co/Giustizia/img/Logo.png" width="6%"><b>GIUSTIZIA</b><img align="right" src="http://www.desoftco.co/Giustizia/img/encabezado1.png" width="50%"></h1>
-        	
-        	<h4 style="margin:4%, 4%, 4%, 4%" > El Software que necesitas en tu Oficina Jurídica</h4>
-    	</div>
-    	</header>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+			<header style="margin:auto">
+			<div style="background:#57A6D9; color:#fff; margin:2%, 2%, 2%, 2%">
+	        	<h2> <img style="margin:4%, 4%, 4%, 4%" src="http://www.desoftco.co/ivc/img/Gobernacion.png" width="8%"><b>  IVC - Vigilancia Educativa</b><img align="right" src="http://www.desoftco.co/ivc/img/logo-01.png" width="17%"></h2>
+	    	</div>
+	    	</header>
 
 		<p>Hola, hemos recibido tu solicitud de recuperación de contraseña,  por lo tanto te remitimos tu nueva clave y te solicitamos de realizar el cambio de la misma una vez accesdas a Giustizia.</p>
 		<h3>Tu Usuario:  </b>'.$rec_documento.'</h3>
 		<h3>Tu Nueva Clave:  </b>'.$rec_clave.'</h3>
 		<br>
-		<p> Ahora puedes volver a ingresar y no olvides cambiar tu clave <a href="http://www.desoftco.co/Giustizia/vistas/Index.php" title="Haz clic aqui">Giustizia</a></b></p> 
+		<p> Ahora puedes volver a ingresar y no olvides cambiar tu clave <a href="http://www.desoftco.co/IVC/vistas/Index.php" title="Haz clic aqui">Haz clic aqui</a></b></p> 
 		<p>Atentamente,</p>
 		<br>
-		<h3>Administración Giustizia</h3>
-		<br>
-		<div class="container-fluid" style="background:#F7F7F7; color:#000; margin: auto">
-		<p align="center"><a href="http://www.desoftco.co" title="Sitio Oficial de la DESOFTCO.CO">Realizado por DESOFTCO.CO</a>
-			<img src="http://www.desoftco.co/Giustizia/img/Logo2.png" align="left" width="20" height="20"><h6 class="text-success" align="center" style="color:green"><img src="http://www.desoftco.co/Giustizia/img/sena.png" width="20" height="20">Proyecto Educativo SENA<img src="http://www.desoftco.co/Giustizia/img/Logo2.png" align="right" width="20" height="20"></h6>
-		</p>	
-		</div>
+		<h3>Administración IVC</h3>
+			<br>
+			<div class="container-fluid" style="background:#F7F7F7; color:#000; margin: auto">
+			<p align="center">
+				<img src="http://www.desoftco.co/ivc/img/Logo2.png" align="left" width="20" height="20"><h3 class="text-success" align="center" style="color:blue">Secretaría de Educación de Cundinamarca<img src="http://www.desoftco.co/ivc/img/Logo2.png" align="right" width="20" height="20"></h3>
+			</p>	
+			</div>
 		';
 
 		$mail -> CharSet = 'UFT-8';

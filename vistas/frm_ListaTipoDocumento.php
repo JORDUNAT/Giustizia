@@ -65,7 +65,7 @@ $(document).ready(function(){
 
 								</thead>
 
-								<tbody class="tablacontenido" align='center'>
+								<tbody class="tablacontenido" align='center' style="color:#456789; font-size:85%">
 							            <?php
 											//Visualizo la data en la vista				
 

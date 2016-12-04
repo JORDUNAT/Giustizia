@@ -47,4 +47,11 @@ $(document).ready(function()
 		location.href='../vistas/frm_ListaClientes.php';
 	});	
 
+	$('#btn_CancelarExpediente').click(function()
+	{
+		//Cancelar accion en el formulario de frm_Clientes, boton que devuelve a frm_ListaClientes.php
+
+		location.href='../vistas/frm_ListaExpedientes.php';
+	});	
+
 });	

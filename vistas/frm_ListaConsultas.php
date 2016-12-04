@@ -71,7 +71,7 @@
 
 								</thead>
 
-								<tbody class="tablacontenido" align='center'>
+								<tbody class="tablacontenido" align='center' style="color:#456789; font-size:85%">
 							            <?php
 											//Visualizo la data en la vista				
 											$cont = 1;
@@ -105,7 +105,7 @@
 												print "<th align='center'>".$consulta["cons_Cuantia"]."</th>";
 												print "<th align='center'>".$consulta["cons_AbogadoAsignado"]."</th>";												
 										        echo '<td align="center">';
-												echo '<input type="radio" name="juzg" id="juzg" value="'.$consulta["cons_Id"].'" required>';
+												echo '<input type="radio" name="idconsulta" id="idconsulta" value="'.$consulta["cons_Id"].'" required>';
 										        echo "</td>";
 												print "</tr>";
 												$cont++;			

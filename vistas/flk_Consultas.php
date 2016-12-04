@@ -43,18 +43,28 @@
 					</div>
 
 					<div class="row">	
-							<div div class="col-xs-12  col-sm-5 col-md-3 col-lg-3 ">
+							<div div class="col-xs-12  col-sm-6 col-md-2 col-lg-2 ">
 							<label>Documento Cliente: </label>
 							<input type="number" min="1" name="documento" id="documento"  class="form-control" placeholder="Documento" aria-describedby="sizing-addon3" value="<?php echo $resultado['cons_Cliente']?>" disabled="disabled" required/>
 							</div>
 
 
-						<div class="col-xs-12  col-sm-5 col-md-5 col-lg-5 ">
+						<div class="col-xs-12  col-sm-6 col-md-4 col-lg45 ">
 						<label>Nombre del Cliente: </label>
 						<input type="text" name="nombre" id="nombre"  class="form-control" placeholder="Nombres" value="<?php echo $resultado['usu_Nombres']?> <?php echo $resultado['usu_Apellidos']?>" disabled="disabled" required/>
 						</div>
 
-							<div  class="col-xs-12  col-sm-5 col-md-3 col-lg-3">
+						<div  class="col-xs-12  col-sm-6 col-md-2 col-lg-2">
+							<label>No. de Consulta: </label>
+							<input type="text" name="NoConsulta" id="NoConsulta"  class="form-control" aria-describedby="sizing-addon3" value="<?php echo $resultado['cons_NoConsulta']?>" disabled>
+						</div>
+
+
+							<div  class="col-xs-12  col-sm-5 col-md-1 col-lg-1">
+							<input type="number" min="1" name="idconsulta" id="idconsulta" style = "visibility:hidden"  class="form-control" placeholder="Documento" aria-describedby="sizing-addon3" value="<?php echo $resultado['cons_Id']?>" required/>
+							</div>
+
+							<div  class="col-xs-12  col-sm-5 col-md-1 col-lg-1">
 							<input type="number" min="1" name="documentooculto" id="documentooculto" style = "visibility:hidden"  class="form-control" placeholder="Documento" aria-describedby="sizing-addon3" value="<?php echo $resultado['cons_Cliente']?>" required/>
 							</div>
 
@@ -62,12 +72,8 @@
 						<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
 						</div>
 
-						<div  class="col-xs-12  col-sm-6 col-md-3 col-lg-3">
-							<label>No. de Consulta: </label>
-							<input type="text" name="NoConsulta" id="NoConsulta"  class="form-control" aria-describedby="sizing-addon3" value="<?php echo $resultado['cons_NoConsulta']?>" disabled>
-						</div>
 
-						<div  class="col-xs-12  col-sm-6 col-md-3 col-lg-3">
+						<div  class="col-xs-12  col-sm-6 col-md-2 col-lg-2">
 							<label>Fecha de Consulta: </label>
 							<input type="text" name="FechaConsulta" id="FechaConsulta"  class="form-control" value="<?php echo $resultado['cons_Fecha']?>" disabled>
 						</div>						
@@ -79,6 +85,16 @@
 
 				<?php 
 					if ($resultado['cons_Estado']==2 || $resultado['cons_Estado']==4){
+
+						echo '<div class="col-xs-12  col-sm-6 col-md-6 col-lg-6  has-default">';
+						echo '<label>Asignar Abogado: </label>';
+						echo '<select name="abogado" id="abogado" class="form-control" aria-describedby="sizing-addon2" disabled >';
+						echo '<option value="">Sin Seleccion</option>';
+						echo $obj_model-> getClientesAbogados($conexion);
+						echo '</select>
+
+						</div>';
+
 						echo '<div  class="col-xs-12  col-sm-6 col-md-3 col-lg-3">';
 						echo '<label>Cuantía: </label>';	
 						echo '<input type="number" name="cuantia" id="cuantia"  class="form-control" aria-describedby="sizing-addon3" value="'.$resultado['cons_Cuantia'].'" disabled>';
@@ -106,6 +122,15 @@
 
 
 					}else{
+						echo '<div class="col-xs-12  col-sm-6 col-md-6 col-lg-6  has-default">';
+						echo '<label>Asignar Abogado: </label>';
+						echo '<select name="abogado" id="abogado" class="form-control" aria-describedby="sizing-addon2" required >';
+						echo '<option value="">Sin Seleccion</option>';
+						echo $obj_model-> getClientesAbogados($conexion);
+						echo '</select>
+
+						</div>';
+
 						echo '<div  class="col-xs-12  col-sm-6 col-md-3 col-lg-3">';
 						echo '<label>Cuantía: </label>';	
 						echo '<input type="number" name="cuantia" id="cuantia"  class="form-control" aria-describedby="sizing-addon3" value="'.$resultado['cons_Cuantia'].'">';
@@ -133,21 +158,26 @@
 						echo '<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">';
 						echo '</div>';
 
-						echo '<div class="col-xs-12  col-sm-3 col-md-3 col-lg-3">';
-						echo '<input type="submit" name="btn_GeneExpediente" id="btn_GeneExpediente" class="btn btn-primary" value="Generar Expediente" >';
+						echo '<div class="col-xs-12  col-sm-6 col-md-5 col-lg-5">';
+						echo '<input type="submit" name="btn_GeneExpediente" id="btn_GeneExpediente" class="btn btn-primary" value="Generar Expediente" >
+
+							<input type="submit" class="btn btn-primary" name="btn_GuardarConsulta" id="btn_GuardarConsulta"  value="Guardar Cambios" >	 
+
+						';
 						echo '</div>';
 
-						echo '<div class="col-xs-12  col-sm-3 col-md-3 col-lg-3">';
+						echo '<div class="col-xs-12  col-sm-6 col-md-3 col-lg-3">';
 						echo '<input type="submit" name="btn_ArchivarConsulta" id="btn_ArchivarConsulta" class="btn btn-danger" value="Archivar Consulta" >';
 						echo '</div>';
 					}
 				?>
-										
-						<div class="col-xs-12  col-sm-3 col-md-3 col-lg-3">	
+
+						<div class="col-xs-12  col-sm-6 col-md-2 col-lg-2">	
+							
 							<input type="button" class="btn btn-primary" onclick="location.href='frm_ListaConsultas.php'" value="Cancelar" >							
 						</div>
 
-						<div  class="col-xs-12  col-sm-5 col-md-3 col-lg-3">
+						<div  class="col-xs-12  col-sm-1 col-md-1 col-lg-1">
 							<input type="text" name="consultaoculta" id="consultaoculta" style = "visibility:hidden"  class="form-control" aria-describedby="sizing-addon3" value="<?php echo $resultado['cons_NoConsulta']?>" required/>
 						</div>
 

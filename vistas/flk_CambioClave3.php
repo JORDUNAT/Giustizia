@@ -22,7 +22,7 @@
 	<article id="articulo" class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
 		<div align="center" class="ibody1 col-xs-12  col-sm-12 col-md-12 col-lg-12" >
 			<div align="center" class="jumbotron">
-			<h8 align="center"><b>DEBES CAMBIAR TU CLAVE</b></h8>
+			<h6><b>DEBES CAMBIAR TU CLAVE</b></h6>
 			</div>
 			<div align="center" >
 				<form align="center" name="flk_CambioClave3" id="flk_CambioClave3" method="POST" action="" >

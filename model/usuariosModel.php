@@ -406,7 +406,7 @@
 
 			$html = array();
 			$sql = "
-				SELECT * FROM tbl_departamentos WHERE depa_Id = '$departamento'
+				SELECT * FROM tbl_departamentos WHERE 	depa_Id = '$departamento'
 			";
 
 			$qry = $conexion->query($sql);
@@ -621,7 +621,7 @@
 
 			while ($departamentos = $qry->fetch_assoc())
 			{
-				$html_combo .= "<option value='".$departamentos['depa_Codigo']."'>".$departamentos['depa_Departamento']."</option>";
+				$html_combo .= "<option value='".$departamentos['depa_Id']."'>".$departamentos['depa_Departamento']."</option>";
 			}
 
 			return $html_combo;
@@ -676,23 +676,43 @@
 		{
 			$oficina = $_SESSION['s_oficina'];
 			$usuario_sesionado = $_SESSION['s_usuario'];
+			$tipousuario = $_SESSION['s_tipusu'];
 
 
 			$html = array();
-			$sql = "
-			SELECT A.cons_Id, A.cons_NoConsulta, A.cons_Fecha, A.cons_Atendido, A.cons_Cliente, A.cons_DetalleConsulta, A.cons_Cuantia, A.cons_TipoAccion, A.cons_Observaciones, A.cons_AbogadoAsignado, A.cons_Estado, B.tipAcc_Id, B.tipAcc_TipoAccion FROM tbl_consultas A LEFT JOIN tbl_tipoaccion B ON A.cons_TipoAccion=B.tipAcc_Id WHERE A.cons_AbogadoAsignado='$usuario_sesionado' AND A.cons_Estado='1'
-			";
+			if($tipousuario<>1){
+				$sql = "
+				SELECT A.cons_Id, A.cons_NoConsulta, A.cons_Fecha, A.cons_Atendido, A.cons_Cliente, A.cons_DetalleConsulta, A.cons_Cuantia, A.cons_TipoAccion, A.cons_Observaciones, A.cons_AbogadoAsignado, A.cons_Estado, B.tipAcc_Id, B.tipAcc_TipoAccion FROM tbl_consultas A, tbl_tipoaccion B WHERE  (A.cons_TipoAccion=B.tipAcc_Id) AND (A.cons_AbogadoAsignado='$usuario_sesionado') AND (A.cons_Estado='1')
+				";
 
-			$qry = $conexion->query($sql);
-			if (!$qry)
-			{
-				return 'Error->'.mysql_error().',qry:'.$sql;
+				$qry = $conexion->query($sql);
+				if (!$qry)
+				{
+					return 'Error->'.mysql_error().',qry:'.$sql;
+				}
+				while ($cursor = $qry->fetch_assoc())
+				{
+					array_push($html,$cursor);
+				}
+				return $html;
+			}else{
+				$sql = "
+				SELECT A.cons_Id, A.cons_NoConsulta, A.cons_Fecha, A.cons_Atendido, A.cons_Cliente, A.cons_DetalleConsulta, A.cons_Cuantia, A.cons_TipoAccion, A.cons_Observaciones, A.cons_AbogadoAsignado, A.cons_Estado, B.tipAcc_Id, B.tipAcc_TipoAccion FROM tbl_consultas A LEFT JOIN tbl_tipoaccion B ON A.cons_TipoAccion=B.tipAcc_Id WHERE A.cons_AbogadoAsignado='$usuario_sesionado' AND A.cons_Estado='1'
+				";
+
+				$qry = $conexion->query($sql);
+				if (!$qry)
+				{
+					return 'Error->'.mysql_error().',qry:'.$sql;
+				}
+				while ($cursor = $qry->fetch_assoc())
+				{
+					array_push($html,$cursor);
+				}
+				return $html;				
+
 			}
-			while ($cursor = $qry->fetch_assoc())
-			{
-				array_push($html,$cursor);
-			}
-			return $html;
+
 		}		
 
 		function getConsutlasUsuarioHis($conexion) //Consulta de las conusltas jurídicas asignadas al usuario sesionado
@@ -798,7 +818,7 @@
 
 			$html = array();
 			$sql = "
-				SELECT A.muni_Codigo, A.muni_Departamento, A.muni_Municipio, B.depa_Codigo, B.depa_Departamento FROM tbl_municipios A, tbl_departamentos B WHERE (muni_Codigo='$id') AND (A.muni_Departamento= B.depa_Codigo)
+				SELECT A.muni_Codigo, A.muni_Departamento, A.muni_Municipio, B.depa_Id, B.depa_Departamento FROM tbl_municipios A, tbl_departamentos B WHERE (muni_Codigo='$id') AND (A.muni_Departamento= B.depa_Id)
 			";
 
 			$qry = $conexion->query($sql);

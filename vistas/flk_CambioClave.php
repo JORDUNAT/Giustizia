@@ -22,8 +22,8 @@
 ?>
 	<article id="articulo" class="col-xs-12  col-sm-8 col-md-9 col-lg-9">
 		<div align="center" class="ibody1 col-xs-12  col-sm-12 col-md-12 col-lg-12" >
-			<div align="center" class="jumbotron">
-			<h8 align="center" ><b>CAMBIANDO MI CLAVE</b></h8>
+			<div class="jumbotron">
+			<h8><b>CAMBIANDO MI CLAVE</b></h8>
 			</div>
 			<div align="center">
 				<form align="center" name="flk_CambioClave" id="flk_CambioClave" method="POST" action="">

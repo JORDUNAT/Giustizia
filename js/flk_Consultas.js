@@ -6,7 +6,7 @@ $(document).ready(function()
 {
   //Evento sobre el botón modifica un cliente en vista flk_Consultas.php
 
-  $('#btn_ArchivarConsulta').click(function()
+  $('#btn_GuardarConsulta').click(function()
   {
     //Validación del formulario
     $('#flk_consultas').validate(
@@ -14,7 +14,7 @@ $(document).ready(function()
       rules:
       {
             consultaoculta:{required:true},
-            cuantia:{required:false},
+            cuantia:{required:true},
             TipAcc:{required:true},
             detaconsulta:{required:true},
             observaciones:{required:true}  
@@ -33,11 +33,10 @@ $(document).ready(function()
              var observaciones1     = $("textarea[name='observaciones']").val();
 
             var parametros = {'txt_consulta':consultaoculta1, 'txt_cuantia':cuantia1, 'txt_TipAcc':TipAcc1, 'txt_detaconsulta':detaconsulta1, 'txt_observaciones':observaciones1};
-
            
         $.ajax({
                 type: 'POST',
-                url:  '../model/flk_ConsultasArch.php',
+                url:  '../model/flk_Consultas.php',
                 data: parametros,
                 async : true,
                 success: function(data){

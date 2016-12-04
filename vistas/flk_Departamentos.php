@@ -19,13 +19,13 @@
 	include_once('../model/usuariosModel.php');	
 
 	$obj_model = new usuariosModel();
-	$data = $obj_model->getQryDepartamentos($conexion);
+	$data = $obj_model -> getQryDepartamentos($conexion);
 
 ?>
 	<article class="col-xs-12  col-sm-8 col-md-9 col-lg-9">
 		<div class="ibody1 col-xs-12  col-sm-12 col-md-12 col-lg-12">
-			<div align='center' class="jumbotron">
-			<h8 align='center'><b>MODIFICANDO DEPARTAMENTO CON CODIGO  <?php echo $data['depa_Codigo']?> </b></h8>
+			<div align='center>' class="jumbotron">
+			<h8 align='center>'><b>MODIFICANDO DEPARTAMENTO DE CODIGO  <?php echo $data['depa_Codigo']?> </b></h8>
 			</div>
 			<div >
 				<form name="flk_Departamentof" id="flk_Departamentof" method="POST" action="">
