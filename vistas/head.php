@@ -5,7 +5,10 @@
         <title>GIUSTIZIA</title>
         <link rel="icon" type="image/png" href="../img/Logo.png" />
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0">        
-
+        <script language="javascript" src="../js/modernizr-custom.js"></script> 
+        <script language="javascript" src="../js/html5shiv.js"></script> 
+        <script language="javascript" src="../js/html5shiv-printshiv.js"></script>  
+        
         <!-- Inclusión CSS -->
         <link href="../css/bootstrap.css" rel="stylesheet" />
         <link href="../css/bootstrap-theme.css" rel="stylesheet" />        
