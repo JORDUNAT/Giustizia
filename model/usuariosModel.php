@@ -519,6 +519,23 @@
 
 		}
 
+		function getTipAccExp($conexion)
+		{
+			$tipoaccion =  $_POST['TipAcc'];
+
+			$html_combo = "";
+			$qryestrato="SELECT * FROM tbl_tipoaccion WHERE TipAcc_Id ='$tipoaccion' "; // Sleccion de Tipo de Usuario
+			$qry = $conexion->query($qryestrato);
+			
+
+			while ($tipaccion = $qry->fetch_assoc())
+			{
+				$html_combo .= "<option   value='".$tipaccion['tipAcc_Id']."'>".$tipaccion['tipAcc_TipoAccion']."</option>";
+			}
+
+			return $html_combo;
+
+		}
 
 		function getTipoAccionRelacion($conexion)
 		{

@@ -19,6 +19,10 @@
 
 	$fecha_actual 		= date("Y-m-d");
 
+	$abogado 	=  $_POST['abogado'];
+	$cuantia 	=  $_POST['cuantia'];
+	$observaciones = $_POST['observaciones'];
+	$detaconsulta = $_POST['detaconsulta'];
 
 	include('nav.php');
 	include('menu.php');
@@ -47,10 +51,10 @@ form.btn_ModProvinc.disabled = false;
 	<article class="col-xs-12  col-sm-8 col-md-9 col-lg-9">
 		<div class="ibody1 col-xs-12  col-sm-12 col-md-12 col-lg-12">
 			<div align='center' class="jumbotron">
-			<h8 align='center'><b>CREANDO EXPEDIENTE</b></h8>
+			<h8 align='center'><b>EXPEDIENTES DE LA CONSULTA <?php echo $resultado['cons_NoConsulta']?></b></h8>
 			</div>
 			<div >
-				<form name="frm_Usuarios" id="frm_Usuarios" method="POST" action="">
+				<form name="flk_consultas" id="flk_consultas" method="POST" action="">
 					<div id="mensaje" style="display: none;">
 
 					</div>
@@ -78,13 +82,13 @@ form.btn_ModProvinc.disabled = false;
 			
 						<div  class="col-xs-12  col-sm-6 col-md-3 col-lg-3">
 						<label>Cuantía: </label>	
-						<input type="number" name="cuantia" id="cuantia"  class="form-control" aria-describedby="sizing-addon3" value="<?php echo $resultado['cons_Cuantia']?>">
+						<input type="number" name="cuantia" id="cuantia"  class="form-control" aria-describedby="sizing-addon3" value="<?php echo $cuantia?>">
 						</div>
 
 						<div class="col-xs-12  col-sm-5 col-md-6 col-lg-6 " >
 							<label>Tipo de Acción: </label>
 							<select name="TipAcc" id="TipAcc" class="form-control" aria-describedby="sizing-addon2">
-							<option value="<?php  $resultado['cons_TipoAccion']?>"><?php echo $resultado['tipAcc_TipoAccion']; ?></option>
+							<?php echo $obj_model-> getTipAccExp($conexion)?>
 							<?php echo $obj_model-> getTipoAccion($conexion)?>
 							</select>
 						</div>
@@ -96,19 +100,23 @@ form.btn_ModProvinc.disabled = false;
 
 
 
-					<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">
-						<label>Observaciones o Recomendaciones: </label>
-						<textarea type="text" name="observaciones" id="observaciones" cols="15" rows="4" class="form-control" > <?php echo $resultado['cons_Observaciones']?> </textarea>
+					<div class="col-xs-12  col-sm-12 col-md-5 col-lg-5">
+						<label>Decripción de la Consulta: </label>
+						<textarea type="text" name="detaconsulta" id="detaconsulta" cols="15" rows="4" class="form-control" > <?php echo $detaconsulta ?> </textarea>
 					</div>
 
+					<div class="col-xs-12  col-sm-12 col-md-6 col-lg-6">
+						<label>Observaciones o Recomendaciones: </label>
+						<textarea type="text" name="observaciones" id="observaciones" cols="15" rows="4" class="form-control" > <?php echo $observaciones ?> </textarea>
+					</div>
 
 						<div class="col-xs-12  col-sm-12 col-md-6 col-lg-12">
 						</div>
 		
 
 					<div class="col-xs-12  col-sm-12 col-md-6 col-lg-6 has-default">
-						<input type="submit" name="btn_GuardarNuevoUsuario" id="btn_GuardarNuevoUsuario" class="btn btn-primary" value="Guardar" >
-						<input type="button" class="btn btn-primary" id="btn_CancelarCrearUsuairo" value="Cancelar" >
+						<input type="submit" name="btn_GuardarConsulta" id="btn_GuardarConsulta" class="btn btn-primary" value="Guardar" >
+						<input type="button" class="btn btn-primary" onclick="location.href='frm_ListaConsultas.php'" value="Cancelar" >	
 					</div>
 
 					</div>
@@ -129,7 +137,7 @@ form.btn_ModProvinc.disabled = false;
 					<div class="row">	
 						<div class="table-responsive" align="center">
 						<div align='center' class="jumbotron">
-							<h8 align='center' color='#fff'><b>EXPEDIENTES</b></h8>
+							<h8 align='center' color='#fff'><b> RELACION DE EXPEDIENTES</b></h8>
 						</div>
 						<div class="panel panel-default">
 

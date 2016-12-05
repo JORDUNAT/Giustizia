@@ -97,14 +97,14 @@
 
 						echo '<div  class="col-xs-12  col-sm-6 col-md-3 col-lg-3">';
 						echo '<label>Cuantía: </label>';	
-						echo '<input type="number" name="cuantia" id="cuantia"  class="form-control" aria-describedby="sizing-addon3" value="'.$resultado['cons_Cuantia'].'" disabled>';
+						echo '<input type="number" name="cuantia" id="cuantia"  class="form-control" aria-describedby="sizing-addon3" value="'.$resultado['cons_Cuantia'].'" required disabled>';
 						echo '</div>';
 
 						echo '<div class="col-xs-12  col-sm-5 col-md-3 col-lg-3 " >';
 						echo '<label>Tipo de Acción: </label>';
 
 						echo '<select disabled name="TipAcc" id="TipAcc" class="form-control" aria-describedby="sizing-addon2">';
-						echo '<option value="'.$resultado['cons_TipoAccion'].'">'.$resultado['tipAcc_TipoAccion'].'</option>';
+						echo '<option value="'.$resultado['cons_TipoAccion'].'" required>'.$resultado['tipAcc_TipoAccion'].'</option>';
 						echo $obj_model-> getTipoAccion($conexion);
 						echo '</select>';
 						echo '</div>';
@@ -112,12 +112,12 @@
 
 						echo '<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">';
 						echo '<label>Detalle de Consulta: </label>';
-						echo '<textarea disabled type="text" name="detaconsulta" id="detaconsulta" cols="15" rows="4" class="form-control" >'.$resultado['cons_DetalleConsulta'].'</textarea>';
+						echo '<textarea disabled type="text" name="detaconsulta" id="detaconsulta" cols="15" rows="4" class="form-control" required>'.$resultado['cons_DetalleConsulta'].'</textarea>';
 						echo '</div>';
 
 						echo '<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">';
 						echo '<label>Observaciones o Recomendaciones: </label>';
-						echo '<textarea disabled type="text" name="observaciones" id="observaciones" cols="15" rows="4" class="form-control" >'.$resultado['cons_Observaciones'].'</textarea>';
+						echo '<textarea disabled type="text" name="observaciones" id="observaciones" cols="15" rows="4" class="form-control" required>'.$resultado['cons_Observaciones'].'</textarea>';
 						echo '</div>';
 
 
@@ -133,12 +133,12 @@
 
 						echo '<div  class="col-xs-12  col-sm-6 col-md-3 col-lg-3">';
 						echo '<label>Cuantía: </label>';	
-						echo '<input type="number" name="cuantia" id="cuantia"  class="form-control" aria-describedby="sizing-addon3" value="'.$resultado['cons_Cuantia'].'">';
+						echo '<input type="number" name="cuantia" id="cuantia"  class="form-control" aria-describedby="sizing-addon3" value="'.$resultado['cons_Cuantia'].'" required>';
 						echo '</div>';
 
 						echo '<div class="col-xs-12  col-sm-5 col-md-6 col-lg-6 " >';
 						echo '<label>Tipo de Acción: </label>';
-						echo '<select name="TipAcc" id="TipAcc" class="form-control" aria-describedby="sizing-addon2">';
+						echo '<select name="TipAcc" id="TipAcc" class="form-control" aria-describedby="sizing-addon2" required>';
 						echo '<option value="'.$resultado['cons_TipoAccion'].'">'.$resultado['tipAcc_TipoAccion'].'</option>';
 						echo $obj_model-> getTipoAccion($conexion);
 						echo '</select>';
@@ -147,19 +147,19 @@
 
 						echo '<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">';
 						echo '<label>Detalle de Consulta: </label>';
-						echo '<textarea type="text" name="detaconsulta" id="detaconsulta" cols="15" rows="4" class="form-control" >'.$resultado['cons_DetalleConsulta'].'</textarea>';
+						echo '<textarea type="text" name="detaconsulta" id="detaconsulta" cols="15" rows="4" class="form-control" required>'.$resultado['cons_DetalleConsulta'].'</textarea>';
 						echo '</div>';
 
 						echo '<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">';
 						echo '<label>Observaciones o Recomendaciones: </label>';
-						echo '<textarea type="text" name="observaciones" id="observaciones" cols="15" rows="4" class="form-control" >'.$resultado['cons_Observaciones'].'</textarea>';
+						echo '<textarea type="text" name="observaciones" id="observaciones" cols="15" rows="4" class="form-control" required>'.$resultado['cons_Observaciones'].'</textarea>';
 						echo '</div>';
 
 						echo '<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12">';
 						echo '</div>';
 
 						echo '<div class="col-xs-12  col-sm-6 col-md-5 col-lg-5">';
-						echo '<input type="submit" name="btn_GeneExpediente" id="btn_GeneExpediente" class="btn btn-primary" value="Generar Expediente" >
+						echo '<input type="submit" name="btn_GeneExpediente" id="btn_GeneExpediente" class="btn btn-primary" value="Expedientes" >
 
 							<input type="submit" class="btn btn-primary" name="btn_GuardarConsulta" id="btn_GuardarConsulta"  value="Guardar Cambios" >	 
 
