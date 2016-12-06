@@ -670,6 +670,21 @@
 		}
 
 
+		function getProcesos($conexion)
+		{
+			$html_combo = "";
+			$qrytiproc="SELECT * FROM tbl_clasificacionproceso"; // Sleccion de Departamentos
+			$qry = $conexion->query($qrytiproc);
+
+			while ($tiproceso = $qry->fetch_assoc())
+			{
+				$html_combo .= "<option value='".$tiproceso['clapro_Id']."'>".$tiproceso['clapro_ClasificacionProceso']."</option>";
+			}
+
+			return $html_combo;
+		}
+
+
 		function getDepartamentos($conexion)
 		{
 
@@ -977,6 +992,7 @@
 			return $html;
 		}
 
+
 		function getConsConsUsu($conexion) //Consulta de los usuarios no clientes de acuero a cada oficina
 		{
 			$consulta =$_SESSION['s_Consulta'];
@@ -996,8 +1012,11 @@
 
 		function getConsExped($conexion) //Consulta de los usuarios no clientes de acuero a cada oficina
 		{
+			$consulta = $_POST['consultaoculta'];
 			$html = array();
-			$qryproceso="SELECT A.exp_NumeroExpediente, A.exp_Id, A.exp_DocumentoConsultorio, A.exp_FechaExpediente, A.exp_EstadoExpediente, A.exp_Soportes, A.exp_ObservacionExpedientes, A.exp_Consulta, A.exp_clasificacionproceso, B.cons_NoConsulta, B.cons_Cliente, C.clapro_Id, C.clapro_ClasificacionProceso, D.usu_Documento, D.usu_Nombres, D.usu_Apellidos FROM tbl_expedientes A, tbl_consultas B, tbl_clasificacionproceso C, tbl_usuarios D  WHERE  (A.exp_Consulta=B.cons_NoConsulta) AND (B.cons_Cliente=D.usu_Documento) AND (A.exp_clasificacionproceso=C.clapro_ClasificacionProceso) "; // Sleccion de Expedientes
+			$qryproceso="
+				SELECT A.exp_NumeroExpediente, A.exp_Id, A.exp_DocumentoConsultorio, A.exp_FechaExpediente, A.exp_EstadoExpediente, A.exp_Soportes, A.exp_ObservacionExpedientes, A.exp_Consulta, A.exp_clasificacionproceso, B.cons_NoConsulta, B.cons_Cliente, B.cons_AbogadoAsignado FROM tbl_expedientes A, tbl_consultas B  WHERE  (A.exp_Consulta=B.cons_NoConsulta) AND (A.exp_EstadoExpediente='1') AND (A.exp_Consulta='$consulta')
+			"; // Sleccion de Expedientes
 			$qry = $conexion->query($qryproceso);
 			
 			if (!$qry)
@@ -1010,6 +1029,120 @@
 			}
 			return $html;
 		}
+
+		function getExpedientes($conexion) ////Consulta de las Expedinetes Jurídicos de la Oficina
+		{
+			$oficina = $_SESSION['s_oficina'];
+
+			$html = array();
+			$sql = "
+				SELECT A.exp_NumeroExpediente, A.exp_Id, A.exp_DocumentoConsultorio, A.exp_FechaExpediente, A.exp_EstadoExpediente, A.exp_Soportes, A.exp_ObservacionExpedientes, A.exp_Consulta, A.exp_clasificacionproceso, B.cons_NoConsulta, B.cons_Cliente, B.cons_AbogadoAsignado FROM tbl_expedientes A, tbl_consultas B  WHERE  (A.exp_Consulta=B.cons_NoConsulta) AND (A.exp_EstadoExpediente='1') AND (exp_Consulta LIKE '%$oficina%')
+			";
+
+			$qry = $conexion->query($sql);
+			if (!$qry)
+			{
+				return 'Error->'.mysql_error().',qry:'.$sql;
+			}
+			while ($cursor = $qry->fetch_assoc())
+			{
+				array_push($html,$cursor);
+			}
+			return $html;
+		}
+
+
+
+		function getExpedienteUsuario($conexion) //Consulta de los expedientes asignadas al usuario sesionado
+		{
+			$oficina = $_SESSION['s_oficina'];
+			$usuario_sesionado = $_SESSION['s_usuario'];
+			$tipousuario = $_SESSION['s_tipusu'];
+
+
+			$html = array();
+			if($tipousuario<>1){
+				$sql = "
+				SELECT A.exp_NumeroExpediente, A.exp_Id, A.exp_DocumentoConsultorio, A.exp_FechaExpediente, A.exp_EstadoExpediente, A.exp_Soportes, A.exp_ObservacionExpedientes, A.exp_Consulta, A.exp_clasificacionproceso, B.cons_NoConsulta, B.cons_Cliente, B.cons_AbogadoAsignado FROM tbl_expedientes A, tbl_consultas B  WHERE  (A.exp_Consulta=B.cons_NoConsulta) AND (A.exp_EstadoExpediente='1') AND (A.cons_AbogadoAsignado='$usuario_sesionado') 
+				";
+
+				$qry = $conexion->query($sql);
+				if (!$qry)
+				{
+					return 'Error->'.mysql_error().',qry:'.$sql;
+				}
+				while ($cursor = $qry->fetch_assoc())
+				{
+					array_push($html,$cursor);
+				}
+				return $html;
+			}else{
+				$sql = "
+				SELECT A.exp_NumeroExpediente, A.exp_Id, A.exp_DocumentoConsultorio, A.exp_FechaExpediente, A.exp_EstadoExpediente, A.exp_Soportes, A.exp_ObservacionExpedientes, A.exp_Consulta, A.exp_clasificacionproceso, B.cons_NoConsulta, B.cons_Cliente, B.cons_AbogadoAsignado FROM tbl_expedientes A, tbl_consultas B  WHERE  (A.exp_Consulta=B.cons_NoConsulta) AND (A.exp_EstadoExpediente='1')
+				";
+
+				$qry = $conexion->query($sql);
+				if (!$qry)
+				{
+					return 'Error->'.mysql_error().',qry:'.$sql;
+				}
+				while ($cursor = $qry->fetch_assoc())
+				{
+					array_push($html,$cursor);
+				}
+				return $html;				
+
+			}
+
+		}	
+
+		function getExpedienteCliente($conexion) //Expediente de los usuarios no clientes de acuero a cada oficina
+		{
+			$oficina = $_SESSION['s_oficina'];
+			$usuario_sesionado = $_SESSION['s_usuario'];
+
+			$html = array();
+			$sql = "
+
+			SELECT A.exp_NumeroExpediente, A.exp_Id, A.exp_DocumentoConsultorio, A.exp_FechaExpediente, A.exp_EstadoExpediente, A.exp_Soportes, A.exp_ObservacionExpedientes, A.exp_Consulta, A.exp_clasificacionproceso, B.cons_NoConsulta, B.cons_Cliente, B.cons_AbogadoAsignado FROM tbl_expedientes A, tbl_consultas B  WHERE  (A.exp_Consulta=B.cons_NoConsulta) AND (A.exp_EstadoExpediente='1')AND (B.cons_Cliente=$usuario_sesionado)
+			";
+
+			$qry = $conexion->query($sql);
+			if (!$qry)
+			{
+				return 'Error->'.mysql_error().',qry:'.$sql;
+			}
+			while ($cursor = $qry->fetch_assoc())
+			{
+				array_push($html,$cursor);
+			}
+			return $html;
+		}	
+
+
+		function getQryConsExped($conexion) //Consulta de los usuarios no clientes de acuero a cada oficina
+		{
+			$consulta= $_POST['idexpediente'];
+			$usuario_sesionado = $_SESSION['s_usuario'];
+
+			$html = array();
+			$sql = "
+
+			SELECT A.exp_NumeroExpediente, A.exp_Id, A.exp_DocumentoConsultorio, A.exp_FechaExpediente, A.exp_EstadoExpediente, A.exp_Soportes, A.exp_ObservacionExpedientes, A.exp_Consulta, A.exp_clasificacionproceso, B.cons_NoConsulta, B.cons_Cliente, B.cons_AbogadoAsignado FROM tbl_expedientes A, tbl_consultas B  WHERE  (A.exp_Consulta=B.cons_NoConsulta) AND (A.exp_Id=$idexpediente)
+			";
+
+			$qry = $conexion->query($sql);
+			if (!$qry)
+			{
+				return 'Error->'.mysql_error().',qry:'.$sql;
+			}
+			while ($cursor = $qry->fetch_assoc())
+			{
+				array_push($html,$cursor);
+			}
+			return $html;
+		}
+
 
 		// Hasta aqui
 	}

@@ -55,7 +55,7 @@
                     </ul>
                 </li>
 
-                <li><a href="#" class="sub" tabindex="1"><span class="glyphicon  glyphicon-folder-open"></span>  <b> </b> EXPEDIENTES</a>
+                <li><a href="frm_ListaExpedientes.php" class="sub" tabindex="1"><span class="glyphicon  glyphicon-folder-open"></span>  <b> </b> EXPEDIENTES</a>
                     <ul>
                         <li><a href="#">Admin Expedientes</a></li>
                     </ul>

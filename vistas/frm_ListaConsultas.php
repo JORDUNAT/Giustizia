@@ -62,12 +62,12 @@
 								<thead style = "align-text:center">	
 									<td>Item</td>							
 									<td style = "align-text:center"><span class="glyphicon glyphicon-sort-by-order-alt"></span><b> No. <br> Consulta</b></td>
-									<td align="center"><span class="glyphicon glyphicon-sort-by-order-alt"></span><b> Fecha</b></d>
-									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Atendido Por</b></d>
-									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Cliente</b></d>
-									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Cuantia</b></d>
-									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Abogado<br>Asignado</b></d>
-									<td align="center"><b> Editar</b></d>	
+									<td align="center"><span class="glyphicon glyphicon-sort-by-order-alt"></span><b> Fecha</b></td>
+									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Atendido Por</b></td>
+									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Cliente</b></td>
+									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Cuantia</b></td>
+									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Abogado<br>Asignado</b></td>
+									<td align="center"><b> Editar</b></td>	
 
 								</thead>
 

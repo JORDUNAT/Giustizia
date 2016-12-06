@@ -87,7 +87,8 @@
         <script language="javascript" src="../js/flk_juzgados.js"></script> 
         <script language="javascript" src="../js/frm_Consultas.js"></script>       
         <script language="javascript" src="../js/flk_ConsultasArchivar.js"></script> 
-        <script language="javascript" src="../js/flk_Consultas.js"></script>        
+        <script language="javascript" src="../js/flk_Consultas.js"></script>
+        <script language="javascript" src="../js/frm_Expedientes.js"></script>         
 
     </head>
     

@@ -10,20 +10,22 @@
 	}
 
 	$tipousuario=$_SESSION['s_tipusu'];
+	$oficina = $_SESSION['s_oficina'];
 
 	include('nav.php');
 	include('menu.php');
 	include_once('../model/usuariosModel.php');	
 
 	$obj_model = new usuariosModel();
-	$data = $obj_model -> getConsutlas($conexion);
-	$datausu = $obj_model -> getConsutlasUsuario($conexion);	
-	$undata = $obj_model-> getConsutlasCliente($conexion);
+	$data = $obj_model -> getExpedientes($conexion);
+	$datausu = $obj_model -> getExpedienteUsuario($conexion);	
+	$undata = $obj_model-> getExpedienteCliente($conexion);
+
 ?>
 
 <script type="text/javascript">
 	$(document).ready(function () {
-	$('#tbl_consultas').dataTable({
+	$('#tbl_expedientes').dataTable({
 		"sPaginationType": "full_numbers",
 		"autoWidth": false,
 		paging: true
@@ -38,7 +40,7 @@
 			<h8 align='center'><b>CONTROL DE EXPEDIENTES JURÍDICOS</b></h8>
 			</div>
 			<div >
-				<form name="frm_ListaConsutlas" id="frm_ListaConsutlas" >
+				<form name="frm_ListaExpedientes" id="frm_ListaExpedientes" method="POST" action="flk_Expedientes.php">
 					<div class="row">	
 						<div class="table-responsive">
 						<div class="panel panel-default">
@@ -47,21 +49,21 @@
 									<?php
 										
 										if ($tipousuario<>'3'){
-											echo '<input type="button" class="btn btn-default" value="Crear Consulta" id="btn_crearcliente" >';
+											echo '<input type="submit" class="btn btn-primary" value="Editar" id="btn_Editar">';
 										     }
 										else{ 
 										     echo '<input type="button" class="btn btn-default" value="Crear Consulta" disabled="disabled" >';
 										    } ?>										
 								</div>
 
-							<table id="tbl_consultas" class="table table-striped" align="center">
+							<table id="tbl_expedientes" class="table table-striped" align="center">
 								<thead style = "align-text:center">	
 									<td>Item</td>							
-									<td style = "align-text:center"><span class="glyphicon glyphicon-sort-by-order-alt"></span><b> No. <br> Consulta</b></td>
+									<td style = "align-text:center"><span class="glyphicon glyphicon-sort-by-order-alt"></span><b> No. <br> Expediente</b></td>
 									<td align="center"><span class="glyphicon glyphicon-sort-by-order-alt"></span><b> Fecha</b></d>
-									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Atendido Por</b></d>
+									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Consulta</b></d>
 									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Cliente</b></d>
-									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Cuantia</b></d>
+									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Estado</b></d>
 									<td align="center"><span class="glyphicon glyphicon-sort-by-alphabet"></span><b> Abogado<br>Asignado</b></d>
 									<td align="center"><b> Editar</b></d>	
 
@@ -73,53 +75,53 @@
 											$cont = 1;
 
 										if ($tipousuario=='1' || $tipousuario=='5'){
-											foreach ($data as $consulta)
+											foreach ($data as $expediente)
 											{
 												print "<tr>";
 												print "<th>".$cont."</th>";
-												print "<th align='center'>".$consulta["Cons_NoConsulta"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Fecha"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Atendido"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Cliente"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Cuantia"]."</th>";
-												print "<th align='center'>".$consulta["Cons_AbogadoAsignado"]."</th>";												
-										        echo '<td align="center"><button class="btn btn-default" type="button" aria-hidden="true" onclick="'."location.href='flk_Consultas.php?Consutla=".$consulta['Cons_NoConsulta']."'".'">'."
-														<span class='glyphicon  glyphicon-pencil'></span>
-													</button></td>";
+												print "<th align='center'>".$expediente["exp_NumeroExpediente"]."</th>";
+												print "<th align='center'>".$expediente["exp_FechaExpediente"]."</th>";
+												print "<th align='center'>".$expediente["exp_Consulta"]."</th>";
+												print "<th align='center'>".$expediente["cons_Cliente"]."</th>";
+												print "<th align='center'>".$expediente["exp_EstadoExpediente"]."</th>";
+												print "<th align='center'>".$expediente["cons_AbogadoAsignado"]."</th>";												
+										        echo '<td align="center">';
+												echo '<input type="radio" name="idexpediente" id="idexpediente" value="'.$expediente["exp_Id"].'" required>';
+										        echo "</td>";
 												print "</tr>";
 												$cont++;					
 											}
 										}elseif ($tipousuario<>'1' || $tipousuario<>'3') {
-											foreach ($datausu as $consulta)
+											foreach ($datausu as $expediente)
 											{
 												print "<tr>";
 												print "<th>".$cont."</th>";
-												print "<th align='center'>".$consulta["Cons_NoConsulta"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Fecha"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Atendido"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Cliente"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Cuantia"]."</th>";
-												print "<th align='center'>".$consulta["Cons_AbogadoAsignado"]."</th>";												
-										        echo '<td align="center"><button class="btn btn-default" type="button" aria-hidden="true" onclick="'."location.href='flk_Consultas.php?Consutla=".$consulta['Cons_NoConsulta']."'".'">'."
-														<span class='glyphicon  glyphicon-pencil'></span>
-													</button></td>";
+												print "<th align='center'>".$expediente["exp_NumeroExpediente"]."</th>";
+												print "<th align='center'>".$expediente["exp_FechaExpediente"]."</th>";
+												print "<th align='center'>".$expediente["exp_Consulta"]."</th>";
+												print "<th align='center'>".$expediente["cons_Cliente"]."</th>";
+												print "<th align='center'>".$expediente["exp_EstadoExpediente"]."</th>";
+												print "<th align='center'>".$expediente["cons_AbogadoAsignado"]."</th>";												
+										        echo '<td align="center">';
+												echo '<input type="radio" name="idexpediente" id="idexpediente" value="'.$expediente["exp_Id"].'" required>';
+										        echo "</td>";
 												print "</tr>";
 												$cont++;			
 											}
 										}elseif ($tipousuario=='3') {
-											foreach ($undata as $consulta)
+											foreach ($undata as $expediente)
 											{
 												print "<tr>";
 												print "<th>".$cont."</th>";
-												print "<th align='center'>".$consulta["Cons_NoConsulta"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Fecha"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Atendido"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Cliente"]."</th>";
-												print "<th align='center'>".$consulta["Cons_Cuantia"]."</th>";
-												print "<th align='center'>".$consulta["Cons_AbogadoAsignado"]."</th>";												
-										        echo '<td align="center"><button class="btn btn-default" type="button" aria-hidden="true" onclick="'."location.href='flk_Consultas.php?Consutla=".$consulta['Cons_NoConsulta']."'".'">'."
-														<span class='glyphicon  glyphicon-pencil'></span>
-													</button></td>";
+												print "<th align='center'>".$expediente["exp_NumeroExpediente"]."</th>";
+												print "<th align='center'>".$expediente["exp_FechaExpediente"]."</th>";
+												print "<th align='center'>".$expediente["exp_Consulta"]."</th>";
+												print "<th align='center'>".$expediente["cons_Cliente"]."</th>";
+												print "<th align='center'>".$expediente["exp_EstadoExpediente"]."</th>";
+												print "<th align='center'>".$expediente["cons_AbogadoAsignado"]."</th>";												
+										        echo '<td align="center">';
+												echo '<input type="radio" name="idexpediente" id="idexpediente" value="'.$expediente["exp_Id"].'" required>';
+										        echo "</td>";
 												print "</tr>";
 												$cont++;						
 											}
@@ -138,7 +140,6 @@
 	</article>
 	</section>
 	</div>
-
 
 
 
