@@ -1122,25 +1122,20 @@
 
 		function getQryConsExped($conexion) //Consulta de los usuarios no clientes de acuero a cada oficina
 		{
-			$consulta= $_POST['idexpediente'];
+			$idexpediente= $_POST['idexpediente'];
 			$usuario_sesionado = $_SESSION['s_usuario'];
 
 			$html = array();
 			$sql = "
 
-			SELECT A.exp_NumeroExpediente, A.exp_Id, A.exp_DocumentoConsultorio, A.exp_FechaExpediente, A.exp_EstadoExpediente, A.exp_Soportes, A.exp_ObservacionExpedientes, A.exp_Consulta, A.exp_clasificacionproceso, B.cons_NoConsulta, B.cons_Cliente, B.cons_AbogadoAsignado FROM tbl_expedientes A, tbl_consultas B  WHERE  (A.exp_Consulta=B.cons_NoConsulta) AND (A.exp_Id=$idexpediente)
+			SELECT A.exp_NumeroExpediente, A.exp_Id, A.exp_DocumentoConsultorio, A.exp_FechaExpediente, A.exp_EstadoExpediente, A.exp_Soportes, A.exp_ObservacionExpedientes, A.exp_Consulta, A.exp_clasificacionproceso, B.cons_NoConsulta, B.cons_Cliente, B.cons_AbogadoAsignado, C.usu_Documento, C.usu_Nombres, C.usu_Apellidos, D.clapro_Id, D.clapro_ClasificacionProceso FROM tbl_expedientes A, tbl_consultas B, tbl_usuarios C, tbl_clasificacionproceso D WHERE (A.exp_Consulta=B.cons_NoConsulta) AND (B.cons_Cliente=C.usu_Documento) AND (A.exp_clasificacionproceso=D.clapro_Id) AND  (A.exp_Id='$idexpediente')
 			";
 
 			$qry = $conexion->query($sql);
-			if (!$qry)
-			{
-				return 'Error->'.mysql_error().',qry:'.$sql;
-			}
-			while ($cursor = $qry->fetch_assoc())
-			{
-				array_push($html,$cursor);
-			}
-			return $html;
+			$cursor = $qry->fetch_assoc();
+			//echo '<br>';
+			//echo $cursor['usu_Documento'];
+			return $cursor;
 		}
 
 

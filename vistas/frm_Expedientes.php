@@ -145,7 +145,7 @@
 
 <!--Desde aqui inica talba de gestiones realizadas -->
 
-				<form  name="flk_Gestionf" id="flk_Gestionf" method="POST" action="flk_Gestion.php">
+				<form  name="flk_Gestionf" id="flk_Gestionf" method="POST" action="flk_Expedientes.php">
 					<div class="row">	
 						<div class="table-responsive" align="center">
 						<div align='center' class="jumbotron">
