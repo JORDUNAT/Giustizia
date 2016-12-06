@@ -25,7 +25,8 @@
         <link href="../css/jquery-ui.min.css" rel="stylesheet" />   
         <link href="../css/jquery-ui.structure.min.css" rel="stylesheet" />   
         <link href="../css/jquery-ui.theme.min.css" rel="stylesheet" />   
-        <link href="../css/miestilo.css" rel="stylesheet" />   
+        <link href="../css/miestilo.css" rel="stylesheet" />
+        <link href="../css/calendar.css" rel="stylesheet" />     
 
 
          <!-- Inclusión JS -->
@@ -34,6 +35,12 @@
         <script language="javascript" src="../js/bootstrap.js"></script>
         <script language="javascript" src="../js/bootstrap-datepicker.js"></script>
         <script language="javascript" src="../js/bootstrap-datepicker.es.min.js"></script>
+        <script language="javascript" src="../js/bootstrap-datetimepicker.es.js"></script>
+        <script language="javascript" src="../js/bootstrap-datetimepicker.js"></script>
+        <script language="javascript" src="../js/calendar.js"></script>
+        <script language="javascript" src="../js/es-ES.js"></script>
+        <script language="javascript" src="../js/moment.js"></script>
+        <script language="javascript" src="../js/underscore-min.js"></script>
         <script language="javascript" src="../js/jquery.form.min.js"></script>         
         <script language="javascript" src="../js/ajax.js"></script>     
         <script language="javascript" src="../js/upload.js"></script>         

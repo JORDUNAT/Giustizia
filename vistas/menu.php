@@ -61,7 +61,7 @@
                     </ul>
                 </li>
 
-                <li><a href="frm_Agenda.php" class="sub" tabindex="1"><span class="glyphicon  glyphicon-calendar"></span> <b> </b> AGENDA</a>
+                <li><a href="frm_agenda.php" class="sub" tabindex="1"><span class="glyphicon  glyphicon-calendar"></span> <b> </b> AGENDA</a>
                 </li>
 
                 <li><a href="#" class="sub" tabindex="1"><span class="glyphicon  glyphicon-user"></span> <b> </b> USUARIOS</a>

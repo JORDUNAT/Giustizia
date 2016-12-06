@@ -23,6 +23,7 @@
 
 	$consulta 			=$_POST['txt_consulta'];
 	$cuantia 			=$_POST['txt_cuantia'];
+	$abogado			=$_POST['txt_abogado'];
 	$TipoAccion			=$_POST['txt_TipAcc'];
 	$detalleconsulta1	=$conexion->real_escape_string(strtoupper($_POST['txt_detaconsulta']));
 	$detalleconsulta	= strtr($detalleconsulta1, 'áéíóúñ', 'ÁÉÍÓÚÑ');
@@ -34,7 +35,7 @@
 	}else{
 
 		if($tipousuario<>'3' || $tipousuario<>'6'){
-			$query="UPDATE tbl_consultas SET cons_Cuantia='$cuantia', cons_TipoAccion='$TipoAccion', cons_DetalleConsulta='$detalleconsulta', cons_Observaciones='$observaciones', 	cons_Estado='1' WHERE (cons_NoConsulta='$consulta')";
+			$query="UPDATE tbl_consultas SET cons_Cuantia='$cuantia', cons_TipoAccion='$TipoAccion', cons_DetalleConsulta='$detalleconsulta', cons_Observaciones='$observaciones', cons_AbogadoAsignado='$abogado', cons_Estado='1' WHERE (cons_NoConsulta='$consulta')";
 			$resultado=$conexion->query($query);
 
 			if($resultado>0){
