@@ -142,9 +142,19 @@ if (isset($_POST['from']))
                                         </div>
 
                                 </div>
-                                    <div class="pull-right form-inline"><br>
-                                        <button class="btn btn-info" data-toggle='modal' data-target='#add_evento'>Añadir Evento</button>
-                                    </div>
+                                
+                                <?php 
+                                    if ($tipousuario==1 || $tipousuario==4){
+                                        echo '<div class="pull-right form-inline"><br>';
+                                        echo '<button class="btn btn-info" data-toggle="modal" data-target="#add_evento">Añadir Evento</button>';
+                                        echo '</div>';
+                                    }
+
+
+                                ?>
+                                    
+                                        
+                                    
 
                 </div><hr>
 

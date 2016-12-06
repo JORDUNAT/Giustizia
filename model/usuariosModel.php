@@ -200,6 +200,47 @@
 			return $html_combo;
 		}
 
+		function getAbogadoExp($conexion)
+		{
+			$abogado =  $_POST['abogado'];
+			$html_combo = "";
+			$sql = "
+			SELECT usu_Documento, usu_Nombres, usu_Apellidos, usu_Consultorio,	usu_tipusu FROM tbl_usuarios WHERE (usu_Documento ='$abogado')
+			"; 
+			$qry = $conexion->query($sql);
+			
+			while ($abogado = $qry->fetch_assoc())
+			{
+				$html_combo .= "<option id='abogadoselec', name='abogadoselec',  value='".$abogado['usu_Documento']."'>".$abogado['usu_Documento']." | ".$abogado['usu_Nombres']." ".$abogado['usu_Apellidos']."</option>";
+			}
+			
+
+			return $html_combo;
+		}
+
+
+		function getAbogadoConsul($conexion)
+		{
+			$consulta= $_POST['idconsulta'];
+			$html_combo = "";
+			$sql = "
+
+			SELECT A.usu_Documento, A.usu_Nombres, A.usu_Apellidos, A.usu_Consultorio, A.usu_tipusu, B.cons_Id, B.cons_AbogadoAsignado FROM tbl_usuarios A RIGHT OUTER JOIN tbl_consultas B ON (A.usu_Documento = B.cons_AbogadoAsignado) WHERE (B.cons_Id=$consulta)
+			"; 
+			$qry = $conexion->query($sql);
+			
+
+				while ($abogado = $qry->fetch_assoc())
+				{
+					if ($abogado['cons_AbogadoAsignado']>0){
+					$html_combo .= "<option id='abogadoselec', name='abogadoselec',  value='".$abogado['usu_Documento']."'>".$abogado['usu_Documento']." | ".$abogado['usu_Nombres']." ".$abogado['usu_Apellidos']."</option>";
+					}else{
+						$html_combo .= '<option value="">Sin Seleccion</option>';
+					}
+				}				
+			return $html_combo;
+		}
+
 		function getTipoDocumento($conexion)
 		{
 
@@ -536,6 +577,7 @@
 			return $html_combo;
 
 		}
+
 
 		function getTipoAccionRelacion($conexion)
 		{
@@ -950,6 +992,23 @@
 			//echo '<br>';
 			//echo $cursor['usu_Documento'];
 			return $cursor;
+		}
+
+		function getConsExped($conexion) //Consulta de los usuarios no clientes de acuero a cada oficina
+		{
+			$html = array();
+			$qryproceso="SELECT A.exp_NumeroExpediente, A.exp_Id, A.exp_DocumentoConsultorio, A.exp_FechaExpediente, A.exp_EstadoExpediente, A.exp_Soportes, A.exp_ObservacionExpedientes, A.exp_Consulta, A.exp_clasificacionproceso, B.cons_NoConsulta, B.cons_Cliente, C.clapro_Id, C.clapro_ClasificacionProceso, D.usu_Documento, D.usu_Nombres, D.usu_Apellidos FROM tbl_expedientes A, tbl_consultas B, tbl_clasificacionproceso C, tbl_usuarios D  WHERE  (A.exp_Consulta=B.cons_NoConsulta) AND (B.cons_Cliente=D.usu_Documento) AND (A.exp_clasificacionproceso=C.clapro_ClasificacionProceso) "; // Sleccion de Expedientes
+			$qry = $conexion->query($qryproceso);
+			
+			if (!$qry)
+			{
+				return 'Error->'.mysql_error().',qry:'.$sql;
+			}
+			while ($cursor = $qry->fetch_assoc())
+			{
+				array_push($html,$cursor);
+			}
+			return $html;
 		}
 
 		// Hasta aqui

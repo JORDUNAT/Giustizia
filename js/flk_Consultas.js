@@ -28,13 +28,13 @@ $(document).ready(function()
       submitHandler:function()
       {
              var consultaoculta1    = $("input[name='consultaoculta']").val();
-             var abogado1           = $("input[name='abogado']").val();        
+             var abogado1           = $("#abogado").val();      
              var cuantia1           = $("input[name='cuantia']").val();      
              var TipAcc1            = $("#TipAcc").val();
              var detaconsulta1      = $("textarea[name='detaconsulta']").val();
              var observaciones1     = $("textarea[name='observaciones']").val();
 
-            var parametros = {'txt_consulta':consultaoculta1, 'txt_abogado':abogado1 'txt_cuantia':cuantia1, 'txt_TipAcc':TipAcc1, 'txt_detaconsulta':detaconsulta1, 'txt_observaciones':observaciones1};
+            var parametros = {'txt_consulta':consultaoculta1, 'txt_abogado':abogado1, 'txt_cuantia':cuantia1, 'txt_TipAcc':TipAcc1, 'txt_detaconsulta':detaconsulta1, 'txt_observaciones':observaciones1};
            
         $.ajax({
                 type: 'POST',

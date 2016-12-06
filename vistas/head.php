@@ -35,8 +35,6 @@
         <script language="javascript" src="../js/bootstrap.js"></script>
         <script language="javascript" src="../js/bootstrap-datepicker.js"></script>
         <script language="javascript" src="../js/bootstrap-datepicker.es.min.js"></script>
-        <script language="javascript" src="../js/bootstrap-datetimepicker.es.js"></script>
-        <script language="javascript" src="../js/bootstrap-datetimepicker.js"></script>
         <script language="javascript" src="../js/calendar.js"></script>
         <script language="javascript" src="../js/es-ES.js"></script>
         <script language="javascript" src="../js/moment.js"></script>

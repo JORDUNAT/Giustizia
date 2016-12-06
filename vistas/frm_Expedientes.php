@@ -39,15 +39,6 @@
 
 ?>
 
-<script language="JavaScript">
-function Habilitar(form)
-
-{ 
-form.btn_ModProvinc.disabled = false;
-}
-</script>
-
-
 	<article class="col-xs-12  col-sm-8 col-md-9 col-lg-9">
 		<div class="ibody1 col-xs-12  col-sm-12 col-md-12 col-lg-12">
 			<div align='center' class="jumbotron">
@@ -79,18 +70,30 @@ form.btn_ModProvinc.disabled = false;
 						<input type="text" name="nombre" id="nombre"  class="form-control" placeholder="Nombres" value="<?php echo $resultado['usu_Nombres']?> <?php echo $resultado['usu_Apellidos']?>" disabled="disabled" required/>
 						</div>
 
+						<div  class="col-xs-12  col-sm-1 col-md-1 col-lg-1">
+							<input type="text" name="consultaoculta" id="consultaoculta" style = "visibility:hidden"  class="form-control" aria-describedby="sizing-addon3" value="<?php echo $resultado['cons_NoConsulta']?>" required/>
+						</div>
 			
-						<div  class="col-xs-12  col-sm-6 col-md-3 col-lg-3">
+						<div  class="col-xs-12  col-sm-6 col-md-2 col-lg-2">
 						<label>Cuantía: </label>	
 						<input type="number" name="cuantia" id="cuantia"  class="form-control" aria-describedby="sizing-addon3" value="<?php echo $cuantia?>">
 						</div>
 
-						<div class="col-xs-12  col-sm-5 col-md-6 col-lg-6 " >
+						<div class="col-xs-12  col-sm-5 col-md-3 col-lg-3 " >
 							<label>Tipo de Acción: </label>
 							<select name="TipAcc" id="TipAcc" class="form-control" aria-describedby="sizing-addon2">
 							<?php echo $obj_model-> getTipAccExp($conexion)?>
 							<?php echo $obj_model-> getTipoAccion($conexion)?>
 							</select>
+						</div>
+
+
+						<div class="col-xs-12  col-sm-6 col-md-5 col-lg-5  has-default">
+						<label>Asignar Abogado: </label>
+						<select name="abogado" id="abogado" class="form-control" aria-describedby="sizing-addon2" >
+							<?php echo $obj_model-> getAbogadoExp($conexion)?>	
+							<?php echo $obj_model-> getClientesAbogados($conexion)?>	 
+						</select>
 						</div>
 
 
@@ -171,15 +174,15 @@ form.btn_ModProvinc.disabled = false;
 								<tbody  class="tablacontenido" align='center' style="color:#456789; font-size:85%">
 							            <?php
 											//Visualizo la data en la vista				
-											foreach ($data1 as $area)
+											foreach ($data1 as $expediente)
 											{
 												print "<tr>";
-												print "<th align='center'> ".$area['gestion_id']."</th>";
-												print "<th align='center'> ".$area['tipges_tipogestion']."</th>";
-												print "<th>".$area['gestion_fechacompromiso']."</th>";
-												print "<th>".$area['gestion_observaciones']."</th>";
+												print "<th align='center'> ".$expediente['exp_Id']."</th>";
+												print "<th align='center'> ".$expediente['exp_NumeroExpediente']."</th>";
+												print "<th>".$expediente['exp_FechaExpediente']."</th>";
+												print "<th>".$expediente['gestion_observaciones']."</th>";
 												echo '<td align="center">';
-												echo '<input type="radio" name="radgest" id="radgest" value="'.$area['gestion_id'].'" required>';
+												echo '<input type="radio" name="radgest" id="radgest" value="'.$expediente['gestion_id'].'" required>';
 										        echo "</td>";												
 												print "</tr>";					
 											}
